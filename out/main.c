@@ -393,6 +393,9 @@ typedef bool(*Fn__double_double_bool)(double, double);
 typedef double(*Fn__double_double_double)(double, double);
 
 // Depth 4
+typedef double(*Fn__double_double_double_double)(double, double, double);
+
+// Depth 4
 typedef float(*Fn__double_float)(double);
 
 // Depth 4
@@ -488,8 +491,12 @@ typedef uint8_t(*Fn__uint8_t_uint8_t_uint8_t)(uint8_t, uint8_t);
 // Depth 5
 typedef struct {
     Vec3 pos;
-    Vec3 target;
+    Vec3 front;
+    Vec3 right;
     Vec3 up;
+    Vec3 world_MINUS_up;
+    double yaw;
+    double pitch;
     double fov;
     double aspect;
     double near;
@@ -567,6 +574,9 @@ typedef Maybe__int(*Fn___Maybe__int)();
 
 // Depth 6
 typedef Maybe__uint8_t(*Fn___Maybe__uint8_t)();
+
+// Depth 6
+typedef Vec3(*Fn___Vec3)();
 
 // Depth 6
 typedef Result__bool_String(*Fn__bool_Result__bool_String)(bool);
@@ -742,13 +752,22 @@ typedef String(*Fn__Camera_MUL__String)(Camera*);
 typedef Vec3*(*Fn__Camera_MUL__Vec3_MUL_)(Camera*);
 
 // Depth 8
+typedef void(*Fn__Camera_MUL__Vec3_void)(Camera*, Vec3);
+
+// Depth 8
 typedef double*(*Fn__Camera_MUL__double_MUL_)(Camera*);
 
 // Depth 8
-typedef Camera(*Fn__Vec3_Vec3_Vec3_double_double_double_double_Camera)(Vec3, Vec3, Vec3, double, double, double, double);
+typedef void(*Fn__Camera_MUL__double_void)(Camera*, double);
 
 // Depth 8
-typedef Camera(*Fn__Vec3_Vec3_double_Camera)(Vec3, Vec3, double);
+typedef void(*Fn__Camera_MUL__void)(Camera*);
+
+// Depth 8
+typedef Camera(*Fn__Vec3_Vec3_Vec3_Vec3_Vec3_double_double_double_double_double_double_Camera)(Vec3, Vec3, Vec3, Vec3, Vec3, double, double, double, double, double, double);
+
+// Depth 8
+typedef Camera(*Fn__Vec3_double_double_double_Camera)(Vec3, double, double, double);
 
 // Depth 9
 typedef Mat4(*Fn__Array__float_Mat4)(Array__float);
@@ -2814,25 +2833,49 @@ double* Camera_far(Camera* p);
 double* Camera_fov(Camera* p);
 
 // Depth 500
-Camera Camera_init(Vec3 pos, Vec3 target, Vec3 up, double fov, double aspect, double near, double far);
+Vec3* Camera_front(Camera* p);
+
+// Depth 500
+Camera Camera_init(Vec3 pos, Vec3 front, Vec3 right, Vec3 up, Vec3 world_MINUS_up, double yaw, double pitch, double fov, double aspect, double near, double far);
 
 // Depth 500
 Mat4 Camera_look_MINUS_at(Camera* c);
 
 // Depth 500
+void Camera_move_MINUS_forward_BANG_(Camera* c, double dist);
+
+// Depth 500
+void Camera_move_MINUS_right_BANG_(Camera* c, double dist);
+
+// Depth 500
+void Camera_move_MINUS_up_BANG_(Camera* c, double dist);
+
+// Depth 500
 double* Camera_near(Camera* p);
 
 // Depth 500
-Camera Camera_new(Vec3 pos, Vec3 target, double aspect);
+Camera Camera_new(Vec3 pos, double yaw, double pitch, double aspect);
 
 // Depth 500
 Mat4 Camera_perspective(Camera* c);
+
+// Depth 500
+double* Camera_pitch(Camera* p);
 
 // Depth 500
 Vec3* Camera_pos(Camera* p);
 
 // Depth 500
 String Camera_prn(Camera *p);
+
+// Depth 500
+double Camera_rad(double deg);
+
+// Depth 500
+Vec3* Camera_right(Camera* p);
+
+// Depth 500
+void Camera_rotate_BANG_(Camera* c, double dydp, double dpitch);
 
 // Depth 500
 Camera Camera_set_MINUS_aspect(Camera p, double newValue);
@@ -2853,10 +2896,22 @@ Camera Camera_set_MINUS_fov(Camera p, double newValue);
 void Camera_set_MINUS_fov_BANG_(Camera* pRef, double newValue);
 
 // Depth 500
+Camera Camera_set_MINUS_front(Camera p, Vec3 newValue);
+
+// Depth 500
+void Camera_set_MINUS_front_BANG_(Camera* pRef, Vec3 newValue);
+
+// Depth 500
 Camera Camera_set_MINUS_near(Camera p, double newValue);
 
 // Depth 500
 void Camera_set_MINUS_near_BANG_(Camera* pRef, double newValue);
+
+// Depth 500
+Camera Camera_set_MINUS_pitch(Camera p, double newValue);
+
+// Depth 500
+void Camera_set_MINUS_pitch_BANG_(Camera* pRef, double newValue);
 
 // Depth 500
 Camera Camera_set_MINUS_pos(Camera p, Vec3 newValue);
@@ -2865,10 +2920,10 @@ Camera Camera_set_MINUS_pos(Camera p, Vec3 newValue);
 void Camera_set_MINUS_pos_BANG_(Camera* pRef, Vec3 newValue);
 
 // Depth 500
-Camera Camera_set_MINUS_target(Camera p, Vec3 newValue);
+Camera Camera_set_MINUS_right(Camera p, Vec3 newValue);
 
 // Depth 500
-void Camera_set_MINUS_target_BANG_(Camera* pRef, Vec3 newValue);
+void Camera_set_MINUS_right_BANG_(Camera* pRef, Vec3 newValue);
 
 // Depth 500
 Camera Camera_set_MINUS_up(Camera p, Vec3 newValue);
@@ -2877,10 +2932,19 @@ Camera Camera_set_MINUS_up(Camera p, Vec3 newValue);
 void Camera_set_MINUS_up_BANG_(Camera* pRef, Vec3 newValue);
 
 // Depth 500
-String Camera_str(Camera *p);
+Camera Camera_set_MINUS_world_MINUS_up(Camera p, Vec3 newValue);
 
 // Depth 500
-Vec3* Camera_target(Camera* p);
+void Camera_set_MINUS_world_MINUS_up_BANG_(Camera* pRef, Vec3 newValue);
+
+// Depth 500
+Camera Camera_set_MINUS_yaw(Camera p, double newValue);
+
+// Depth 500
+void Camera_set_MINUS_yaw_BANG_(Camera* pRef, double newValue);
+
+// Depth 500
+String Camera_str(Camera *p);
 
 // Depth 500
 Vec3* Camera_up(Camera* p);
@@ -2889,22 +2953,43 @@ Vec3* Camera_up(Camera* p);
 Camera Camera_update_MINUS_aspect(Camera p, Lambda *updater);
 
 // Depth 500
+void Camera_update_MINUS_basis_BANG_(Camera* c);
+
+// Depth 500
 Camera Camera_update_MINUS_far(Camera p, Lambda *updater);
 
 // Depth 500
 Camera Camera_update_MINUS_fov(Camera p, Lambda *updater);
 
 // Depth 500
+Camera Camera_update_MINUS_front(Camera p, Lambda *updater);
+
+// Depth 500
 Camera Camera_update_MINUS_near(Camera p, Lambda *updater);
+
+// Depth 500
+Camera Camera_update_MINUS_pitch(Camera p, Lambda *updater);
 
 // Depth 500
 Camera Camera_update_MINUS_pos(Camera p, Lambda *updater);
 
 // Depth 500
-Camera Camera_update_MINUS_target(Camera p, Lambda *updater);
+Camera Camera_update_MINUS_right(Camera p, Lambda *updater);
 
 // Depth 500
 Camera Camera_update_MINUS_up(Camera p, Lambda *updater);
+
+// Depth 500
+Camera Camera_update_MINUS_world_MINUS_up(Camera p, Lambda *updater);
+
+// Depth 500
+Camera Camera_update_MINUS_yaw(Camera p, Lambda *updater);
+
+// Depth 500
+Vec3* Camera_world_MINUS_up(Camera* p);
+
+// Depth 500
+double* Camera_yaw(Camera* p);
 
 // Depth 1000
 
@@ -3062,6 +3147,9 @@ double Double_add_MINUS_ref(double* x, double* y);
 
 // Depth 500
 double Double_blit(double x);
+
+// Depth 500
+double Double_clamp__double(double min, double max, double val);
 
 // Depth 500
 double Double_dec(double x);
@@ -8917,8 +9005,12 @@ double* Camera_aspect(Camera* p) { return (&(p->aspect)); }
 Camera Camera_copy(Camera* pRef) {
     Camera copy = *pRef;
     copy.pos = Vec3_copy(&(pRef->pos));
-    copy.target = Vec3_copy(&(pRef->target));
+    copy.front = Vec3_copy(&(pRef->front));
+    copy.right = Vec3_copy(&(pRef->right));
     copy.up = Vec3_copy(&(pRef->up));
+    copy.world_MINUS_up = Vec3_copy(&(pRef->world_MINUS_up));
+    /* Ignore non-managed member 'yaw' : Double */
+    /* Ignore non-managed member 'pitch' : Double */
     /* Ignore non-managed member 'fov' : Double */
     /* Ignore non-managed member 'aspect' : Double */
     /* Ignore non-managed member 'near' : Double */
@@ -8928,8 +9020,12 @@ Camera Camera_copy(Camera* pRef) {
 
 void Camera_delete(Camera p) {
     Vec3_delete(p.pos);
-    Vec3_delete(p.target);
+    Vec3_delete(p.front);
+    Vec3_delete(p.right);
     Vec3_delete(p.up);
+    Vec3_delete(p.world_MINUS_up);
+    /* Ignore non-managed member 'yaw' : Double */
+    /* Ignore non-managed member 'pitch' : Double */
     /* Ignore non-managed member 'fov' : Double */
     /* Ignore non-managed member 'aspect' : Double */
     /* Ignore non-managed member 'near' : Double */
@@ -8940,11 +9036,17 @@ double* Camera_far(Camera* p) { return (&(p->far)); }
 
 double* Camera_fov(Camera* p) { return (&(p->fov)); }
 
-Camera Camera_init(Vec3 pos, Vec3 target, Vec3 up, double fov, double aspect, double near, double far) {
+Vec3* Camera_front(Camera* p) { return (&(p->front)); }
+
+Camera Camera_init(Vec3 pos, Vec3 front, Vec3 right, Vec3 up, Vec3 world_MINUS_up, double yaw, double pitch, double fov, double aspect, double near, double far) {
     Camera instance;
     instance.pos = pos;
-    instance.target = target;
+    instance.front = front;
+    instance.right = right;
     instance.up = up;
+    instance.world_MINUS_up = world_MINUS_up;
+    instance.yaw = yaw;
+    instance.pitch = pitch;
     instance.fov = fov;
     instance.aspect = aspect;
     instance.near = near;
@@ -8953,136 +9055,150 @@ Camera Camera_init(Vec3 pos, Vec3 target, Vec3 up, double fov, double aspect, do
 }
 
 Mat4 Camera_look_MINUS_at(Camera* c) {
-    Mat4 _292;
+    Mat4 _245;
     /* let */ {
-        Vec3* _11 = Camera_target(c);
-        Vec3* _14 = Camera_pos(c);
-        Vec3 _15 = Vec3_sub(_11, _14);
-        Vec3* _16 = &_15; // ref
-        Vec3 _17 = Vec3_normalize(_16);
-        Vec3 f = _17;
-        Vec3* _24 = &f; // ref
-        Vec3* _27 = Camera_up(c);
-        Vec3 _28 = Vec3_cross(_24, _27);
-        Vec3* _29 = &_28; // ref
-        Vec3 _30 = Vec3_normalize(_29);
-        Vec3 s = _30;
-        Vec3* _35 = &s; // ref
-        Vec3* _38 = &f; // ref
-        Vec3 _39 = Vec3_cross(_35, _38);
-        Vec3 u = _39;
-        Vec3* _43 = Camera_pos(c);
-        Vec3* p = _43;
-        static float _49_lit = 0.0f;
-        float* _49 = &_49_lit; // ref
-        Array__float _50 = Array_replicate__float(16, _49);
-        Array__float m = _50;
-        Array__float* _56 = &m; // ref
-        Vec3* _65 = &s; // ref
-        double* _66 = Vec3_x(_65);
-        double _67 = Double_copy(_66);
-        float _68 = Double_to_MINUS_float(_67);
-        float _69 = _68; // From the 'the' function.
-        Array_aset_BANG___float(_56, 0, _69);
-        Array__float* _74 = &m; // ref
-        Vec3* _83 = &s; // ref
-        double* _84 = Vec3_y(_83);
-        double _85 = Double_copy(_84);
-        float _86 = Double_to_MINUS_float(_85);
-        float _87 = _86; // From the 'the' function.
-        Array_aset_BANG___float(_74, 4, _87);
-        Array__float* _92 = &m; // ref
-        Vec3* _101 = &s; // ref
-        double* _102 = Vec3_z(_101);
-        double _103 = Double_copy(_102);
-        float _104 = Double_to_MINUS_float(_103);
-        float _105 = _104; // From the 'the' function.
-        Array_aset_BANG___float(_92, 8, _105);
-        Array__float* _110 = &m; // ref
-        Vec3* _119 = &u; // ref
-        double* _120 = Vec3_x(_119);
-        double _121 = Double_copy(_120);
-        float _122 = Double_to_MINUS_float(_121);
-        float _123 = _122; // From the 'the' function.
-        Array_aset_BANG___float(_110, 1, _123);
-        Array__float* _128 = &m; // ref
-        Vec3* _137 = &u; // ref
-        double* _138 = Vec3_y(_137);
-        double _139 = Double_copy(_138);
-        float _140 = Double_to_MINUS_float(_139);
-        float _141 = _140; // From the 'the' function.
-        Array_aset_BANG___float(_128, 5, _141);
-        Array__float* _146 = &m; // ref
-        Vec3* _155 = &u; // ref
-        double* _156 = Vec3_z(_155);
-        double _157 = Double_copy(_156);
-        float _158 = Double_to_MINUS_float(_157);
-        float _159 = _158; // From the 'the' function.
-        Array_aset_BANG___float(_146, 9, _159);
-        Array__float* _164 = &m; // ref
-        Vec3* _175 = &f; // ref
-        double* _176 = Vec3_x(_175);
-        double _177 = Double_copy(_176);
-        double _178 = Double__MINUS_(0.0, _177);
-        float _179 = Double_to_MINUS_float(_178);
-        float _180 = _179; // From the 'the' function.
-        Array_aset_BANG___float(_164, 2, _180);
-        Array__float* _185 = &m; // ref
-        Vec3* _196 = &f; // ref
-        double* _197 = Vec3_y(_196);
-        double _198 = Double_copy(_197);
-        double _199 = Double__MINUS_(0.0, _198);
-        float _200 = Double_to_MINUS_float(_199);
-        float _201 = _200; // From the 'the' function.
-        Array_aset_BANG___float(_185, 6, _201);
-        Array__float* _206 = &m; // ref
-        Vec3* _217 = &f; // ref
-        double* _218 = Vec3_z(_217);
-        double _219 = Double_copy(_218);
-        double _220 = Double__MINUS_(0.0, _219);
-        float _221 = Double_to_MINUS_float(_220);
-        float _222 = _221; // From the 'the' function.
-        Array_aset_BANG___float(_206, 10, _222);
-        Array__float* _227 = &m; // ref
-        Vec3* _237 = &s; // ref
-        double _239 = Vec3_dot(_237, p);
-        double _240 = Double__MINUS_(0.0, _239);
-        float _241 = Double_to_MINUS_float(_240);
-        float _242 = _241; // From the 'the' function.
-        Array_aset_BANG___float(_227, 12, _242);
-        Array__float* _247 = &m; // ref
-        Vec3* _257 = &u; // ref
-        double _259 = Vec3_dot(_257, p);
-        double _260 = Double__MINUS_(0.0, _259);
-        float _261 = Double_to_MINUS_float(_260);
-        float _262 = _261; // From the 'the' function.
-        Array_aset_BANG___float(_247, 13, _262);
-        Array__float* _267 = &m; // ref
-        Vec3* _275 = &f; // ref
-        double _277 = Vec3_dot(_275, p);
-        float _278 = Double_to_MINUS_float(_277);
-        float _279 = _278; // From the 'the' function.
-        Array_aset_BANG___float(_267, 14, _279);
-        Array__float* _284 = &m; // ref
-        Array_aset_BANG___float(_284, 15, 1.0f);
-        Mat4 _290 = Mat4_init(m);
-        Mat4 _291 = _290;
-        _292 = _291;
-        Vec3_delete(_15);
-        Vec3_delete(_28);
-        Vec3_delete(f);
-        Vec3_delete(s);
-        Vec3_delete(u);
+        Vec3* _8 = Camera_front(c);
+        Vec3* f = _8;
+        Vec3* _12 = Camera_right(c);
+        Vec3* s = _12;
+        Vec3* _16 = Camera_up(c);
+        Vec3* u = _16;
+        Vec3* _20 = Camera_pos(c);
+        Vec3* p = _20;
+        static float _26_lit = 0.0f;
+        float* _26 = &_26_lit; // ref
+        Array__float _27 = Array_replicate__float(16, _26);
+        Array__float m = _27;
+        Array__float* _33 = &m; // ref
+        double* _41 = Vec3_x(s);
+        double _42 = Double_copy(_41);
+        float _43 = Double_to_MINUS_float(_42);
+        float _44 = _43; // From the 'the' function.
+        Array_aset_BANG___float(_33, 0, _44);
+        Array__float* _49 = &m; // ref
+        double* _57 = Vec3_y(s);
+        double _58 = Double_copy(_57);
+        float _59 = Double_to_MINUS_float(_58);
+        float _60 = _59; // From the 'the' function.
+        Array_aset_BANG___float(_49, 4, _60);
+        Array__float* _65 = &m; // ref
+        double* _73 = Vec3_z(s);
+        double _74 = Double_copy(_73);
+        float _75 = Double_to_MINUS_float(_74);
+        float _76 = _75; // From the 'the' function.
+        Array_aset_BANG___float(_65, 8, _76);
+        Array__float* _81 = &m; // ref
+        double* _89 = Vec3_x(u);
+        double _90 = Double_copy(_89);
+        float _91 = Double_to_MINUS_float(_90);
+        float _92 = _91; // From the 'the' function.
+        Array_aset_BANG___float(_81, 1, _92);
+        Array__float* _97 = &m; // ref
+        double* _105 = Vec3_y(u);
+        double _106 = Double_copy(_105);
+        float _107 = Double_to_MINUS_float(_106);
+        float _108 = _107; // From the 'the' function.
+        Array_aset_BANG___float(_97, 5, _108);
+        Array__float* _113 = &m; // ref
+        double* _121 = Vec3_z(u);
+        double _122 = Double_copy(_121);
+        float _123 = Double_to_MINUS_float(_122);
+        float _124 = _123; // From the 'the' function.
+        Array_aset_BANG___float(_113, 9, _124);
+        Array__float* _129 = &m; // ref
+        double* _139 = Vec3_x(f);
+        double _140 = Double_copy(_139);
+        double _141 = Double__MINUS_(0.0, _140);
+        float _142 = Double_to_MINUS_float(_141);
+        float _143 = _142; // From the 'the' function.
+        Array_aset_BANG___float(_129, 2, _143);
+        Array__float* _148 = &m; // ref
+        double* _158 = Vec3_y(f);
+        double _159 = Double_copy(_158);
+        double _160 = Double__MINUS_(0.0, _159);
+        float _161 = Double_to_MINUS_float(_160);
+        float _162 = _161; // From the 'the' function.
+        Array_aset_BANG___float(_148, 6, _162);
+        Array__float* _167 = &m; // ref
+        double* _177 = Vec3_z(f);
+        double _178 = Double_copy(_177);
+        double _179 = Double__MINUS_(0.0, _178);
+        float _180 = Double_to_MINUS_float(_179);
+        float _181 = _180; // From the 'the' function.
+        Array_aset_BANG___float(_167, 10, _181);
+        Array__float* _186 = &m; // ref
+        double _196 = Vec3_dot(s, p);
+        double _197 = Double__MINUS_(0.0, _196);
+        float _198 = Double_to_MINUS_float(_197);
+        float _199 = _198; // From the 'the' function.
+        Array_aset_BANG___float(_186, 12, _199);
+        Array__float* _204 = &m; // ref
+        double _214 = Vec3_dot(u, p);
+        double _215 = Double__MINUS_(0.0, _214);
+        float _216 = Double_to_MINUS_float(_215);
+        float _217 = _216; // From the 'the' function.
+        Array_aset_BANG___float(_204, 13, _217);
+        Array__float* _222 = &m; // ref
+        double _230 = Vec3_dot(f, p);
+        float _231 = Double_to_MINUS_float(_230);
+        float _232 = _231; // From the 'the' function.
+        Array_aset_BANG___float(_222, 14, _232);
+        Array__float* _237 = &m; // ref
+        Array_aset_BANG___float(_237, 15, 1.0f);
+        Mat4 _243 = Mat4_init(m);
+        Mat4 _244 = _243;
+        _245 = _244;
     }
-    return _292;
+    return _245;
+}
+
+void Camera_move_MINUS_forward_BANG_(Camera* c, double dist) {
+    Vec3* _10 = Camera_pos(c);
+    Vec3* _15 = Camera_front(c);
+    Vec3 _17 = Vec3_mul(_15, dist);
+    Vec3* _18 = &_17; // ref
+    Vec3 _19 = Vec3_add(_10, _18);
+    Camera_set_MINUS_pos_BANG_(c, _19);
+    Vec3_delete(_17);
+}
+
+void Camera_move_MINUS_right_BANG_(Camera* c, double dist) {
+    Vec3* _10 = Camera_pos(c);
+    Vec3* _15 = Camera_right(c);
+    Vec3 _17 = Vec3_mul(_15, dist);
+    Vec3* _18 = &_17; // ref
+    Vec3 _19 = Vec3_add(_10, _18);
+    Camera_set_MINUS_pos_BANG_(c, _19);
+    Vec3_delete(_17);
+}
+
+void Camera_move_MINUS_up_BANG_(Camera* c, double dist) {
+    Vec3* _10 = Camera_pos(c);
+    Vec3* _15 = Camera_world_MINUS_up(c);
+    Vec3 _17 = Vec3_mul(_15, dist);
+    Vec3* _18 = &_17; // ref
+    Vec3 _19 = Vec3_add(_10, _18);
+    Camera_set_MINUS_pos_BANG_(c, _19);
+    Vec3_delete(_17);
 }
 
 double* Camera_near(Camera* p) { return (&(p->near)); }
 
-Camera Camera_new(Vec3 pos, Vec3 target, double aspect) {
-    Vec3 _13 = Vec3_init(0.0, 1.0, 0.0);
-    Camera _18 = Camera_init(pos, target, _13, 60.0, aspect, 0.1, 100.0);
-    return _18;
+Camera Camera_new(Vec3 pos, double yaw, double pitch, double aspect) {
+    Camera _38;
+    /* let */ {
+        Vec3 _12 = Vec3_zero();
+        Vec3 _14 = Vec3_zero();
+        Vec3 _16 = Vec3_zero();
+        Vec3 _21 = Vec3_init(0.0, 1.0, 0.0);
+        Camera _28 = Camera_init(pos, _12, _14, _16, _21, yaw, pitch, 60.0, aspect, 0.1, 100.0);
+        Camera c = _28;
+        Camera* _34 = &c; // ref
+        Camera_update_MINUS_basis_BANG_(_34);
+        Camera _37 = c;
+        _38 = _37;
+    }
+    return _38;
 }
 
 Mat4 Camera_perspective(Camera* c) {
@@ -9138,6 +9254,8 @@ Mat4 Camera_perspective(Camera* c) {
     return _123;
 }
 
+double* Camera_pitch(Camera* p) { return (&(p->pitch)); }
+
 Vec3* Camera_pos(Camera* p) { return (&(p->pos)); }
 
 String Camera_prn(Camera *p) {
@@ -9150,11 +9268,27 @@ String Camera_prn(Camera *p) {
   size += snprintf(NULL, 0, "%s ", temp);
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
-  temp = Vec3_prn(&p->target); 
+  temp = Vec3_prn(&p->front); 
+  size += snprintf(NULL, 0, "%s ", temp);
+  if(temp) { CARP_FREE(temp); temp = NULL; }
+
+  temp = Vec3_prn(&p->right); 
   size += snprintf(NULL, 0, "%s ", temp);
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
   temp = Vec3_prn(&p->up); 
+  size += snprintf(NULL, 0, "%s ", temp);
+  if(temp) { CARP_FREE(temp); temp = NULL; }
+
+  temp = Vec3_prn(&p->world_MINUS_up); 
+  size += snprintf(NULL, 0, "%s ", temp);
+  if(temp) { CARP_FREE(temp); temp = NULL; }
+
+  temp = Double_prn(p->yaw); 
+  size += snprintf(NULL, 0, "%s ", temp);
+  if(temp) { CARP_FREE(temp); temp = NULL; }
+
+  temp = Double_prn(p->pitch); 
   size += snprintf(NULL, 0, "%s ", temp);
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
@@ -9186,12 +9320,32 @@ String Camera_prn(Camera *p) {
   bufferPtr += strlen(temp) + 1;
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
-  temp = Vec3_prn(&p->target);
+  temp = Vec3_prn(&p->front);
+  sprintf(bufferPtr, "%s ", temp);
+  bufferPtr += strlen(temp) + 1;
+  if(temp) { CARP_FREE(temp); temp = NULL; }
+
+  temp = Vec3_prn(&p->right);
   sprintf(bufferPtr, "%s ", temp);
   bufferPtr += strlen(temp) + 1;
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
   temp = Vec3_prn(&p->up);
+  sprintf(bufferPtr, "%s ", temp);
+  bufferPtr += strlen(temp) + 1;
+  if(temp) { CARP_FREE(temp); temp = NULL; }
+
+  temp = Vec3_prn(&p->world_MINUS_up);
+  sprintf(bufferPtr, "%s ", temp);
+  bufferPtr += strlen(temp) + 1;
+  if(temp) { CARP_FREE(temp); temp = NULL; }
+
+  temp = Double_prn(p->yaw);
+  sprintf(bufferPtr, "%s ", temp);
+  bufferPtr += strlen(temp) + 1;
+  if(temp) { CARP_FREE(temp); temp = NULL; }
+
+  temp = Double_prn(p->pitch);
   sprintf(bufferPtr, "%s ", temp);
   bufferPtr += strlen(temp) + 1;
   if(temp) { CARP_FREE(temp); temp = NULL; }
@@ -9219,6 +9373,26 @@ String Camera_prn(Camera *p) {
   bufferPtr--;
   sprintf(bufferPtr, ")");
   return buffer;
+}
+
+double Camera_rad(double deg) {
+    double _7 = Double__MUL_(deg, 1.74532925e-2);
+    return _7;
+}
+
+Vec3* Camera_right(Camera* p) { return (&(p->right)); }
+
+void Camera_rotate_BANG_(Camera* c, double dydp, double dpitch) {
+    double* _13 = Camera_yaw(c);
+    double _14 = Double_copy(_13);
+    double _16 = Double__PLUS_(_14, dydp);
+    Camera_set_MINUS_yaw_BANG_(c, _16);
+    double* _27 = Camera_pitch(c);
+    double _28 = Double_copy(_27);
+    double _30 = Double__PLUS_(_28, dpitch);
+    double _31 = Double_clamp__double(-89.0, 89.0, _30);
+    Camera_set_MINUS_pitch_BANG_(c, _31);
+    Camera_update_MINUS_basis_BANG_(c);
 }
 
 Camera Camera_set_MINUS_aspect(Camera p, double newValue) {
@@ -9260,6 +9434,19 @@ void Camera_set_MINUS_fov_BANG_(Camera* pRef, double newValue) {
 }
 
 
+Camera Camera_set_MINUS_front(Camera p, Vec3 newValue) {
+    Vec3_delete(p.front);
+    p.front = newValue;
+    return p;
+}
+
+
+void Camera_set_MINUS_front_BANG_(Camera* pRef, Vec3 newValue) {
+    Vec3_delete(pRef->front);
+    pRef->front = newValue;
+}
+
+
 Camera Camera_set_MINUS_near(Camera p, double newValue) {
     /* Ignore non-managed member 'near' : Double */
     p.near = newValue;
@@ -9270,6 +9457,19 @@ Camera Camera_set_MINUS_near(Camera p, double newValue) {
 void Camera_set_MINUS_near_BANG_(Camera* pRef, double newValue) {
     /* Ignore non-managed member 'near' : Double */
     pRef->near = newValue;
+}
+
+
+Camera Camera_set_MINUS_pitch(Camera p, double newValue) {
+    /* Ignore non-managed member 'pitch' : Double */
+    p.pitch = newValue;
+    return p;
+}
+
+
+void Camera_set_MINUS_pitch_BANG_(Camera* pRef, double newValue) {
+    /* Ignore non-managed member 'pitch' : Double */
+    pRef->pitch = newValue;
 }
 
 
@@ -9286,16 +9486,16 @@ void Camera_set_MINUS_pos_BANG_(Camera* pRef, Vec3 newValue) {
 }
 
 
-Camera Camera_set_MINUS_target(Camera p, Vec3 newValue) {
-    Vec3_delete(p.target);
-    p.target = newValue;
+Camera Camera_set_MINUS_right(Camera p, Vec3 newValue) {
+    Vec3_delete(p.right);
+    p.right = newValue;
     return p;
 }
 
 
-void Camera_set_MINUS_target_BANG_(Camera* pRef, Vec3 newValue) {
-    Vec3_delete(pRef->target);
-    pRef->target = newValue;
+void Camera_set_MINUS_right_BANG_(Camera* pRef, Vec3 newValue) {
+    Vec3_delete(pRef->right);
+    pRef->right = newValue;
 }
 
 
@@ -9312,6 +9512,32 @@ void Camera_set_MINUS_up_BANG_(Camera* pRef, Vec3 newValue) {
 }
 
 
+Camera Camera_set_MINUS_world_MINUS_up(Camera p, Vec3 newValue) {
+    Vec3_delete(p.world_MINUS_up);
+    p.world_MINUS_up = newValue;
+    return p;
+}
+
+
+void Camera_set_MINUS_world_MINUS_up_BANG_(Camera* pRef, Vec3 newValue) {
+    Vec3_delete(pRef->world_MINUS_up);
+    pRef->world_MINUS_up = newValue;
+}
+
+
+Camera Camera_set_MINUS_yaw(Camera p, double newValue) {
+    /* Ignore non-managed member 'yaw' : Double */
+    p.yaw = newValue;
+    return p;
+}
+
+
+void Camera_set_MINUS_yaw_BANG_(Camera* pRef, double newValue) {
+    /* Ignore non-managed member 'yaw' : Double */
+    pRef->yaw = newValue;
+}
+
+
 String Camera_str(Camera *p) {
   // convert members to String here:
   String temp = NULL;
@@ -9322,11 +9548,27 @@ String Camera_str(Camera *p) {
   size += snprintf(NULL, 0, "%s ", temp);
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
-  temp = Vec3_prn(&p->target); 
+  temp = Vec3_prn(&p->front); 
+  size += snprintf(NULL, 0, "%s ", temp);
+  if(temp) { CARP_FREE(temp); temp = NULL; }
+
+  temp = Vec3_prn(&p->right); 
   size += snprintf(NULL, 0, "%s ", temp);
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
   temp = Vec3_prn(&p->up); 
+  size += snprintf(NULL, 0, "%s ", temp);
+  if(temp) { CARP_FREE(temp); temp = NULL; }
+
+  temp = Vec3_prn(&p->world_MINUS_up); 
+  size += snprintf(NULL, 0, "%s ", temp);
+  if(temp) { CARP_FREE(temp); temp = NULL; }
+
+  temp = Double_prn(p->yaw); 
+  size += snprintf(NULL, 0, "%s ", temp);
+  if(temp) { CARP_FREE(temp); temp = NULL; }
+
+  temp = Double_prn(p->pitch); 
   size += snprintf(NULL, 0, "%s ", temp);
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
@@ -9358,12 +9600,32 @@ String Camera_str(Camera *p) {
   bufferPtr += strlen(temp) + 1;
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
-  temp = Vec3_prn(&p->target);
+  temp = Vec3_prn(&p->front);
+  sprintf(bufferPtr, "%s ", temp);
+  bufferPtr += strlen(temp) + 1;
+  if(temp) { CARP_FREE(temp); temp = NULL; }
+
+  temp = Vec3_prn(&p->right);
   sprintf(bufferPtr, "%s ", temp);
   bufferPtr += strlen(temp) + 1;
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
   temp = Vec3_prn(&p->up);
+  sprintf(bufferPtr, "%s ", temp);
+  bufferPtr += strlen(temp) + 1;
+  if(temp) { CARP_FREE(temp); temp = NULL; }
+
+  temp = Vec3_prn(&p->world_MINUS_up);
+  sprintf(bufferPtr, "%s ", temp);
+  bufferPtr += strlen(temp) + 1;
+  if(temp) { CARP_FREE(temp); temp = NULL; }
+
+  temp = Double_prn(p->yaw);
+  sprintf(bufferPtr, "%s ", temp);
+  bufferPtr += strlen(temp) + 1;
+  if(temp) { CARP_FREE(temp); temp = NULL; }
+
+  temp = Double_prn(p->pitch);
   sprintf(bufferPtr, "%s ", temp);
   bufferPtr += strlen(temp) + 1;
   if(temp) { CARP_FREE(temp); temp = NULL; }
@@ -9393,8 +9655,6 @@ String Camera_str(Camera *p) {
   return buffer;
 }
 
-Vec3* Camera_target(Camera* p) { return (&(p->target)); }
-
 Vec3* Camera_up(Camera* p) { return (&(p->up)); }
 
 Camera Camera_update_MINUS_aspect(Camera p, Lambda *updater) {
@@ -9402,6 +9662,48 @@ Camera Camera_update_MINUS_aspect(Camera p, Lambda *updater) {
     return p;
 }
 
+
+void Camera_update_MINUS_basis_BANG_(Camera* c) {
+    /* let */ {
+        double* _10 = Camera_yaw(c);
+        double _11 = Double_copy(_10);
+        double _12 = Camera_rad(_11);
+        double y = _12;
+        double* _18 = Camera_pitch(c);
+        double _19 = Double_copy(_18);
+        double _20 = Camera_rad(_19);
+        double p = _20;
+        double _28 = Double_cos(y);
+        double _31 = Double_cos(p);
+        double _32 = Double__MUL_(_28, _31);
+        double _35 = Double_sin(p);
+        double _39 = Double_sin(y);
+        double _42 = Double_cos(p);
+        double _43 = Double__MUL_(_39, _42);
+        Vec3 _44 = Vec3_init(_32, _35, _43);
+        Vec3* _45 = &_44; // ref
+        Vec3 _46 = Vec3_normalize(_45);
+        Vec3 f = _46;
+        Vec3* _53 = &f; // ref
+        Vec3* _56 = Camera_world_MINUS_up(c);
+        Vec3 _57 = Vec3_cross(_53, _56);
+        Vec3* _58 = &_57; // ref
+        Vec3 _59 = Vec3_normalize(_58);
+        Vec3 r = _59;
+        Vec3* _66 = &r; // ref
+        Vec3* _69 = &f; // ref
+        Vec3 _70 = Vec3_cross(_66, _69);
+        Vec3* _71 = &_70; // ref
+        Vec3 _72 = Vec3_normalize(_71);
+        Vec3 u = _72;
+        Camera_set_MINUS_front_BANG_(c, f);
+        Camera_set_MINUS_right_BANG_(c, r);
+        Camera_set_MINUS_up_BANG_(c, u);
+        Vec3_delete(_44);
+        Vec3_delete(_57);
+        Vec3_delete(_70);
+    }
+}
 
 Camera Camera_update_MINUS_far(Camera p, Lambda *updater) {
     p.far = (*updater).env ? ((Fn__LambdaEnv_double_double)(*updater).callback)((*updater).env, p.far) : ((Fn__double_double)(*updater).callback)(p.far);
@@ -9415,8 +9717,20 @@ Camera Camera_update_MINUS_fov(Camera p, Lambda *updater) {
 }
 
 
+Camera Camera_update_MINUS_front(Camera p, Lambda *updater) {
+    p.front = (*updater).env ? ((Fn__LambdaEnv_Vec3_Vec3)(*updater).callback)((*updater).env, p.front) : ((Fn__Vec3_Vec3)(*updater).callback)(p.front);
+    return p;
+}
+
+
 Camera Camera_update_MINUS_near(Camera p, Lambda *updater) {
     p.near = (*updater).env ? ((Fn__LambdaEnv_double_double)(*updater).callback)((*updater).env, p.near) : ((Fn__double_double)(*updater).callback)(p.near);
+    return p;
+}
+
+
+Camera Camera_update_MINUS_pitch(Camera p, Lambda *updater) {
+    p.pitch = (*updater).env ? ((Fn__LambdaEnv_double_double)(*updater).callback)((*updater).env, p.pitch) : ((Fn__double_double)(*updater).callback)(p.pitch);
     return p;
 }
 
@@ -9427,8 +9741,8 @@ Camera Camera_update_MINUS_pos(Camera p, Lambda *updater) {
 }
 
 
-Camera Camera_update_MINUS_target(Camera p, Lambda *updater) {
-    p.target = (*updater).env ? ((Fn__LambdaEnv_Vec3_Vec3)(*updater).callback)((*updater).env, p.target) : ((Fn__Vec3_Vec3)(*updater).callback)(p.target);
+Camera Camera_update_MINUS_right(Camera p, Lambda *updater) {
+    p.right = (*updater).env ? ((Fn__LambdaEnv_Vec3_Vec3)(*updater).callback)((*updater).env, p.right) : ((Fn__Vec3_Vec3)(*updater).callback)(p.right);
     return p;
 }
 
@@ -9438,6 +9752,22 @@ Camera Camera_update_MINUS_up(Camera p, Lambda *updater) {
     return p;
 }
 
+
+Camera Camera_update_MINUS_world_MINUS_up(Camera p, Lambda *updater) {
+    p.world_MINUS_up = (*updater).env ? ((Fn__LambdaEnv_Vec3_Vec3)(*updater).callback)((*updater).env, p.world_MINUS_up) : ((Fn__Vec3_Vec3)(*updater).callback)(p.world_MINUS_up);
+    return p;
+}
+
+
+Camera Camera_update_MINUS_yaw(Camera p, Lambda *updater) {
+    p.yaw = (*updater).env ? ((Fn__LambdaEnv_double_double)(*updater).callback)((*updater).env, p.yaw) : ((Fn__double_double)(*updater).callback)(p.yaw);
+    return p;
+}
+
+
+Vec3* Camera_world_MINUS_up(Camera* p) { return (&(p->world_MINUS_up)); }
+
+double* Camera_yaw(Camera* p) { return (&(p->yaw)); }
 
 bool Char_alpha_QMARK_(Char c) {
     bool _16;
@@ -10640,6 +10970,28 @@ double Double_add_MINUS_ref(double* x, double* y) {
 double Double_blit(double x) {
     double _7 = x; // From the 'the' function.
     return _7;
+}
+
+double Double_clamp__double(double min, double max, double val) {
+    double _28;
+    bool _10 = Double__GT_(val, max);
+    if (_10) {
+        double _13 = max;
+        _28 = _13;
+    } else {
+        double _26;
+        bool _19 = Double__LT_(val, min);
+        if (_19) {
+            double _22 = min;
+            _26 = _22;
+        } else {
+            double _25 = val;
+            _26 = _25;
+        }
+        double _27 = _26;
+        _28 = _27;
+    }
+    return _28;
 }
 
 double Double_dec(double x) {
@@ -15696,12 +16048,12 @@ int id__int(int x) {
 
 int main(int argc, char** argv) {
     carp_init_globals(argc, argv);
-    int _226;
+    int _221;
     /* let */ {
         TestState _9 = Test_State_init(0, 0);
         TestState* _10 = &_9; // ref
         TestState* camera_MINUS_test = _10;
-        TestState _214;
+        TestState _209;
         /* let */ {
             TestState _21 = Test_State_init(0, 0);
             TestState state = _21;
@@ -15770,52 +16122,50 @@ int main(int argc, char** argv) {
             /* let */ {
                 Vec3 _149 = Vec3_new(0.0, 0.0, 10.0);
                 Vec3 pos = _149;
-                Vec3 _155 = Vec3_new(0.0, 0.0, 0.0);
-                Vec3 target = _155;
-                Camera _161 = Camera_new(pos, target, 1.77);
-                Camera cam = _161;
-                Camera* _166 = &cam; // ref
-                Mat4 _167 = Camera_look_MINUS_at(_166);
-                Mat4 view = _167;
-                Camera* _172 = &cam; // ref
-                Mat4 _173 = Camera_perspective(_172);
-                Mat4 proj = _173;
-                TestState* _181 = &state; // ref
-                Mat4* _187 = &view; // ref
-                Array__float* _188 = Mat4_data(_187);
-                int _189 = Array_length__float(_188);
-                static String _190 = "View matrix has 16 elements";
-                String *_190_ref = &_190;
-                TestState _191 = Test_assert_MINUS_equal__int_String(_181, 16, _189, _190_ref);
+                Camera _156 = Camera_new(pos, -90.0, 0.0, 1.77);
+                Camera cam = _156;
+                Camera* _161 = &cam; // ref
+                Mat4 _162 = Camera_look_MINUS_at(_161);
+                Mat4 view = _162;
+                Camera* _167 = &cam; // ref
+                Mat4 _168 = Camera_perspective(_167);
+                Mat4 proj = _168;
+                TestState* _176 = &state; // ref
+                Mat4* _182 = &view; // ref
+                Array__float* _183 = Mat4_data(_182);
+                int _184 = Array_length__float(_183);
+                static String _185 = "View matrix has 16 elements";
+                String *_185_ref = &_185;
+                TestState _186 = Test_assert_MINUS_equal__int_String(_176, 16, _184, _185_ref);
                 Test_State_delete(state);
-                state = _191;  // Test.State = Test.State
-                TestState* _198 = &state; // ref
-                Mat4* _204 = &proj; // ref
-                Array__float* _205 = Mat4_data(_204);
-                int _206 = Array_length__float(_205);
-                static String _207 = "Proj matrix has 16 elements";
-                String *_207_ref = &_207;
-                TestState _208 = Test_assert_MINUS_equal__int_String(_198, 16, _206, _207_ref);
+                state = _186;  // Test.State = Test.State
+                TestState* _193 = &state; // ref
+                Mat4* _199 = &proj; // ref
+                Array__float* _200 = Mat4_data(_199);
+                int _201 = Array_length__float(_200);
+                static String _202 = "Proj matrix has 16 elements";
+                String *_202_ref = &_202;
+                TestState _203 = Test_assert_MINUS_equal__int_String(_193, 16, _201, _202_ref);
                 Test_State_delete(state);
-                state = _208;  // Test.State = Test.State
+                state = _203;  // Test.State = Test.State
                 Camera_delete(cam);
                 Mat4_delete(proj);
                 Mat4_delete(view);
             }
-            TestState _213 = state;
-            _214 = _213;
+            TestState _208 = state;
+            _209 = _208;
         }
-        TestState* _215 = &_214; // ref
-        camera_MINUS_test = _215;  // (Ref Test.State r154) = (Ref Test.State r154)
+        TestState* _210 = &_209; // ref
+        camera_MINUS_test = _210;  // (Ref Test.State r152) = (Ref Test.State r152)
         Test_print_MINUS_test_MINUS_results(camera_MINUS_test);
-        int* _223 = Test_State_failed(camera_MINUS_test);
-        int _224 = Int_copy(_223);
-        int _225 = _224;
-        _226 = _225;
-        Test_State_delete(_214);
+        int* _218 = Test_State_failed(camera_MINUS_test);
+        int _219 = Int_copy(_218);
+        int _220 = _219;
+        _221 = _220;
+        Test_State_delete(_209);
         Test_State_delete(_9);
     }
-    return _226;
+    return _221;
 }
 
 int max__int(int a, int b) {

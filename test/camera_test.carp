@@ -22,8 +22,7 @@
 
       ;; Camera Test
       (let [pos (Vec3.new 0.0 0.0 10.0)
-            target (Vec3.new 0.0 0.0 0.0)
-            cam (Camera.new pos target 1.77)
+            cam (Camera.new pos -90.0 0.0 1.77)
             view (Camera.look-at &cam)
             proj (Camera.perspective &cam)]
         (do
