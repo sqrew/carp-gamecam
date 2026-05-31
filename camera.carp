@@ -1,0 +1,129 @@
+(use Double)
+
+(deftype Vec3 [x Double, y Double, z Double])
+(defmodule Vec3
+  (defn new [x y z] (Vec3.init x y z))
+  (defn zero [] (Vec3.init 0.0 0.0 0.0))
+  (defn prn [v] (str* "(" (str @(Vec3.x v)) ", " (str @(Vec3.y v)) ", " (str @(Vec3.z v)) ")"))
+  
+  (defn add [a b] (Vec3.init (+ @(Vec3.x a) @(Vec3.x b)) (+ @(Vec3.y a) @(Vec3.y b)) (+ @(Vec3.z a) @(Vec3.z b))))
+  (defn sub [a b] (Vec3.init (- @(Vec3.x a) @(Vec3.x b)) (- @(Vec3.y a) @(Vec3.y b)) (- @(Vec3.z a) @(Vec3.z b))))
+  (defn mul [v s] (Vec3.init (* @(Vec3.x v) s) (* @(Vec3.y v) s) (* @(Vec3.z v) s)))
+
+  (defn dot [a b]
+    (+ (+ (* @(Vec3.x a) @(Vec3.x b)) (* @(Vec3.y a) @(Vec3.y b))) (* @(Vec3.z a) @(Vec3.z b))))
+
+  (defn cross [a b]
+    (Vec3.init (- (* @(Vec3.y a) @(Vec3.z b)) (* @(Vec3.z a) @(Vec3.y b)))
+               (- (* @(Vec3.z a) @(Vec3.x b)) (* @(Vec3.x a) @(Vec3.z b)))
+               (- (* @(Vec3.x a) @(Vec3.y b)) (* @(Vec3.y a) @(Vec3.x b)))))
+
+  (defn mag-sq [v] (Vec3.dot v v))
+  (defn mag [v] (sqrt (Vec3.mag-sq v)))
+
+  (defn normalize [v]
+    (let [m (Vec3.mag v)]
+      (if (> m 0.0) (Vec3.mul v (/ 1.0 m)) @v)))
+)
+
+(doc Mat4 "is a 4x4 matrix stored in column-major order (standard for WGPU/OpenGL).")
+(deftype Mat4 [data (Array Float)])
+
+(defmodule Mat4
+  (defn zero [] (Mat4.init (Array.replicate 16 &0.0f)))
+
+  (defn identity []
+    (let [m (Array.replicate 16 &0.0f)]
+      (do
+        (Array.aset! &m 0  1.0f)
+        (Array.aset! &m 5  1.0f)
+        (Array.aset! &m 10 1.0f)
+        (Array.aset! &m 15 1.0f)
+        (Mat4.init m))))
+
+  (defn mul [a b]
+    (let [m1 (Mat4.data a)
+          m2 (Mat4.data b)
+          res (Array.replicate 16 &0.0f)]
+      (do
+        (for [col 0 4]
+          (for [row 0 4]
+            (let [sum 0.0f]
+              (do
+                (for [k 0 4]
+                  (set! sum (+ sum (* @(Array.unsafe-nth m1 (+ (* k 4) row))
+                                      @(Array.unsafe-nth m2 (+ (* col 4) k))))))
+                (Array.aset! &res (+ (* col 4) row) sum)))))
+        (Mat4.init res))))
+)
+
+(doc Camera "represents a 3D perspective camera.")
+(deftype Camera [
+  pos Vec3
+  target Vec3
+  up Vec3
+  yaw Double
+  pitch Double
+  fov Double
+  aspect Double
+  near Double
+  far Double
+])
+
+(defmodule Camera
+  (defn new [pos target aspect]
+    (Camera.init pos target (Vec3.init 0.0 1.0 0.0) -90.0 0.0 60.0 aspect 0.1 100.0))
+
+  (doc perspective "generates a 4x4 projection matrix.")
+  (defn perspective [c]
+    (let [f (/ 1.0f (the Float (Double.to-float (tan (* @(Camera.fov c) 0.00872664625))))) ;; tan(fov * 0.5 * PI/180)
+          a (the Float (Double.to-float @(Camera.aspect c)))
+          n (the Float (Double.to-float @(Camera.near c)))
+          far (the Float (Double.to-float @(Camera.far c)))
+          m (Array.replicate 16 &0.0f)]
+      (do
+        (Array.aset! &m 0 (/ f a))
+        (Array.aset! &m 5 f)
+        (Array.aset! &m 10 (/ far (- n far)))
+        (Array.aset! &m 11 -1.0f)
+        (Array.aset! &m 14 (/ (* far n) (- n far)))
+        (Mat4.init m))))
+
+  (doc look-at "generates a 4x4 view matrix.")
+  (defn look-at [c]
+    (let [f (Vec3.normalize &(Vec3.sub (Camera.target c) (Camera.pos c)))
+          s (Vec3.normalize &(Vec3.cross &f (Camera.up c)))
+          u (Vec3.cross &s &f)
+          p (Camera.pos c)
+          m (Array.replicate 16 &0.0f)]
+      (do
+        (Array.aset! &m 0 (the Float (Double.to-float @(Vec3.x &s))))
+        (Array.aset! &m 4 (the Float (Double.to-float @(Vec3.y &s))))
+        (Array.aset! &m 8 (the Float (Double.to-float @(Vec3.z &s))))
+        
+        (Array.aset! &m 1 (the Float (Double.to-float @(Vec3.x &u))))
+        (Array.aset! &m 5 (the Float (Double.to-float @(Vec3.y &u))))
+        (Array.aset! &m 9 (the Float (Double.to-float @(Vec3.z &u))))
+        
+        (Array.aset! &m 2 (the Float (Double.to-float (- 0.0 @(Vec3.x &f)))))
+        (Array.aset! &m 6 (the Float (Double.to-float (- 0.0 @(Vec3.y &f)))))
+        (Array.aset! &m 10 (the Float (Double.to-float (- 0.0 @(Vec3.z &f)))))
+        
+        (Array.aset! &m 12 (the Float (Double.to-float (- 0.0 (Vec3.dot &s p)))))
+        (Array.aset! &m 13 (the Float (Double.to-float (- 0.0 (Vec3.dot &u p)))))
+        (Array.aset! &m 14 (the Float (Double.to-float (Vec3.dot &f p))))
+        (Array.aset! &m 15 1.0f)
+        (Mat4.init m))))
+
+  (defn- rad [deg] (* deg 0.0174532925))
+
+  (doc update-orientation! "recalculates the target vector based on yaw and pitch.")
+  (defn update-orientation! [c]
+    (let [y (Camera.rad @(Camera.yaw c))
+          p (Camera.rad @(Camera.pitch c))
+          front-x (* (cos y) (cos p))
+          front-y (sin p)
+          front-z (* (sin y) (cos p))
+          front (Vec3.normalize &(Vec3.init front-x front-y front-z))]
+      (Camera.set-target! c (Vec3.add (Camera.pos c) &front))))
+)

@@ -1,0 +1,33 @@
+(load "Test.carp")
+(use Test)
+(load "camera.carp")
+
+(deftest camera-test
+  (let [state (Test.State.init 0 0)]
+    (do
+      ;; Vector Test
+      (let [v1 (Vec3.new 1.0 2.0 3.0)
+            v2 (Vec3.new 4.0 5.0 6.0)
+            v3 (Vec3.add &v1 &v2)]
+        (set! state (assert-equal &state 5.0 @(Vec3.x &v3) "Vec3 addition works")))
+
+      ;; Matrix Identity Test
+      (let [m (Mat4.identity)
+            data (Mat4.data &m)]
+        (do
+          (set! state (assert-equal &state 1.0f @(Array.unsafe-nth data 0)  "Identity [0] is 1"))
+          (set! state (assert-equal &state 1.0f @(Array.unsafe-nth data 5)  "Identity [5] is 1"))
+          (set! state (assert-equal &state 1.0f @(Array.unsafe-nth data 10) "Identity [10] is 1"))
+          (set! state (assert-equal &state 1.0f @(Array.unsafe-nth data 15) "Identity [15] is 1"))))
+
+      ;; Camera Test
+      (let [pos (Vec3.new 0.0 0.0 10.0)
+            target (Vec3.new 0.0 0.0 0.0)
+            cam (Camera.new pos target 1.77)
+            view (Camera.look-at &cam)
+            proj (Camera.perspective &cam)]
+        (do
+          (set! state (assert-equal &state 16 (Array.length (Mat4.data &view)) "View matrix has 16 elements"))
+          (set! state (assert-equal &state 16 (Array.length (Mat4.data &proj)) "Proj matrix has 16 elements"))))
+      
+      state)))
