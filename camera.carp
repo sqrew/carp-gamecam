@@ -23,7 +23,7 @@
 
   (defn normalize [v]
     (let [m (Vec3.mag v)]
-      (if (> m 0.0) (Vec3.mul v (/ 1.0 m)) @v)))
+      (if (> m 0.000001) (Vec3.mul v (/ 1.0 m)) @v)))
 )
 
 (doc Mat4 "is a 4x4 matrix stored in column-major order.")
@@ -74,6 +74,7 @@
 
 (defmodule Camera
   (defn- rad [deg] (* deg 0.0174532925))
+  (defn- deg [rad] (* rad 57.2957795))
 
   (doc update-basis! "recalculates the basis vectors (front, right, up) from yaw and pitch.")
   (defn update-basis! [c]
@@ -95,12 +96,34 @@
         (Camera.update-basis! &c)
         c)))
 
-  (doc rotate! "adds to the yaw and pitch, with automatic clamping.")
-  (defn rotate! [c dydp dpitch]
+  (doc update-yaw! "sets the yaw and updates the internal basis vectors.")
+  (defn update-yaw! [c val]
     (do
-      (Camera.set-yaw! c (+ @(Camera.yaw c) dydp))
+      (Camera.set-yaw! c val)
+      (Camera.update-basis! c)))
+
+  (doc update-pitch! "sets the pitch (clamped -89 to 89) and updates the internal basis vectors.")
+  (defn update-pitch! [c val]
+    (do
+      (Camera.set-pitch! c (Double.clamp -89.0 89.0 val))
+      (Camera.update-basis! c)))
+
+  (doc rotate! "adds to the yaw and pitch, with automatic clamping.")
+  (defn rotate! [c dyaw dpitch]
+    (do
+      (Camera.set-yaw! c (+ @(Camera.yaw c) dyaw))
       (Camera.set-pitch! c (Double.clamp -89.0 89.0 (+ @(Camera.pitch c) dpitch)))
       (Camera.update-basis! c)))
+
+  (doc look-at-point! "orients the camera to face a target point in space.")
+  (defn look-at-point! [c target]
+    (let [dir (Vec3.normalize &(Vec3.sub target (Camera.pos c)))
+          p (Camera.deg (asin @(Vec3.y &dir)))
+          y (Camera.deg (atan2 @(Vec3.z &dir) @(Vec3.x &dir)))]
+      (do
+        (Camera.set-pitch! c (Double.clamp -89.0 89.0 p))
+        (Camera.set-yaw! c y)
+        (Camera.update-basis! c))))
 
   (doc move-forward! "moves the camera forward/backward along its front vector.")
   (defn move-forward! [c dist]
@@ -137,9 +160,9 @@
           p (Camera.pos c)
           m (Array.replicate 16 &0.0f)]
       (do
-        (Array.aset! &m 0 (the Float (Double.to-float @(Vec3.x s))))
-        (Array.aset! &m 4 (the Float (Double.to-float @(Vec3.y s))))
-        (Array.aset! &m 8 (the Float (Double.to-float @(Vec3.z s))))
+        (Array.aset! &m 0 (the Float (Double.to-float @(Vec3.x f))))
+        (Array.aset! &m 4 (the Float (Double.to-float @(Vec3.y f))))
+        (Array.aset! &m 8 (the Float (Double.to-float @(Vec3.z f))))
         
         (Array.aset! &m 1 (the Float (Double.to-float @(Vec3.x u))))
         (Array.aset! &m 5 (the Float (Double.to-float @(Vec3.y u))))
@@ -154,4 +177,8 @@
         (Array.aset! &m 14 (the Float (Double.to-float (Vec3.dot f p))))
         (Array.aset! &m 15 1.0f)
         (Mat4.init m))))
+
+  (doc view-projection "generates a combined view-projection matrix.")
+  (defn view-projection [c]
+    (Mat4.mul &(Camera.perspective c) &(Camera.look-at c)))
 )

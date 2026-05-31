@@ -779,6 +779,9 @@ typedef Mat4(*Fn__Camera_MUL__Mat4)(Camera*);
 typedef Array__float*(*Fn__Mat4_MUL__Array__float_MUL_)(Mat4*);
 
 // Depth 9
+typedef Mat4(*Fn__Mat4_MUL__Mat4_MUL__Mat4)(Mat4*, Mat4*);
+
+// Depth 9
 typedef String(*Fn__Mat4_MUL__String)(Mat4*);
 
 // Depth 9
@@ -2824,6 +2827,9 @@ double* Camera_aspect(Camera* p);
 Camera Camera_copy(Camera* pRef);
 
 // Depth 500
+double Camera_deg(double rad);
+
+// Depth 500
 void Camera_delete(Camera p);
 
 // Depth 500
@@ -2840,6 +2846,9 @@ Camera Camera_init(Vec3 pos, Vec3 front, Vec3 right, Vec3 up, Vec3 world_MINUS_u
 
 // Depth 500
 Mat4 Camera_look_MINUS_at(Camera* c);
+
+// Depth 500
+void Camera_look_MINUS_at_MINUS_point_BANG_(Camera* c, Vec3* target);
 
 // Depth 500
 void Camera_move_MINUS_forward_BANG_(Camera* c, double dist);
@@ -2875,7 +2884,7 @@ double Camera_rad(double deg);
 Vec3* Camera_right(Camera* p);
 
 // Depth 500
-void Camera_rotate_BANG_(Camera* c, double dydp, double dpitch);
+void Camera_rotate_BANG_(Camera* c, double dyaw, double dpitch);
 
 // Depth 500
 Camera Camera_set_MINUS_aspect(Camera p, double newValue);
@@ -2971,6 +2980,9 @@ Camera Camera_update_MINUS_near(Camera p, Lambda *updater);
 Camera Camera_update_MINUS_pitch(Camera p, Lambda *updater);
 
 // Depth 500
+void Camera_update_MINUS_pitch_BANG_(Camera* c, double val);
+
+// Depth 500
 Camera Camera_update_MINUS_pos(Camera p, Lambda *updater);
 
 // Depth 500
@@ -2984,6 +2996,12 @@ Camera Camera_update_MINUS_world_MINUS_up(Camera p, Lambda *updater);
 
 // Depth 500
 Camera Camera_update_MINUS_yaw(Camera p, Lambda *updater);
+
+// Depth 500
+void Camera_update_MINUS_yaw_BANG_(Camera* c, double val);
+
+// Depth 500
+Mat4 Camera_view_MINUS_projection(Camera* c);
 
 // Depth 500
 Vec3* Camera_world_MINUS_up(Camera* p);
@@ -9018,6 +9036,11 @@ Camera Camera_copy(Camera* pRef) {
     return copy;
 }
 
+double Camera_deg(double rad) {
+    double _7 = Double__MUL_(rad, 57.2957795);
+    return _7;
+}
+
 void Camera_delete(Camera p) {
     Vec3_delete(p.pos);
     Vec3_delete(p.front);
@@ -9070,19 +9093,19 @@ Mat4 Camera_look_MINUS_at(Camera* c) {
         Array__float _27 = Array_replicate__float(16, _26);
         Array__float m = _27;
         Array__float* _33 = &m; // ref
-        double* _41 = Vec3_x(s);
+        double* _41 = Vec3_x(f);
         double _42 = Double_copy(_41);
         float _43 = Double_to_MINUS_float(_42);
         float _44 = _43; // From the 'the' function.
         Array_aset_BANG___float(_33, 0, _44);
         Array__float* _49 = &m; // ref
-        double* _57 = Vec3_y(s);
+        double* _57 = Vec3_y(f);
         double _58 = Double_copy(_57);
         float _59 = Double_to_MINUS_float(_58);
         float _60 = _59; // From the 'the' function.
         Array_aset_BANG___float(_49, 4, _60);
         Array__float* _65 = &m; // ref
-        double* _73 = Vec3_z(s);
+        double* _73 = Vec3_z(f);
         double _74 = Double_copy(_73);
         float _75 = Double_to_MINUS_float(_74);
         float _76 = _75; // From the 'the' function.
@@ -9150,6 +9173,37 @@ Mat4 Camera_look_MINUS_at(Camera* c) {
         _245 = _244;
     }
     return _245;
+}
+
+void Camera_look_MINUS_at_MINUS_point_BANG_(Camera* c, Vec3* target) {
+    /* let */ {
+        Vec3* _13 = Camera_pos(c);
+        Vec3 _14 = Vec3_sub(target, _13);
+        Vec3* _15 = &_14; // ref
+        Vec3 _16 = Vec3_normalize(_15);
+        Vec3 dir = _16;
+        Vec3* _24 = &dir; // ref
+        double* _25 = Vec3_y(_24);
+        double _26 = Double_copy(_25);
+        double _27 = Double_asin(_26);
+        double _28 = Camera_deg(_27);
+        double p = _28;
+        Vec3* _36 = &dir; // ref
+        double* _37 = Vec3_z(_36);
+        double _38 = Double_copy(_37);
+        Vec3* _43 = &dir; // ref
+        double* _44 = Vec3_x(_43);
+        double _45 = Double_copy(_44);
+        double _46 = Double_atan2(_38, _45);
+        double _47 = Camera_deg(_46);
+        double y = _47;
+        double _56 = Double_clamp__double(-89.0, 89.0, p);
+        Camera_set_MINUS_pitch_BANG_(c, _56);
+        Camera_set_MINUS_yaw_BANG_(c, y);
+        Camera_update_MINUS_basis_BANG_(c);
+        Vec3_delete(_14);
+        Vec3_delete(dir);
+    }
 }
 
 void Camera_move_MINUS_forward_BANG_(Camera* c, double dist) {
@@ -9382,10 +9436,10 @@ double Camera_rad(double deg) {
 
 Vec3* Camera_right(Camera* p) { return (&(p->right)); }
 
-void Camera_rotate_BANG_(Camera* c, double dydp, double dpitch) {
+void Camera_rotate_BANG_(Camera* c, double dyaw, double dpitch) {
     double* _13 = Camera_yaw(c);
     double _14 = Double_copy(_13);
-    double _16 = Double__PLUS_(_14, dydp);
+    double _16 = Double__PLUS_(_14, dyaw);
     Camera_set_MINUS_yaw_BANG_(c, _16);
     double* _27 = Camera_pitch(c);
     double _28 = Double_copy(_27);
@@ -9735,6 +9789,12 @@ Camera Camera_update_MINUS_pitch(Camera p, Lambda *updater) {
 }
 
 
+void Camera_update_MINUS_pitch_BANG_(Camera* c, double val) {
+    double _12 = Double_clamp__double(-89.0, 89.0, val);
+    Camera_set_MINUS_pitch_BANG_(c, _12);
+    Camera_update_MINUS_basis_BANG_(c);
+}
+
 Camera Camera_update_MINUS_pos(Camera p, Lambda *updater) {
     p.pos = (*updater).env ? ((Fn__LambdaEnv_Vec3_Vec3)(*updater).callback)((*updater).env, p.pos) : ((Fn__Vec3_Vec3)(*updater).callback)(p.pos);
     return p;
@@ -9764,6 +9824,22 @@ Camera Camera_update_MINUS_yaw(Camera p, Lambda *updater) {
     return p;
 }
 
+
+void Camera_update_MINUS_yaw_BANG_(Camera* c, double val) {
+    Camera_set_MINUS_yaw_BANG_(c, val);
+    Camera_update_MINUS_basis_BANG_(c);
+}
+
+Mat4 Camera_view_MINUS_projection(Camera* c) {
+    Mat4 _8 = Camera_perspective(c);
+    Mat4* _9 = &_8; // ref
+    Mat4 _13 = Camera_look_MINUS_at(c);
+    Mat4* _14 = &_13; // ref
+    Mat4 _15 = Mat4_mul(_9, _14);
+    Mat4_delete(_13);
+    Mat4_delete(_8);
+    return _15;
+}
 
 Vec3* Camera_world_MINUS_up(Camera* p) { return (&(p->world_MINUS_up)); }
 
@@ -15832,7 +15908,7 @@ Vec3 Vec3_normalize(Vec3* v) {
         double _8 = Vec3_mag(v);
         double m = _8;
         Vec3 _29;
-        bool _14 = Double__GT_(m, 0.0);
+        bool _14 = Double__GT_(m, 1.0e-6);
         if (_14) {
             double _21 = Double__DIV_(1.0, m);
             Vec3 _22 = Vec3_mul(v, _21);
