@@ -555,6 +555,9 @@ typedef double*(*Fn__Vec3_MUL__double_MUL_)(Vec3*);
 typedef Vec3(*Fn__Vec3_MUL__double_Vec3)(Vec3*, double);
 
 // Depth 6
+typedef void(*Fn__Vec3_MUL__double_void)(Vec3*, double);
+
+// Depth 6
 typedef Vec3(*Fn__Vec3_Vec3)(Vec3);
 
 // Depth 6
@@ -9093,19 +9096,19 @@ Mat4 Camera_look_MINUS_at(Camera* c) {
         Array__float _27 = Array_replicate__float(16, _26);
         Array__float m = _27;
         Array__float* _33 = &m; // ref
-        double* _41 = Vec3_x(f);
+        double* _41 = Vec3_x(s);
         double _42 = Double_copy(_41);
         float _43 = Double_to_MINUS_float(_42);
         float _44 = _43; // From the 'the' function.
         Array_aset_BANG___float(_33, 0, _44);
         Array__float* _49 = &m; // ref
-        double* _57 = Vec3_y(f);
+        double* _57 = Vec3_y(s);
         double _58 = Double_copy(_57);
         float _59 = Double_to_MINUS_float(_58);
         float _60 = _59; // From the 'the' function.
         Array_aset_BANG___float(_49, 4, _60);
         Array__float* _65 = &m; // ref
-        double* _73 = Vec3_z(f);
+        double* _73 = Vec3_z(s);
         double _74 = Double_copy(_73);
         float _75 = Double_to_MINUS_float(_74);
         float _76 = _75; // From the 'the' function.
@@ -9207,33 +9210,93 @@ void Camera_look_MINUS_at_MINUS_point_BANG_(Camera* c, Vec3* target) {
 }
 
 void Camera_move_MINUS_forward_BANG_(Camera* c, double dist) {
-    Vec3* _10 = Camera_pos(c);
-    Vec3* _15 = Camera_front(c);
-    Vec3 _17 = Vec3_mul(_15, dist);
-    Vec3* _18 = &_17; // ref
-    Vec3 _19 = Vec3_add(_10, _18);
-    Camera_set_MINUS_pos_BANG_(c, _19);
-    Vec3_delete(_17);
+    /* let */ {
+        Vec3* _9 = Camera_pos(c);
+        Vec3* p = _9;
+        Vec3* _13 = Camera_front(c);
+        Vec3* f = _13;
+        double* _22 = Vec3_x(p);
+        double _23 = Double_copy(_22);
+        double* _28 = Vec3_x(f);
+        double _29 = Double_copy(_28);
+        double _31 = Double__MUL_(_29, dist);
+        double _32 = Double__PLUS_(_23, _31);
+        Vec3_set_MINUS_x_BANG_(p, _32);
+        double* _40 = Vec3_y(p);
+        double _41 = Double_copy(_40);
+        double* _46 = Vec3_y(f);
+        double _47 = Double_copy(_46);
+        double _49 = Double__MUL_(_47, dist);
+        double _50 = Double__PLUS_(_41, _49);
+        Vec3_set_MINUS_y_BANG_(p, _50);
+        double* _58 = Vec3_z(p);
+        double _59 = Double_copy(_58);
+        double* _64 = Vec3_z(f);
+        double _65 = Double_copy(_64);
+        double _67 = Double__MUL_(_65, dist);
+        double _68 = Double__PLUS_(_59, _67);
+        Vec3_set_MINUS_z_BANG_(p, _68);
+    }
 }
 
 void Camera_move_MINUS_right_BANG_(Camera* c, double dist) {
-    Vec3* _10 = Camera_pos(c);
-    Vec3* _15 = Camera_right(c);
-    Vec3 _17 = Vec3_mul(_15, dist);
-    Vec3* _18 = &_17; // ref
-    Vec3 _19 = Vec3_add(_10, _18);
-    Camera_set_MINUS_pos_BANG_(c, _19);
-    Vec3_delete(_17);
+    /* let */ {
+        Vec3* _9 = Camera_pos(c);
+        Vec3* p = _9;
+        Vec3* _13 = Camera_right(c);
+        Vec3* r = _13;
+        double* _22 = Vec3_x(p);
+        double _23 = Double_copy(_22);
+        double* _28 = Vec3_x(r);
+        double _29 = Double_copy(_28);
+        double _31 = Double__MUL_(_29, dist);
+        double _32 = Double__PLUS_(_23, _31);
+        Vec3_set_MINUS_x_BANG_(p, _32);
+        double* _40 = Vec3_y(p);
+        double _41 = Double_copy(_40);
+        double* _46 = Vec3_y(r);
+        double _47 = Double_copy(_46);
+        double _49 = Double__MUL_(_47, dist);
+        double _50 = Double__PLUS_(_41, _49);
+        Vec3_set_MINUS_y_BANG_(p, _50);
+        double* _58 = Vec3_z(p);
+        double _59 = Double_copy(_58);
+        double* _64 = Vec3_z(r);
+        double _65 = Double_copy(_64);
+        double _67 = Double__MUL_(_65, dist);
+        double _68 = Double__PLUS_(_59, _67);
+        Vec3_set_MINUS_z_BANG_(p, _68);
+    }
 }
 
 void Camera_move_MINUS_up_BANG_(Camera* c, double dist) {
-    Vec3* _10 = Camera_pos(c);
-    Vec3* _15 = Camera_world_MINUS_up(c);
-    Vec3 _17 = Vec3_mul(_15, dist);
-    Vec3* _18 = &_17; // ref
-    Vec3 _19 = Vec3_add(_10, _18);
-    Camera_set_MINUS_pos_BANG_(c, _19);
-    Vec3_delete(_17);
+    /* let */ {
+        Vec3* _9 = Camera_pos(c);
+        Vec3* p = _9;
+        Vec3* _13 = Camera_world_MINUS_up(c);
+        Vec3* wu = _13;
+        double* _22 = Vec3_x(p);
+        double _23 = Double_copy(_22);
+        double* _28 = Vec3_x(wu);
+        double _29 = Double_copy(_28);
+        double _31 = Double__MUL_(_29, dist);
+        double _32 = Double__PLUS_(_23, _31);
+        Vec3_set_MINUS_x_BANG_(p, _32);
+        double* _40 = Vec3_y(p);
+        double _41 = Double_copy(_40);
+        double* _46 = Vec3_y(wu);
+        double _47 = Double_copy(_46);
+        double _49 = Double__MUL_(_47, dist);
+        double _50 = Double__PLUS_(_41, _49);
+        Vec3_set_MINUS_y_BANG_(p, _50);
+        double* _58 = Vec3_z(p);
+        double _59 = Double_copy(_58);
+        double* _64 = Vec3_z(wu);
+        double _65 = Double_copy(_64);
+        double _67 = Double__MUL_(_65, dist);
+        double _68 = Double__PLUS_(_59, _67);
+        Vec3_set_MINUS_z_BANG_(p, _68);
+    }
 }
 
 double* Camera_near(Camera* p) { return (&(p->near)); }

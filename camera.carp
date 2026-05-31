@@ -127,15 +127,30 @@
 
   (doc move-forward! "moves the camera forward/backward along its front vector.")
   (defn move-forward! [c dist]
-    (Camera.set-pos! c (Vec3.add (Camera.pos c) &(Vec3.mul (Camera.front c) dist))))
+    (let [p (Camera.pos c)
+          f (Camera.front c)]
+      (do
+        (Vec3.set-x! p (+ @(Vec3.x p) (* @(Vec3.x f) dist)))
+        (Vec3.set-y! p (+ @(Vec3.y p) (* @(Vec3.y f) dist)))
+        (Vec3.set-z! p (+ @(Vec3.z p) (* @(Vec3.z f) dist))))))
 
   (doc move-right! "moves the camera left/right along its right vector.")
   (defn move-right! [c dist]
-    (Camera.set-pos! c (Vec3.add (Camera.pos c) &(Vec3.mul (Camera.right c) dist))))
+    (let [p (Camera.pos c)
+          r (Camera.right c)]
+      (do
+        (Vec3.set-x! p (+ @(Vec3.x p) (* @(Vec3.x r) dist)))
+        (Vec3.set-y! p (+ @(Vec3.y p) (* @(Vec3.y r) dist)))
+        (Vec3.set-z! p (+ @(Vec3.z p) (* @(Vec3.z r) dist))))))
 
   (doc move-up! "moves the camera up/down along the world-up vector.")
   (defn move-up! [c dist]
-    (Camera.set-pos! c (Vec3.add (Camera.pos c) &(Vec3.mul (Camera.world-up c) dist))))
+    (let [p (Camera.pos c)
+          wu (Camera.world-up c)]
+      (do
+        (Vec3.set-x! p (+ @(Vec3.x p) (* @(Vec3.x wu) dist)))
+        (Vec3.set-y! p (+ @(Vec3.y p) (* @(Vec3.y wu) dist)))
+        (Vec3.set-z! p (+ @(Vec3.z p) (* @(Vec3.z wu) dist))))))
 
   (doc perspective "generates a 4x4 projection matrix (WGPU/D3D style).")
   (defn perspective [c]
@@ -160,9 +175,9 @@
           p (Camera.pos c)
           m (Array.replicate 16 &0.0f)]
       (do
-        (Array.aset! &m 0 (the Float (Double.to-float @(Vec3.x f))))
-        (Array.aset! &m 4 (the Float (Double.to-float @(Vec3.y f))))
-        (Array.aset! &m 8 (the Float (Double.to-float @(Vec3.z f))))
+        (Array.aset! &m 0 (the Float (Double.to-float @(Vec3.x s))))
+        (Array.aset! &m 4 (the Float (Double.to-float @(Vec3.y s))))
+        (Array.aset! &m 8 (the Float (Double.to-float @(Vec3.z s))))
         
         (Array.aset! &m 1 (the Float (Double.to-float @(Vec3.x u))))
         (Array.aset! &m 5 (the Float (Double.to-float @(Vec3.y u))))
