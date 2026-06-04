@@ -69,6 +69,20 @@ typedef struct {
 typedef struct {
     union {
     struct {
+        bool member0;
+    } Just;
+    // Nothing
+    char __dummy;
+    } u;
+    char _tag;
+} Maybe__bool;
+#define Maybe__bool_Just_tag 0
+#define Maybe__bool_Nothing_tag 1
+
+// Depth 3
+typedef struct {
+    union {
+    struct {
         double member0;
     } Just;
     // Nothing
@@ -171,10 +185,33 @@ typedef struct {
 
 // Depth 3
 typedef struct {
+    bool x;
+    bool y;
+} Vector2__bool;
+
+// Depth 3
+typedef struct {
+    double n;
+} Vector3__Lambda_div__double_13_env_ty;
+
+// Depth 3
+typedef struct {
+    double n;
+} Vector3__Lambda_mul__double_13_env_ty;
+
+// Depth 3
+typedef struct {
+    bool x;
+    bool y;
+    bool z;
+} Vector3__bool;
+
+// Depth 3
+typedef struct {
     double x;
     double y;
     double z;
-} Vec3;
+} Vector3__double;
 
 // Depth 3
 typedef struct {
@@ -435,6 +472,9 @@ typedef int(*Fn__int_MUL__int)(int*);
 typedef int*(*Fn__int_MUL__int_MUL_)(int*);
 
 // Depth 4
+typedef bool(*Fn__int_MUL__int_MUL__bool)(int*, int*);
+
+// Depth 4
 typedef String(*Fn__int_String)(int);
 
 // Depth 4
@@ -490,11 +530,11 @@ typedef uint8_t(*Fn__uint8_t_uint8_t_uint8_t)(uint8_t, uint8_t);
 
 // Depth 5
 typedef struct {
-    Vec3 pos;
-    Vec3 front;
-    Vec3 right;
-    Vec3 up;
-    Vec3 world_MINUS_up;
+    Vector3__double pos;
+    Vector3__double front;
+    Vector3__double right;
+    Vector3__double up;
+    Vector3__double world_MINUS_up;
     double yaw;
     double pitch;
     double fov;
@@ -511,6 +551,21 @@ typedef void(*Fn__int_Fn__int_void_void)(int, Lambda);
 
 // Depth 6
 typedef Result__Char_String(*Fn__Char_Result__Char_String)(Char);
+
+// Depth 6
+typedef bool(*Fn__Fn__bool_bool_bool_bool_Vector2__bool_MUL__bool)(Lambda, bool, Vector2__bool*);
+
+// Depth 6
+typedef bool(*Fn__Fn__bool_bool_bool_bool_Vector3__bool_MUL__bool)(Lambda, bool, Vector3__bool*);
+
+// Depth 6
+typedef Vector3__double(*Fn__Fn__double_double_Vector3__double_MUL__Vector3__double)(Lambda, Vector3__double*);
+
+// Depth 6
+typedef Vector3__double(*Fn__Fn__double_double_double_Vector3__double_MUL__Vector3__double_MUL__Vector3__double)(Lambda, Vector3__double*, Vector3__double*);
+
+// Depth 6
+typedef double(*Fn__Fn__double_double_double_double_Vector3__double_MUL__double)(Lambda, double, Vector3__double*);
 
 // Depth 6
 typedef Maybe__Long(*Fn__Long_Maybe__Long)(Long);
@@ -534,31 +589,34 @@ typedef Result__String_String(*Fn__String_Result__String_String)(String);
 typedef Result__bool_String(*Fn__String_Result__bool_String)(String);
 
 // Depth 6
-typedef String(*Fn__Vec3_MUL__String)(Vec3*);
+typedef bool*(*Fn__Vector2__bool_MUL__bool_MUL_)(Vector2__bool*);
 
 // Depth 6
-typedef Vec3(*Fn__Vec3_MUL__Vec3)(Vec3*);
+typedef bool*(*Fn__Vector3__bool_MUL__bool_MUL_)(Vector3__bool*);
 
 // Depth 6
-typedef Vec3(*Fn__Vec3_MUL__Vec3_MUL__Vec3)(Vec3*, Vec3*);
+typedef String(*Fn__Vector3__double_MUL__String)(Vector3__double*);
 
 // Depth 6
-typedef double(*Fn__Vec3_MUL__Vec3_MUL__double)(Vec3*, Vec3*);
+typedef Vector3__double(*Fn__Vector3__double_MUL__Vector3__double)(Vector3__double*);
 
 // Depth 6
-typedef double(*Fn__Vec3_MUL__double)(Vec3*);
+typedef Vector3__double(*Fn__Vector3__double_MUL__Vector3__double_MUL__Vector3__double)(Vector3__double*, Vector3__double*);
 
 // Depth 6
-typedef double*(*Fn__Vec3_MUL__double_MUL_)(Vec3*);
+typedef double(*Fn__Vector3__double_MUL__Vector3__double_MUL__double)(Vector3__double*, Vector3__double*);
 
 // Depth 6
-typedef Vec3(*Fn__Vec3_MUL__double_Vec3)(Vec3*, double);
+typedef double(*Fn__Vector3__double_MUL__double)(Vector3__double*);
 
 // Depth 6
-typedef void(*Fn__Vec3_MUL__double_void)(Vec3*, double);
+typedef double*(*Fn__Vector3__double_MUL__double_MUL_)(Vector3__double*);
 
 // Depth 6
-typedef Vec3(*Fn__Vec3_Vec3)(Vec3);
+typedef Vector3__double(*Fn__Vector3__double_MUL__double_Vector3__double)(Vector3__double*, double);
+
+// Depth 6
+typedef Vector3__double(*Fn__Vector3__double_Vector3__double)(Vector3__double);
 
 // Depth 6
 typedef Maybe__Long(*Fn___Maybe__Long)();
@@ -579,16 +637,13 @@ typedef Maybe__int(*Fn___Maybe__int)();
 typedef Maybe__uint8_t(*Fn___Maybe__uint8_t)();
 
 // Depth 6
-typedef Vec3(*Fn___Vec3)();
-
-// Depth 6
 typedef Result__bool_String(*Fn__bool_Result__bool_String)(bool);
 
 // Depth 6
 typedef Maybe__double(*Fn__double_Maybe__double)(double);
 
 // Depth 6
-typedef Vec3(*Fn__double_double_double_Vec3)(double, double, double);
+typedef Vector3__double(*Fn__double_double_double_Vector3__double)(double, double, double);
 
 // Depth 6
 typedef Maybe__float(*Fn__float_Maybe__float)(float);
@@ -752,10 +807,10 @@ typedef Array__float(*Fn__int_float_MUL__Array__float)(int, float*);
 typedef String(*Fn__Camera_MUL__String)(Camera*);
 
 // Depth 8
-typedef Vec3*(*Fn__Camera_MUL__Vec3_MUL_)(Camera*);
+typedef Vector3__double*(*Fn__Camera_MUL__Vector3__double_MUL_)(Camera*);
 
 // Depth 8
-typedef void(*Fn__Camera_MUL__Vec3_void)(Camera*, Vec3);
+typedef void(*Fn__Camera_MUL__Vector3__double_void)(Camera*, Vector3__double);
 
 // Depth 8
 typedef double*(*Fn__Camera_MUL__double_MUL_)(Camera*);
@@ -767,10 +822,10 @@ typedef void(*Fn__Camera_MUL__double_void)(Camera*, double);
 typedef void(*Fn__Camera_MUL__void)(Camera*);
 
 // Depth 8
-typedef Camera(*Fn__Vec3_Vec3_Vec3_Vec3_Vec3_double_double_double_double_double_double_Camera)(Vec3, Vec3, Vec3, Vec3, Vec3, double, double, double, double, double, double);
+typedef Camera(*Fn__Vector3__double_Vector3__double_Vector3__double_Vector3__double_Vector3__double_double_double_double_double_double_double_Camera)(Vector3__double, Vector3__double, Vector3__double, Vector3__double, Vector3__double, double, double, double, double, double, double);
 
 // Depth 8
-typedef Camera(*Fn__Vec3_double_double_double_Camera)(Vec3, double, double, double);
+typedef Camera(*Fn__Vector3__double_double_double_double_Camera)(Vector3__double, double, double, double);
 
 // Depth 9
 typedef Mat4(*Fn__Array__float_Mat4)(Array__float);
@@ -1789,7 +1844,7 @@ typedef bool(*Fn__LambdaEnv_Result__Uint64_Array__uint8_t_MUL__bool)(LambdaEnv, 
 typedef bool(*Fn__LambdaEnv_String_MUL__bool)(LambdaEnv, String*);
 
 // Depth 505
-typedef Vec3(*Fn__LambdaEnv_Vec3_Vec3)(LambdaEnv, Vec3);
+typedef Vector3__double(*Fn__LambdaEnv_Vector3__double_Vector3__double)(LambdaEnv, Vector3__double);
 
 // Depth 505
 typedef double(*Fn__LambdaEnv_double_double)(LambdaEnv, double);
@@ -1832,15 +1887,6 @@ typedef String(*Fn__TestState_MUL__String)(TestState*);
 
 // Depth 505
 typedef TestState(*Fn__TestState_MUL__TestState)(TestState*);
-
-// Depth 505
-typedef TestState(*Fn__TestState_MUL__double_double_String_MUL__String_MUL__Fn__double_double_bool_TestState)(TestState*, double, double, String*, String*, Lambda);
-
-// Depth 505
-typedef TestState(*Fn__TestState_MUL__double_double_String_MUL__String_MUL__bool_TestState)(TestState*, double, double, String*, String*, bool);
-
-// Depth 505
-typedef TestState(*Fn__TestState_MUL__double_double_String_MUL__TestState)(TestState*, double, double, String*);
 
 // Depth 505
 typedef TestState(*Fn__TestState_MUL__float_float_String_MUL__String_MUL__Fn__float_float_bool_TestState)(TestState*, float, float, String*, String*, Lambda);
@@ -2090,6 +2136,18 @@ Pattern__Lambda_global_MINUS_match_MINUS_str_16_env_ty* Pattern__Lambda_global_M
 
 // Depth 500
 void Pattern__Lambda_global_MINUS_match_MINUS_str_16_env_ty_delete(Pattern__Lambda_global_MINUS_match_MINUS_str_16_env_ty* p);
+
+// Depth 500
+Vector3__Lambda_div__double_13_env_ty* Vector3__Lambda_div__double_13_env_ty_copy(Vector3__Lambda_div__double_13_env_ty* pRef);
+
+// Depth 500
+void Vector3__Lambda_div__double_13_env_ty_delete(Vector3__Lambda_div__double_13_env_ty* p);
+
+// Depth 500
+Vector3__Lambda_mul__double_13_env_ty* Vector3__Lambda_mul__double_13_env_ty_copy(Vector3__Lambda_mul__double_13_env_ty* pRef);
+
+// Depth 500
+void Vector3__Lambda_mul__double_13_env_ty_delete(Vector3__Lambda_mul__double_13_env_ty* p);
 
 // Depth 500
 int id__int(int x);
@@ -2842,16 +2900,16 @@ double* Camera_far(Camera* p);
 double* Camera_fov(Camera* p);
 
 // Depth 500
-Vec3* Camera_front(Camera* p);
+Vector3__double* Camera_front(Camera* p);
 
 // Depth 500
-Camera Camera_init(Vec3 pos, Vec3 front, Vec3 right, Vec3 up, Vec3 world_MINUS_up, double yaw, double pitch, double fov, double aspect, double near, double far);
+Camera Camera_init(Vector3__double pos, Vector3__double front, Vector3__double right, Vector3__double up, Vector3__double world_MINUS_up, double yaw, double pitch, double fov, double aspect, double near, double far);
 
 // Depth 500
 Mat4 Camera_look_MINUS_at(Camera* c);
 
 // Depth 500
-void Camera_look_MINUS_at_MINUS_point_BANG_(Camera* c, Vec3* target);
+void Camera_look_MINUS_at_MINUS_point_BANG_(Camera* c, Vector3__double* target);
 
 // Depth 500
 void Camera_move_MINUS_forward_BANG_(Camera* c, double dist);
@@ -2866,7 +2924,7 @@ void Camera_move_MINUS_up_BANG_(Camera* c, double dist);
 double* Camera_near(Camera* p);
 
 // Depth 500
-Camera Camera_new(Vec3 pos, double yaw, double pitch, double aspect);
+Camera Camera_new(Vector3__double pos, double yaw, double pitch, double aspect);
 
 // Depth 500
 Mat4 Camera_perspective(Camera* c);
@@ -2875,7 +2933,7 @@ Mat4 Camera_perspective(Camera* c);
 double* Camera_pitch(Camera* p);
 
 // Depth 500
-Vec3* Camera_pos(Camera* p);
+Vector3__double* Camera_pos(Camera* p);
 
 // Depth 500
 String Camera_prn(Camera *p);
@@ -2884,7 +2942,7 @@ String Camera_prn(Camera *p);
 double Camera_rad(double deg);
 
 // Depth 500
-Vec3* Camera_right(Camera* p);
+Vector3__double* Camera_right(Camera* p);
 
 // Depth 500
 void Camera_rotate_BANG_(Camera* c, double dyaw, double dpitch);
@@ -2908,10 +2966,10 @@ Camera Camera_set_MINUS_fov(Camera p, double newValue);
 void Camera_set_MINUS_fov_BANG_(Camera* pRef, double newValue);
 
 // Depth 500
-Camera Camera_set_MINUS_front(Camera p, Vec3 newValue);
+Camera Camera_set_MINUS_front(Camera p, Vector3__double newValue);
 
 // Depth 500
-void Camera_set_MINUS_front_BANG_(Camera* pRef, Vec3 newValue);
+void Camera_set_MINUS_front_BANG_(Camera* pRef, Vector3__double newValue);
 
 // Depth 500
 Camera Camera_set_MINUS_near(Camera p, double newValue);
@@ -2926,28 +2984,28 @@ Camera Camera_set_MINUS_pitch(Camera p, double newValue);
 void Camera_set_MINUS_pitch_BANG_(Camera* pRef, double newValue);
 
 // Depth 500
-Camera Camera_set_MINUS_pos(Camera p, Vec3 newValue);
+Camera Camera_set_MINUS_pos(Camera p, Vector3__double newValue);
 
 // Depth 500
-void Camera_set_MINUS_pos_BANG_(Camera* pRef, Vec3 newValue);
+void Camera_set_MINUS_pos_BANG_(Camera* pRef, Vector3__double newValue);
 
 // Depth 500
-Camera Camera_set_MINUS_right(Camera p, Vec3 newValue);
+Camera Camera_set_MINUS_right(Camera p, Vector3__double newValue);
 
 // Depth 500
-void Camera_set_MINUS_right_BANG_(Camera* pRef, Vec3 newValue);
+void Camera_set_MINUS_right_BANG_(Camera* pRef, Vector3__double newValue);
 
 // Depth 500
-Camera Camera_set_MINUS_up(Camera p, Vec3 newValue);
+Camera Camera_set_MINUS_up(Camera p, Vector3__double newValue);
 
 // Depth 500
-void Camera_set_MINUS_up_BANG_(Camera* pRef, Vec3 newValue);
+void Camera_set_MINUS_up_BANG_(Camera* pRef, Vector3__double newValue);
 
 // Depth 500
-Camera Camera_set_MINUS_world_MINUS_up(Camera p, Vec3 newValue);
+Camera Camera_set_MINUS_world_MINUS_up(Camera p, Vector3__double newValue);
 
 // Depth 500
-void Camera_set_MINUS_world_MINUS_up_BANG_(Camera* pRef, Vec3 newValue);
+void Camera_set_MINUS_world_MINUS_up_BANG_(Camera* pRef, Vector3__double newValue);
 
 // Depth 500
 Camera Camera_set_MINUS_yaw(Camera p, double newValue);
@@ -2959,7 +3017,7 @@ void Camera_set_MINUS_yaw_BANG_(Camera* pRef, double newValue);
 String Camera_str(Camera *p);
 
 // Depth 500
-Vec3* Camera_up(Camera* p);
+Vector3__double* Camera_up(Camera* p);
 
 // Depth 500
 Camera Camera_update_MINUS_aspect(Camera p, Lambda *updater);
@@ -3007,7 +3065,7 @@ void Camera_update_MINUS_yaw_BANG_(Camera* c, double val);
 Mat4 Camera_view_MINUS_projection(Camera* c);
 
 // Depth 500
-Vec3* Camera_world_MINUS_up(Camera* p);
+Vector3__double* Camera_world_MINUS_up(Camera* p);
 
 // Depth 500
 double* Camera_yaw(Camera* p);
@@ -3325,7 +3383,13 @@ void Function_delete__Uint32_MUL__Array__uint8_t (Lambda f);
 void Function_delete__Uint64_MUL__Array__uint8_t (Lambda f);
 
 // Depth 500
-void Function_delete__double_double_bool (Lambda f);
+void Function_delete__bool_bool_bool (Lambda f);
+
+// Depth 500
+void Function_delete__double_double (Lambda f);
+
+// Depth 500
+void Function_delete__double_double_double (Lambda f);
 
 // Depth 500
 void Function_delete__float_float_bool (Lambda f);
@@ -3782,6 +3846,9 @@ void Maybe_delete__Uint32(Maybe__Uint32 p);
 
 // Depth 500
 void Maybe_delete__Uint64(Maybe__Uint64 p);
+
+// Depth 500
+void Maybe_delete__bool(Maybe__bool p);
 
 // Depth 500
 void Maybe_delete__double(Maybe__double p);
@@ -4314,16 +4381,10 @@ String System_strerror(int error_MINUS_no);
 // Depth 1000
 
 // Depth 500
-TestState Test_assert_MINUS_equal__double_String(TestState* state, double x, double y, String* descr);
-
-// Depth 500
 TestState Test_assert_MINUS_equal__float_String(TestState* state, float x, float y, String* descr);
 
 // Depth 500
 TestState Test_assert_MINUS_equal__int_String(TestState* state, int x, int y, String* descr);
-
-// Depth 500
-TestState Test_display_MINUS_test__double_double_String_String(TestState* state, double expected, double actual, String* descr, String* what, bool is_MINUS_success);
 
 // Depth 500
 TestState Test_display_MINUS_test__float_float_String_String(TestState* state, float expected, float actual, String* descr, String* what, bool is_MINUS_success);
@@ -4333,9 +4394,6 @@ TestState Test_display_MINUS_test__int_int_String_String(TestState* state, int e
 
 // Depth 500
 void Test_handle_MINUS_signal__void(int x);
-
-// Depth 500
-TestState Test_handler__double_double_String_String(TestState* state, double expected, double actual, String* descr, String* what, Lambda op);
 
 // Depth 500
 TestState Test_handler__float_float_String_String(TestState* state, float expected, float actual, String* descr, String* what, Lambda op);
@@ -4518,85 +4576,105 @@ bool UnitRef__EQ_();
 // Depth 1000
 
 // Depth 500
-Vec3 Vec3_add(Vec3* a, Vec3* b);
+bool Vector2__Lambda_vapprox_19_env(bool i, bool v);
 
 // Depth 500
-Vec3 Vec3_copy(Vec3* pRef);
+void Vector2_delete__bool(Vector2__bool p);
 
 // Depth 500
-Vec3 Vec3_cross(Vec3* a, Vec3* b);
+bool Vector2_vreduce__bool_bool(Lambda f, bool i, Vector2__bool* v);
 
 // Depth 500
-void Vec3_delete(Vec3 p);
+bool* Vector2_x__bool(Vector2__bool* p);
 
 // Depth 500
-double Vec3_dot(Vec3* a, Vec3* b);
+bool* Vector2_y__bool(Vector2__bool* p);
+
+// Depth 1000
 
 // Depth 500
-Vec3 Vec3_init(double x, double y, double z);
+double Vector3__Lambda_div__double_13_env(Vector3__Lambda_div__double_13_env_ty* _env, double c);
 
 // Depth 500
-double Vec3_mag(Vec3* v);
+double Vector3__Lambda_mul__double_13_env(Vector3__Lambda_mul__double_13_env_ty* _env, double c);
 
 // Depth 500
-double Vec3_mag_MINUS_sq(Vec3* v);
+bool Vector3__Lambda_vapprox_19_env(bool i, bool v);
 
 // Depth 500
-Vec3 Vec3_mul(Vec3* v, double s);
+Vector3__double Vector3_add__double(Vector3__double* a, Vector3__double* b);
 
 // Depth 500
-Vec3 Vec3_new(double x, double y, double z);
+Vector3__double Vector3_copy__double(Vector3__double* pRef);
 
 // Depth 500
-Vec3 Vec3_normalize(Vec3* v);
+Vector3__double Vector3_cross__double(Vector3__double* a, Vector3__double* b);
 
 // Depth 500
-String Vec3_prn(Vec3* v);
+void Vector3_delete__bool(Vector3__bool p);
 
 // Depth 500
-Vec3 Vec3_set_MINUS_x(Vec3 p, double newValue);
+void Vector3_delete__double(Vector3__double p);
 
 // Depth 500
-void Vec3_set_MINUS_x_BANG_(Vec3* pRef, double newValue);
+Vector3__double Vector3_div__double(Vector3__double* v, double n);
 
 // Depth 500
-Vec3 Vec3_set_MINUS_y(Vec3 p, double newValue);
+double Vector3_dot__double(Vector3__double* a, Vector3__double* b);
 
 // Depth 500
-void Vec3_set_MINUS_y_BANG_(Vec3* pRef, double newValue);
+Vector3__double Vector3_init__double(double x, double y, double z);
 
 // Depth 500
-Vec3 Vec3_set_MINUS_z(Vec3 p, double newValue);
+double Vector3_mag_MINUS_sq__double(Vector3__double* o);
 
 // Depth 500
-void Vec3_set_MINUS_z_BANG_(Vec3* pRef, double newValue);
+double Vector3_mag__double(Vector3__double* o);
 
 // Depth 500
-String Vec3_str(Vec3 *p);
+Vector3__double Vector3_map__double_double(Lambda f, Vector3__double* v);
 
 // Depth 500
-Vec3 Vec3_sub(Vec3* a, Vec3* b);
+Vector3__double Vector3_mul__double(Vector3__double* v, double n);
 
 // Depth 500
-Vec3 Vec3_update_MINUS_x(Vec3 p, Lambda *updater);
+Vector3__double Vector3_normalize__double(Vector3__double* o);
 
 // Depth 500
-Vec3 Vec3_update_MINUS_y(Vec3 p, Lambda *updater);
+String Vector3_prn__double(Vector3__double *p);
 
 // Depth 500
-Vec3 Vec3_update_MINUS_z(Vec3 p, Lambda *updater);
+Vector3__double Vector3_sub__double(Vector3__double* a, Vector3__double* b);
 
 // Depth 500
-double* Vec3_x(Vec3* p);
+double Vector3_sum__double(Vector3__double* o);
 
 // Depth 500
-double* Vec3_y(Vec3* p);
+bool Vector3_vreduce__bool_bool(Lambda f, bool i, Vector3__bool* v);
 
 // Depth 500
-double* Vec3_z(Vec3* p);
+double Vector3_vreduce__double_double(Lambda f, double i, Vector3__double* v);
 
 // Depth 500
-Vec3 Vec3_zero();
+bool* Vector3_x__bool(Vector3__bool* p);
+
+// Depth 500
+double* Vector3_x__double(Vector3__double* p);
+
+// Depth 500
+bool* Vector3_y__bool(Vector3__bool* p);
+
+// Depth 500
+double* Vector3_y__double(Vector3__double* p);
+
+// Depth 500
+bool* Vector3_z__bool(Vector3__bool* p);
+
+// Depth 500
+double* Vector3_z__double(Vector3__double* p);
+
+// Depth 500
+Vector3__double Vector3_zip__double_double_double(Lambda f, Vector3__double* a, Vector3__double* b);
 
 
 //Init globals:
@@ -9025,11 +9103,11 @@ double* Camera_aspect(Camera* p) { return (&(p->aspect)); }
 
 Camera Camera_copy(Camera* pRef) {
     Camera copy = *pRef;
-    copy.pos = Vec3_copy(&(pRef->pos));
-    copy.front = Vec3_copy(&(pRef->front));
-    copy.right = Vec3_copy(&(pRef->right));
-    copy.up = Vec3_copy(&(pRef->up));
-    copy.world_MINUS_up = Vec3_copy(&(pRef->world_MINUS_up));
+    copy.pos = Vector3_copy__double(&(pRef->pos));
+    copy.front = Vector3_copy__double(&(pRef->front));
+    copy.right = Vector3_copy__double(&(pRef->right));
+    copy.up = Vector3_copy__double(&(pRef->up));
+    copy.world_MINUS_up = Vector3_copy__double(&(pRef->world_MINUS_up));
     /* Ignore non-managed member 'yaw' : Double */
     /* Ignore non-managed member 'pitch' : Double */
     /* Ignore non-managed member 'fov' : Double */
@@ -9045,11 +9123,11 @@ double Camera_deg(double rad) {
 }
 
 void Camera_delete(Camera p) {
-    Vec3_delete(p.pos);
-    Vec3_delete(p.front);
-    Vec3_delete(p.right);
-    Vec3_delete(p.up);
-    Vec3_delete(p.world_MINUS_up);
+    Vector3_delete__double(p.pos);
+    Vector3_delete__double(p.front);
+    Vector3_delete__double(p.right);
+    Vector3_delete__double(p.up);
+    Vector3_delete__double(p.world_MINUS_up);
     /* Ignore non-managed member 'yaw' : Double */
     /* Ignore non-managed member 'pitch' : Double */
     /* Ignore non-managed member 'fov' : Double */
@@ -9062,9 +9140,9 @@ double* Camera_far(Camera* p) { return (&(p->far)); }
 
 double* Camera_fov(Camera* p) { return (&(p->fov)); }
 
-Vec3* Camera_front(Camera* p) { return (&(p->front)); }
+Vector3__double* Camera_front(Camera* p) { return (&(p->front)); }
 
-Camera Camera_init(Vec3 pos, Vec3 front, Vec3 right, Vec3 up, Vec3 world_MINUS_up, double yaw, double pitch, double fov, double aspect, double near, double far) {
+Camera Camera_init(Vector3__double pos, Vector3__double front, Vector3__double right, Vector3__double up, Vector3__double world_MINUS_up, double yaw, double pitch, double fov, double aspect, double near, double far) {
     Camera instance;
     instance.pos = pos;
     instance.front = front;
@@ -9083,89 +9161,89 @@ Camera Camera_init(Vec3 pos, Vec3 front, Vec3 right, Vec3 up, Vec3 world_MINUS_u
 Mat4 Camera_look_MINUS_at(Camera* c) {
     Mat4 _245;
     /* let */ {
-        Vec3* _8 = Camera_front(c);
-        Vec3* f = _8;
-        Vec3* _12 = Camera_right(c);
-        Vec3* s = _12;
-        Vec3* _16 = Camera_up(c);
-        Vec3* u = _16;
-        Vec3* _20 = Camera_pos(c);
-        Vec3* p = _20;
+        Vector3__double* _8 = Camera_front(c);
+        Vector3__double* f = _8;
+        Vector3__double* _12 = Camera_right(c);
+        Vector3__double* s = _12;
+        Vector3__double* _16 = Camera_up(c);
+        Vector3__double* u = _16;
+        Vector3__double* _20 = Camera_pos(c);
+        Vector3__double* p = _20;
         static float _26_lit = 0.0f;
         float* _26 = &_26_lit; // ref
         Array__float _27 = Array_replicate__float(16, _26);
         Array__float m = _27;
         Array__float* _33 = &m; // ref
-        double* _41 = Vec3_x(s);
+        double* _41 = Vector3_x__double(s);
         double _42 = Double_copy(_41);
         float _43 = Double_to_MINUS_float(_42);
         float _44 = _43; // From the 'the' function.
         Array_aset_BANG___float(_33, 0, _44);
         Array__float* _49 = &m; // ref
-        double* _57 = Vec3_y(s);
+        double* _57 = Vector3_y__double(s);
         double _58 = Double_copy(_57);
         float _59 = Double_to_MINUS_float(_58);
         float _60 = _59; // From the 'the' function.
         Array_aset_BANG___float(_49, 4, _60);
         Array__float* _65 = &m; // ref
-        double* _73 = Vec3_z(s);
+        double* _73 = Vector3_z__double(s);
         double _74 = Double_copy(_73);
         float _75 = Double_to_MINUS_float(_74);
         float _76 = _75; // From the 'the' function.
         Array_aset_BANG___float(_65, 8, _76);
         Array__float* _81 = &m; // ref
-        double* _89 = Vec3_x(u);
+        double* _89 = Vector3_x__double(u);
         double _90 = Double_copy(_89);
         float _91 = Double_to_MINUS_float(_90);
         float _92 = _91; // From the 'the' function.
         Array_aset_BANG___float(_81, 1, _92);
         Array__float* _97 = &m; // ref
-        double* _105 = Vec3_y(u);
+        double* _105 = Vector3_y__double(u);
         double _106 = Double_copy(_105);
         float _107 = Double_to_MINUS_float(_106);
         float _108 = _107; // From the 'the' function.
         Array_aset_BANG___float(_97, 5, _108);
         Array__float* _113 = &m; // ref
-        double* _121 = Vec3_z(u);
+        double* _121 = Vector3_z__double(u);
         double _122 = Double_copy(_121);
         float _123 = Double_to_MINUS_float(_122);
         float _124 = _123; // From the 'the' function.
         Array_aset_BANG___float(_113, 9, _124);
         Array__float* _129 = &m; // ref
-        double* _139 = Vec3_x(f);
+        double* _139 = Vector3_x__double(f);
         double _140 = Double_copy(_139);
         double _141 = Double__MINUS_(0.0, _140);
         float _142 = Double_to_MINUS_float(_141);
         float _143 = _142; // From the 'the' function.
         Array_aset_BANG___float(_129, 2, _143);
         Array__float* _148 = &m; // ref
-        double* _158 = Vec3_y(f);
+        double* _158 = Vector3_y__double(f);
         double _159 = Double_copy(_158);
         double _160 = Double__MINUS_(0.0, _159);
         float _161 = Double_to_MINUS_float(_160);
         float _162 = _161; // From the 'the' function.
         Array_aset_BANG___float(_148, 6, _162);
         Array__float* _167 = &m; // ref
-        double* _177 = Vec3_z(f);
+        double* _177 = Vector3_z__double(f);
         double _178 = Double_copy(_177);
         double _179 = Double__MINUS_(0.0, _178);
         float _180 = Double_to_MINUS_float(_179);
         float _181 = _180; // From the 'the' function.
         Array_aset_BANG___float(_167, 10, _181);
         Array__float* _186 = &m; // ref
-        double _196 = Vec3_dot(s, p);
+        double _196 = Vector3_dot__double(s, p);
         double _197 = Double__MINUS_(0.0, _196);
         float _198 = Double_to_MINUS_float(_197);
         float _199 = _198; // From the 'the' function.
         Array_aset_BANG___float(_186, 12, _199);
         Array__float* _204 = &m; // ref
-        double _214 = Vec3_dot(u, p);
+        double _214 = Vector3_dot__double(u, p);
         double _215 = Double__MINUS_(0.0, _214);
         float _216 = Double_to_MINUS_float(_215);
         float _217 = _216; // From the 'the' function.
         Array_aset_BANG___float(_204, 13, _217);
         Array__float* _222 = &m; // ref
-        double _230 = Vec3_dot(f, p);
+        double _230 = Vector3_dot__double(f, p);
         float _231 = Double_to_MINUS_float(_230);
         float _232 = _231; // From the 'the' function.
         Array_aset_BANG___float(_222, 14, _232);
@@ -9178,24 +9256,24 @@ Mat4 Camera_look_MINUS_at(Camera* c) {
     return _245;
 }
 
-void Camera_look_MINUS_at_MINUS_point_BANG_(Camera* c, Vec3* target) {
+void Camera_look_MINUS_at_MINUS_point_BANG_(Camera* c, Vector3__double* target) {
     /* let */ {
-        Vec3* _13 = Camera_pos(c);
-        Vec3 _14 = Vec3_sub(target, _13);
-        Vec3* _15 = &_14; // ref
-        Vec3 _16 = Vec3_normalize(_15);
-        Vec3 dir = _16;
-        Vec3* _24 = &dir; // ref
-        double* _25 = Vec3_y(_24);
+        Vector3__double* _13 = Camera_pos(c);
+        Vector3__double _14 = Vector3_sub__double(target, _13);
+        Vector3__double* _15 = &_14; // ref
+        Vector3__double _16 = Vector3_normalize__double(_15);
+        Vector3__double dir = _16;
+        Vector3__double* _24 = &dir; // ref
+        double* _25 = Vector3_y__double(_24);
         double _26 = Double_copy(_25);
         double _27 = Double_asin(_26);
         double _28 = Camera_deg(_27);
         double p = _28;
-        Vec3* _36 = &dir; // ref
-        double* _37 = Vec3_z(_36);
+        Vector3__double* _36 = &dir; // ref
+        double* _37 = Vector3_z__double(_36);
         double _38 = Double_copy(_37);
-        Vec3* _43 = &dir; // ref
-        double* _44 = Vec3_x(_43);
+        Vector3__double* _43 = &dir; // ref
+        double* _44 = Vector3_x__double(_43);
         double _45 = Double_copy(_44);
         double _46 = Double_atan2(_38, _45);
         double _47 = Camera_deg(_46);
@@ -9204,118 +9282,70 @@ void Camera_look_MINUS_at_MINUS_point_BANG_(Camera* c, Vec3* target) {
         Camera_set_MINUS_pitch_BANG_(c, _56);
         Camera_set_MINUS_yaw_BANG_(c, y);
         Camera_update_MINUS_basis_BANG_(c);
-        Vec3_delete(_14);
-        Vec3_delete(dir);
+        Vector3_delete__double(_14);
+        Vector3_delete__double(dir);
     }
 }
 
 void Camera_move_MINUS_forward_BANG_(Camera* c, double dist) {
     /* let */ {
-        Vec3* _9 = Camera_pos(c);
-        Vec3* p = _9;
-        Vec3* _13 = Camera_front(c);
-        Vec3* f = _13;
-        double* _22 = Vec3_x(p);
-        double _23 = Double_copy(_22);
-        double* _28 = Vec3_x(f);
-        double _29 = Double_copy(_28);
-        double _31 = Double__MUL_(_29, dist);
-        double _32 = Double__PLUS_(_23, _31);
-        Vec3_set_MINUS_x_BANG_(p, _32);
-        double* _40 = Vec3_y(p);
-        double _41 = Double_copy(_40);
-        double* _46 = Vec3_y(f);
-        double _47 = Double_copy(_46);
-        double _49 = Double__MUL_(_47, dist);
-        double _50 = Double__PLUS_(_41, _49);
-        Vec3_set_MINUS_y_BANG_(p, _50);
-        double* _58 = Vec3_z(p);
-        double _59 = Double_copy(_58);
-        double* _64 = Vec3_z(f);
-        double _65 = Double_copy(_64);
-        double _67 = Double__MUL_(_65, dist);
-        double _68 = Double__PLUS_(_59, _67);
-        Vec3_set_MINUS_z_BANG_(p, _68);
+        Vector3__double* _9 = Camera_pos(c);
+        Vector3__double* p = _9;
+        Vector3__double* _13 = Camera_front(c);
+        Vector3__double* f = _13;
+        Vector3__double _23 = Vector3_mul__double(f, dist);
+        Vector3__double* _24 = &_23; // ref
+        Vector3__double _25 = Vector3_add__double(p, _24);
+        Camera_set_MINUS_pos_BANG_(c, _25);
+        Vector3_delete__double(_23);
     }
 }
 
 void Camera_move_MINUS_right_BANG_(Camera* c, double dist) {
     /* let */ {
-        Vec3* _9 = Camera_pos(c);
-        Vec3* p = _9;
-        Vec3* _13 = Camera_right(c);
-        Vec3* r = _13;
-        double* _22 = Vec3_x(p);
-        double _23 = Double_copy(_22);
-        double* _28 = Vec3_x(r);
-        double _29 = Double_copy(_28);
-        double _31 = Double__MUL_(_29, dist);
-        double _32 = Double__PLUS_(_23, _31);
-        Vec3_set_MINUS_x_BANG_(p, _32);
-        double* _40 = Vec3_y(p);
-        double _41 = Double_copy(_40);
-        double* _46 = Vec3_y(r);
-        double _47 = Double_copy(_46);
-        double _49 = Double__MUL_(_47, dist);
-        double _50 = Double__PLUS_(_41, _49);
-        Vec3_set_MINUS_y_BANG_(p, _50);
-        double* _58 = Vec3_z(p);
-        double _59 = Double_copy(_58);
-        double* _64 = Vec3_z(r);
-        double _65 = Double_copy(_64);
-        double _67 = Double__MUL_(_65, dist);
-        double _68 = Double__PLUS_(_59, _67);
-        Vec3_set_MINUS_z_BANG_(p, _68);
+        Vector3__double* _9 = Camera_pos(c);
+        Vector3__double* p = _9;
+        Vector3__double* _13 = Camera_right(c);
+        Vector3__double* r = _13;
+        Vector3__double _23 = Vector3_mul__double(r, dist);
+        Vector3__double* _24 = &_23; // ref
+        Vector3__double _25 = Vector3_add__double(p, _24);
+        Camera_set_MINUS_pos_BANG_(c, _25);
+        Vector3_delete__double(_23);
     }
 }
 
 void Camera_move_MINUS_up_BANG_(Camera* c, double dist) {
     /* let */ {
-        Vec3* _9 = Camera_pos(c);
-        Vec3* p = _9;
-        Vec3* _13 = Camera_world_MINUS_up(c);
-        Vec3* wu = _13;
-        double* _22 = Vec3_x(p);
-        double _23 = Double_copy(_22);
-        double* _28 = Vec3_x(wu);
-        double _29 = Double_copy(_28);
-        double _31 = Double__MUL_(_29, dist);
-        double _32 = Double__PLUS_(_23, _31);
-        Vec3_set_MINUS_x_BANG_(p, _32);
-        double* _40 = Vec3_y(p);
-        double _41 = Double_copy(_40);
-        double* _46 = Vec3_y(wu);
-        double _47 = Double_copy(_46);
-        double _49 = Double__MUL_(_47, dist);
-        double _50 = Double__PLUS_(_41, _49);
-        Vec3_set_MINUS_y_BANG_(p, _50);
-        double* _58 = Vec3_z(p);
-        double _59 = Double_copy(_58);
-        double* _64 = Vec3_z(wu);
-        double _65 = Double_copy(_64);
-        double _67 = Double__MUL_(_65, dist);
-        double _68 = Double__PLUS_(_59, _67);
-        Vec3_set_MINUS_z_BANG_(p, _68);
+        Vector3__double* _9 = Camera_pos(c);
+        Vector3__double* p = _9;
+        Vector3__double* _13 = Camera_world_MINUS_up(c);
+        Vector3__double* wu = _13;
+        Vector3__double _23 = Vector3_mul__double(wu, dist);
+        Vector3__double* _24 = &_23; // ref
+        Vector3__double _25 = Vector3_add__double(p, _24);
+        Camera_set_MINUS_pos_BANG_(c, _25);
+        Vector3_delete__double(_23);
     }
 }
 
 double* Camera_near(Camera* p) { return (&(p->near)); }
 
-Camera Camera_new(Vec3 pos, double yaw, double pitch, double aspect) {
-    Camera _38;
+Camera Camera_new(Vector3__double pos, double yaw, double pitch, double aspect) {
+    Camera _47;
     /* let */ {
-        Vec3 _12 = Vec3_zero();
-        Vec3 _14 = Vec3_zero();
-        Vec3 _16 = Vec3_zero();
-        Vec3 _21 = Vec3_init(0.0, 1.0, 0.0);
-        Camera _28 = Camera_init(pos, _12, _14, _16, _21, yaw, pitch, 60.0, aspect, 0.1, 100.0);
-        Camera c = _28;
-        Camera* _34 = &c; // ref
-        Camera_update_MINUS_basis_BANG_(_34);
-        Camera _37 = c;
-        _38 = _37;
+        Vector3__double _15 = Vector3_init__double(0.0, 0.0, 0.0);
+        Vector3__double _20 = Vector3_init__double(0.0, 0.0, 0.0);
+        Vector3__double _25 = Vector3_init__double(0.0, 0.0, 0.0);
+        Vector3__double _30 = Vector3_init__double(0.0, 1.0, 0.0);
+        Camera _37 = Camera_init(pos, _15, _20, _25, _30, yaw, pitch, 60.0, aspect, 0.1, 100.0);
+        Camera c = _37;
+        Camera* _43 = &c; // ref
+        Camera_update_MINUS_basis_BANG_(_43);
+        Camera _46 = c;
+        _47 = _46;
     }
-    return _38;
+    return _47;
 }
 
 Mat4 Camera_perspective(Camera* c) {
@@ -9373,7 +9403,7 @@ Mat4 Camera_perspective(Camera* c) {
 
 double* Camera_pitch(Camera* p) { return (&(p->pitch)); }
 
-Vec3* Camera_pos(Camera* p) { return (&(p->pos)); }
+Vector3__double* Camera_pos(Camera* p) { return (&(p->pos)); }
 
 String Camera_prn(Camera *p) {
   // convert members to String here:
@@ -9381,23 +9411,23 @@ String Camera_prn(Camera *p) {
   int tempsize = 0;
   (void)tempsize; // that way we remove the occasional unused warning 
   int size = snprintf(NULL, 0, "(%s )", "Camera");
-  temp = Vec3_prn(&p->pos); 
+  temp = Vector3_prn__double(&p->pos); 
   size += snprintf(NULL, 0, "%s ", temp);
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
-  temp = Vec3_prn(&p->front); 
+  temp = Vector3_prn__double(&p->front); 
   size += snprintf(NULL, 0, "%s ", temp);
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
-  temp = Vec3_prn(&p->right); 
+  temp = Vector3_prn__double(&p->right); 
   size += snprintf(NULL, 0, "%s ", temp);
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
-  temp = Vec3_prn(&p->up); 
+  temp = Vector3_prn__double(&p->up); 
   size += snprintf(NULL, 0, "%s ", temp);
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
-  temp = Vec3_prn(&p->world_MINUS_up); 
+  temp = Vector3_prn__double(&p->world_MINUS_up); 
   size += snprintf(NULL, 0, "%s ", temp);
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
@@ -9432,27 +9462,27 @@ String Camera_prn(Camera *p) {
   sprintf(bufferPtr, "(%s ", "Camera");
   bufferPtr += strlen("Camera") + 2;
 
-  temp = Vec3_prn(&p->pos);
+  temp = Vector3_prn__double(&p->pos);
   sprintf(bufferPtr, "%s ", temp);
   bufferPtr += strlen(temp) + 1;
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
-  temp = Vec3_prn(&p->front);
+  temp = Vector3_prn__double(&p->front);
   sprintf(bufferPtr, "%s ", temp);
   bufferPtr += strlen(temp) + 1;
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
-  temp = Vec3_prn(&p->right);
+  temp = Vector3_prn__double(&p->right);
   sprintf(bufferPtr, "%s ", temp);
   bufferPtr += strlen(temp) + 1;
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
-  temp = Vec3_prn(&p->up);
+  temp = Vector3_prn__double(&p->up);
   sprintf(bufferPtr, "%s ", temp);
   bufferPtr += strlen(temp) + 1;
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
-  temp = Vec3_prn(&p->world_MINUS_up);
+  temp = Vector3_prn__double(&p->world_MINUS_up);
   sprintf(bufferPtr, "%s ", temp);
   bufferPtr += strlen(temp) + 1;
   if(temp) { CARP_FREE(temp); temp = NULL; }
@@ -9497,7 +9527,7 @@ double Camera_rad(double deg) {
     return _7;
 }
 
-Vec3* Camera_right(Camera* p) { return (&(p->right)); }
+Vector3__double* Camera_right(Camera* p) { return (&(p->right)); }
 
 void Camera_rotate_BANG_(Camera* c, double dyaw, double dpitch) {
     double* _13 = Camera_yaw(c);
@@ -9551,15 +9581,15 @@ void Camera_set_MINUS_fov_BANG_(Camera* pRef, double newValue) {
 }
 
 
-Camera Camera_set_MINUS_front(Camera p, Vec3 newValue) {
-    Vec3_delete(p.front);
+Camera Camera_set_MINUS_front(Camera p, Vector3__double newValue) {
+    Vector3_delete__double(p.front);
     p.front = newValue;
     return p;
 }
 
 
-void Camera_set_MINUS_front_BANG_(Camera* pRef, Vec3 newValue) {
-    Vec3_delete(pRef->front);
+void Camera_set_MINUS_front_BANG_(Camera* pRef, Vector3__double newValue) {
+    Vector3_delete__double(pRef->front);
     pRef->front = newValue;
 }
 
@@ -9590,54 +9620,54 @@ void Camera_set_MINUS_pitch_BANG_(Camera* pRef, double newValue) {
 }
 
 
-Camera Camera_set_MINUS_pos(Camera p, Vec3 newValue) {
-    Vec3_delete(p.pos);
+Camera Camera_set_MINUS_pos(Camera p, Vector3__double newValue) {
+    Vector3_delete__double(p.pos);
     p.pos = newValue;
     return p;
 }
 
 
-void Camera_set_MINUS_pos_BANG_(Camera* pRef, Vec3 newValue) {
-    Vec3_delete(pRef->pos);
+void Camera_set_MINUS_pos_BANG_(Camera* pRef, Vector3__double newValue) {
+    Vector3_delete__double(pRef->pos);
     pRef->pos = newValue;
 }
 
 
-Camera Camera_set_MINUS_right(Camera p, Vec3 newValue) {
-    Vec3_delete(p.right);
+Camera Camera_set_MINUS_right(Camera p, Vector3__double newValue) {
+    Vector3_delete__double(p.right);
     p.right = newValue;
     return p;
 }
 
 
-void Camera_set_MINUS_right_BANG_(Camera* pRef, Vec3 newValue) {
-    Vec3_delete(pRef->right);
+void Camera_set_MINUS_right_BANG_(Camera* pRef, Vector3__double newValue) {
+    Vector3_delete__double(pRef->right);
     pRef->right = newValue;
 }
 
 
-Camera Camera_set_MINUS_up(Camera p, Vec3 newValue) {
-    Vec3_delete(p.up);
+Camera Camera_set_MINUS_up(Camera p, Vector3__double newValue) {
+    Vector3_delete__double(p.up);
     p.up = newValue;
     return p;
 }
 
 
-void Camera_set_MINUS_up_BANG_(Camera* pRef, Vec3 newValue) {
-    Vec3_delete(pRef->up);
+void Camera_set_MINUS_up_BANG_(Camera* pRef, Vector3__double newValue) {
+    Vector3_delete__double(pRef->up);
     pRef->up = newValue;
 }
 
 
-Camera Camera_set_MINUS_world_MINUS_up(Camera p, Vec3 newValue) {
-    Vec3_delete(p.world_MINUS_up);
+Camera Camera_set_MINUS_world_MINUS_up(Camera p, Vector3__double newValue) {
+    Vector3_delete__double(p.world_MINUS_up);
     p.world_MINUS_up = newValue;
     return p;
 }
 
 
-void Camera_set_MINUS_world_MINUS_up_BANG_(Camera* pRef, Vec3 newValue) {
-    Vec3_delete(pRef->world_MINUS_up);
+void Camera_set_MINUS_world_MINUS_up_BANG_(Camera* pRef, Vector3__double newValue) {
+    Vector3_delete__double(pRef->world_MINUS_up);
     pRef->world_MINUS_up = newValue;
 }
 
@@ -9661,23 +9691,23 @@ String Camera_str(Camera *p) {
   int tempsize = 0;
   (void)tempsize; // that way we remove the occasional unused warning 
   int size = snprintf(NULL, 0, "(%s )", "Camera");
-  temp = Vec3_prn(&p->pos); 
+  temp = Vector3_prn__double(&p->pos); 
   size += snprintf(NULL, 0, "%s ", temp);
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
-  temp = Vec3_prn(&p->front); 
+  temp = Vector3_prn__double(&p->front); 
   size += snprintf(NULL, 0, "%s ", temp);
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
-  temp = Vec3_prn(&p->right); 
+  temp = Vector3_prn__double(&p->right); 
   size += snprintf(NULL, 0, "%s ", temp);
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
-  temp = Vec3_prn(&p->up); 
+  temp = Vector3_prn__double(&p->up); 
   size += snprintf(NULL, 0, "%s ", temp);
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
-  temp = Vec3_prn(&p->world_MINUS_up); 
+  temp = Vector3_prn__double(&p->world_MINUS_up); 
   size += snprintf(NULL, 0, "%s ", temp);
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
@@ -9712,27 +9742,27 @@ String Camera_str(Camera *p) {
   sprintf(bufferPtr, "(%s ", "Camera");
   bufferPtr += strlen("Camera") + 2;
 
-  temp = Vec3_prn(&p->pos);
+  temp = Vector3_prn__double(&p->pos);
   sprintf(bufferPtr, "%s ", temp);
   bufferPtr += strlen(temp) + 1;
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
-  temp = Vec3_prn(&p->front);
+  temp = Vector3_prn__double(&p->front);
   sprintf(bufferPtr, "%s ", temp);
   bufferPtr += strlen(temp) + 1;
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
-  temp = Vec3_prn(&p->right);
+  temp = Vector3_prn__double(&p->right);
   sprintf(bufferPtr, "%s ", temp);
   bufferPtr += strlen(temp) + 1;
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
-  temp = Vec3_prn(&p->up);
+  temp = Vector3_prn__double(&p->up);
   sprintf(bufferPtr, "%s ", temp);
   bufferPtr += strlen(temp) + 1;
   if(temp) { CARP_FREE(temp); temp = NULL; }
 
-  temp = Vec3_prn(&p->world_MINUS_up);
+  temp = Vector3_prn__double(&p->world_MINUS_up);
   sprintf(bufferPtr, "%s ", temp);
   bufferPtr += strlen(temp) + 1;
   if(temp) { CARP_FREE(temp); temp = NULL; }
@@ -9772,7 +9802,7 @@ String Camera_str(Camera *p) {
   return buffer;
 }
 
-Vec3* Camera_up(Camera* p) { return (&(p->up)); }
+Vector3__double* Camera_up(Camera* p) { return (&(p->up)); }
 
 Camera Camera_update_MINUS_aspect(Camera p, Lambda *updater) {
     p.aspect = (*updater).env ? ((Fn__LambdaEnv_double_double)(*updater).callback)((*updater).env, p.aspect) : ((Fn__double_double)(*updater).callback)(p.aspect);
@@ -9797,28 +9827,28 @@ void Camera_update_MINUS_basis_BANG_(Camera* c) {
         double _39 = Double_sin(y);
         double _42 = Double_cos(p);
         double _43 = Double__MUL_(_39, _42);
-        Vec3 _44 = Vec3_init(_32, _35, _43);
-        Vec3* _45 = &_44; // ref
-        Vec3 _46 = Vec3_normalize(_45);
-        Vec3 f = _46;
-        Vec3* _53 = &f; // ref
-        Vec3* _56 = Camera_world_MINUS_up(c);
-        Vec3 _57 = Vec3_cross(_53, _56);
-        Vec3* _58 = &_57; // ref
-        Vec3 _59 = Vec3_normalize(_58);
-        Vec3 r = _59;
-        Vec3* _66 = &r; // ref
-        Vec3* _69 = &f; // ref
-        Vec3 _70 = Vec3_cross(_66, _69);
-        Vec3* _71 = &_70; // ref
-        Vec3 _72 = Vec3_normalize(_71);
-        Vec3 u = _72;
+        Vector3__double _44 = Vector3_init__double(_32, _35, _43);
+        Vector3__double* _45 = &_44; // ref
+        Vector3__double _46 = Vector3_normalize__double(_45);
+        Vector3__double f = _46;
+        Vector3__double* _53 = &f; // ref
+        Vector3__double* _56 = Camera_world_MINUS_up(c);
+        Vector3__double _57 = Vector3_cross__double(_53, _56);
+        Vector3__double* _58 = &_57; // ref
+        Vector3__double _59 = Vector3_normalize__double(_58);
+        Vector3__double r = _59;
+        Vector3__double* _66 = &r; // ref
+        Vector3__double* _69 = &f; // ref
+        Vector3__double _70 = Vector3_cross__double(_66, _69);
+        Vector3__double* _71 = &_70; // ref
+        Vector3__double _72 = Vector3_normalize__double(_71);
+        Vector3__double u = _72;
         Camera_set_MINUS_front_BANG_(c, f);
         Camera_set_MINUS_right_BANG_(c, r);
         Camera_set_MINUS_up_BANG_(c, u);
-        Vec3_delete(_44);
-        Vec3_delete(_57);
-        Vec3_delete(_70);
+        Vector3_delete__double(_44);
+        Vector3_delete__double(_57);
+        Vector3_delete__double(_70);
     }
 }
 
@@ -9835,7 +9865,7 @@ Camera Camera_update_MINUS_fov(Camera p, Lambda *updater) {
 
 
 Camera Camera_update_MINUS_front(Camera p, Lambda *updater) {
-    p.front = (*updater).env ? ((Fn__LambdaEnv_Vec3_Vec3)(*updater).callback)((*updater).env, p.front) : ((Fn__Vec3_Vec3)(*updater).callback)(p.front);
+    p.front = (*updater).env ? ((Fn__LambdaEnv_Vector3__double_Vector3__double)(*updater).callback)((*updater).env, p.front) : ((Fn__Vector3__double_Vector3__double)(*updater).callback)(p.front);
     return p;
 }
 
@@ -9859,25 +9889,25 @@ void Camera_update_MINUS_pitch_BANG_(Camera* c, double val) {
 }
 
 Camera Camera_update_MINUS_pos(Camera p, Lambda *updater) {
-    p.pos = (*updater).env ? ((Fn__LambdaEnv_Vec3_Vec3)(*updater).callback)((*updater).env, p.pos) : ((Fn__Vec3_Vec3)(*updater).callback)(p.pos);
+    p.pos = (*updater).env ? ((Fn__LambdaEnv_Vector3__double_Vector3__double)(*updater).callback)((*updater).env, p.pos) : ((Fn__Vector3__double_Vector3__double)(*updater).callback)(p.pos);
     return p;
 }
 
 
 Camera Camera_update_MINUS_right(Camera p, Lambda *updater) {
-    p.right = (*updater).env ? ((Fn__LambdaEnv_Vec3_Vec3)(*updater).callback)((*updater).env, p.right) : ((Fn__Vec3_Vec3)(*updater).callback)(p.right);
+    p.right = (*updater).env ? ((Fn__LambdaEnv_Vector3__double_Vector3__double)(*updater).callback)((*updater).env, p.right) : ((Fn__Vector3__double_Vector3__double)(*updater).callback)(p.right);
     return p;
 }
 
 
 Camera Camera_update_MINUS_up(Camera p, Lambda *updater) {
-    p.up = (*updater).env ? ((Fn__LambdaEnv_Vec3_Vec3)(*updater).callback)((*updater).env, p.up) : ((Fn__Vec3_Vec3)(*updater).callback)(p.up);
+    p.up = (*updater).env ? ((Fn__LambdaEnv_Vector3__double_Vector3__double)(*updater).callback)((*updater).env, p.up) : ((Fn__Vector3__double_Vector3__double)(*updater).callback)(p.up);
     return p;
 }
 
 
 Camera Camera_update_MINUS_world_MINUS_up(Camera p, Lambda *updater) {
-    p.world_MINUS_up = (*updater).env ? ((Fn__LambdaEnv_Vec3_Vec3)(*updater).callback)((*updater).env, p.world_MINUS_up) : ((Fn__Vec3_Vec3)(*updater).callback)(p.world_MINUS_up);
+    p.world_MINUS_up = (*updater).env ? ((Fn__LambdaEnv_Vector3__double_Vector3__double)(*updater).callback)((*updater).env, p.world_MINUS_up) : ((Fn__Vector3__double_Vector3__double)(*updater).callback)(p.world_MINUS_up);
     return p;
 }
 
@@ -9904,7 +9934,7 @@ Mat4 Camera_view_MINUS_projection(Camera* c) {
     return _15;
 }
 
-Vec3* Camera_world_MINUS_up(Camera* p) { return (&(p->world_MINUS_up)); }
+Vector3__double* Camera_world_MINUS_up(Camera* p) { return (&(p->world_MINUS_up)); }
 
 double* Camera_yaw(Camera* p) { return (&(p->yaw)); }
 
@@ -11461,7 +11491,21 @@ void Function_delete__Uint64_MUL__Array__uint8_t (Lambda f) {
   }
 }
 
-void Function_delete__double_double_bool (Lambda f) {
+void Function_delete__bool_bool_bool (Lambda f) {
+  if(f.delete) {
+      ((void(*)(void*))f.delete)(f.env);
+      CARP_FREE(f.env);
+  }
+}
+
+void Function_delete__double_double (Lambda f) {
+  if(f.delete) {
+      ((void(*)(void*))f.delete)(f.env);
+      CARP_FREE(f.env);
+  }
+}
+
+void Function_delete__double_double_double (Lambda f) {
   if(f.delete) {
       ((void(*)(void*))f.delete)(f.env);
       CARP_FREE(f.env);
@@ -12962,6 +13006,16 @@ void Maybe_delete__Uint64(Maybe__Uint64 p) {
     /* Ignore non-managed member 'u.Just.member0' : Uint64 */
   }
   else if(p._tag == Maybe__Uint64_Nothing_tag) {
+
+  }
+
+}
+
+void Maybe_delete__bool(Maybe__bool p) {
+  if(p._tag == Maybe__bool_Just_tag) {
+    /* Ignore non-managed member 'u.Just.member0' : Bool */
+  }
+  else if(p._tag == Maybe__bool_Nothing_tag) {
 
   }
 
@@ -15032,14 +15086,6 @@ TestState Test_State_update_MINUS_passed(TestState p, Lambda *updater) {
 }
 
 
-TestState Test_assert_MINUS_equal__double_String(TestState* state, double x, double y, String* descr) {
-    static String _12 = "value";
-    String *_12_ref = &_12;
-    Lambda _13 = { .callback = (void*)Double__EQ_, .env = NULL, .delete = NULL, .copy = NULL }; //Sym Double.= (LookupGlobal ExternalCode AFunction)
-    TestState _14 = Test_handler__double_double_String_String(state, x, y, descr, _12_ref, _13);
-    return _14;
-}
-
 TestState Test_assert_MINUS_equal__float_String(TestState* state, float x, float y, String* descr) {
     static String _12 = "value";
     String *_12_ref = &_12;
@@ -15054,139 +15100,6 @@ TestState Test_assert_MINUS_equal__int_String(TestState* state, int x, int y, St
     Lambda _13 = { .callback = (void*)Int__EQ_, .env = NULL, .delete = NULL, .copy = NULL }; //Sym Int.= (LookupGlobal ExternalCode AFunction)
     TestState _14 = Test_handler__int_int_String_String(state, x, y, descr, _12_ref, _13);
     return _14;
-}
-
-TestState Test_display_MINUS_test__double_double_String_String(TestState* state, double expected, double actual, String* descr, String* what, bool is_MINUS_success) {
-    TestState _188;
-    if (is_MINUS_success) {
-        ColorId _14 = Color_Id_Green();
-        static String _22 = "Test '";
-        String *_22_ref = &_22;
-        String _23 = String_copy(_22_ref);
-        String _24 = StringCopy_str(_23);
-        String* _25 = &_24; // ref
-        String _32 = String_copy(descr);
-        String _33 = StringCopy_str(_32);
-        String* _34 = &_33; // ref
-        static String _38 = "' passed\n";
-        String *_38_ref = &_38;
-        String _39 = String_copy(_38_ref);
-        String _40 = StringCopy_str(_39);
-        String* _41 = &_40; // ref
-        String _42 = String_append(_34, _41);
-        String* _43 = &_42; // ref
-        String _44 = String_append(_25, _43);
-        String* _45 = &_44; // ref
-        String _46 = String_copy(_45);
-        String* _47 = &_46; // ref
-        IO_colorize(_14, _47);
-        TestState _52 = Test_State_copy(state);
-        Lambda _54 = { .callback = (void*)Int_inc, .env = NULL, .delete = NULL, .copy = NULL }; //Sym Int.inc (LookupGlobal ExternalCode AFunction)
-        Lambda* _55 = &_54; // ref
-        TestState _56 = Test_State_update_MINUS_passed(_52, _55);
-        TestState _57 = _56;
-        String_delete(_24);
-        String_delete(_33);
-        String_delete(_40);
-        String_delete(_42);
-        String_delete(_44);
-        String_delete(_46);
-        _188 = _57;
-    } else {
-        ColorId _61 = Color_Id_Red();
-        IO_color(_61);
-        static String _71 = "Test '";
-        String *_71_ref = &_71;
-        String _72 = String_copy(_71_ref);
-        String _73 = StringCopy_str(_72);
-        String* _74 = &_73; // ref
-        String _81 = String_copy(descr);
-        String _82 = StringCopy_str(_81);
-        String* _83 = &_82; // ref
-        static String _87 = "' failed:";
-        String *_87_ref = &_87;
-        String _88 = String_copy(_87_ref);
-        String _89 = StringCopy_str(_88);
-        String* _90 = &_89; // ref
-        String _91 = String_append(_83, _90);
-        String* _92 = &_91; // ref
-        String _93 = String_append(_74, _92);
-        String* _94 = &_93; // ref
-        String _95 = String_copy(_94);
-        String* _96 = &_95; // ref
-        IO_println(_96);
-        static String _106 = "\tExpected ";
-        String *_106_ref = &_106;
-        String _107 = String_copy(_106_ref);
-        String _108 = StringCopy_str(_107);
-        String* _109 = &_108; // ref
-        String _116 = String_copy(what);
-        String _117 = StringCopy_str(_116);
-        String* _118 = &_117; // ref
-        static String _122 = ": '";
-        String *_122_ref = &_122;
-        String _123 = String_copy(_122_ref);
-        String _124 = StringCopy_str(_123);
-        String* _125 = &_124; // ref
-        String _126 = String_append(_118, _125);
-        String* _127 = &_126; // ref
-        String _128 = String_append(_109, _127);
-        String* _129 = &_128; // ref
-        String _130 = String_copy(_129);
-        String* _131 = &_130; // ref
-        IO_print(_131);
-        String _137 = Double_str(expected);
-        String* _138 = &_137; // ref
-        IO_print(_138);
-        static String _148 = "', actual value: '";
-        String *_148_ref = &_148;
-        String _149 = String_copy(_148_ref);
-        String _150 = StringCopy_str(_149);
-        String* _151 = &_150; // ref
-        String _158 = Double_str(actual);
-        String _159 = StringCopy_str(_158);
-        String* _160 = &_159; // ref
-        static String _164 = "'";
-        String *_164_ref = &_164;
-        String _165 = String_copy(_164_ref);
-        String _166 = StringCopy_str(_165);
-        String* _167 = &_166; // ref
-        String _168 = String_append(_160, _167);
-        String* _169 = &_168; // ref
-        String _170 = String_append(_151, _169);
-        String* _171 = &_170; // ref
-        String _172 = String_copy(_171);
-        String* _173 = &_172; // ref
-        IO_println(_173);
-        ColorId _177 = Color_Id_Reset();
-        IO_color(_177);
-        TestState _182 = Test_State_copy(state);
-        Lambda _184 = { .callback = (void*)Int_inc, .env = NULL, .delete = NULL, .copy = NULL }; //Sym Int.inc (LookupGlobal ExternalCode AFunction)
-        Lambda* _185 = &_184; // ref
-        TestState _186 = Test_State_update_MINUS_failed(_182, _185);
-        TestState _187 = _186;
-        String_delete(_108);
-        String_delete(_117);
-        String_delete(_124);
-        String_delete(_126);
-        String_delete(_128);
-        String_delete(_130);
-        String_delete(_137);
-        String_delete(_150);
-        String_delete(_159);
-        String_delete(_166);
-        String_delete(_168);
-        String_delete(_170);
-        String_delete(_172);
-        String_delete(_73);
-        String_delete(_82);
-        String_delete(_89);
-        String_delete(_91);
-        String_delete(_93);
-        String_delete(_95);
-        _188 = _187;
-    }
-    return _188;
 }
 
 TestState Test_display_MINUS_test__float_float_String_String(TestState* state, float expected, float actual, String* descr, String* what, bool is_MINUS_success) {
@@ -15457,13 +15370,6 @@ TestState Test_display_MINUS_test__int_int_String_String(TestState* state, int e
 
 void Test_handle_MINUS_signal__void(int x) {
     System_exit__void(x);
-}
-
-TestState Test_handler__double_double_String_String(TestState* state, double expected, double actual, String* descr, String* what, Lambda op) {
-    bool _18 = op.env ? ((bool(*)(LambdaEnv, double, double))op.callback)(op.env, expected, actual) : ((bool(*)(double, double))op.callback)(expected, actual);
-    TestState _19 = Test_display_MINUS_test__double_double_String_String(state, expected, actual, descr, what, _18);
-    Function_delete__double_double_bool(op);
-    return _19;
 }
 
 TestState Test_handler__float_float_String_String(TestState* state, float expected, float actual, String* descr, String* what, Lambda op) {
@@ -15834,265 +15740,223 @@ bool UnitRef__EQ_() {
     return true;
 }
 
-Vec3 Vec3_add(Vec3* a, Vec3* b) {
-    double* _10 = Vec3_x(a);
-    double _11 = Double_copy(_10);
-    double* _15 = Vec3_x(b);
-    double _16 = Double_copy(_15);
-    double _17 = Double__PLUS_(_11, _16);
-    double* _22 = Vec3_y(a);
-    double _23 = Double_copy(_22);
-    double* _27 = Vec3_y(b);
-    double _28 = Double_copy(_27);
-    double _29 = Double__PLUS_(_23, _28);
-    double* _34 = Vec3_z(a);
-    double _35 = Double_copy(_34);
-    double* _39 = Vec3_z(b);
-    double _40 = Double_copy(_39);
-    double _41 = Double__PLUS_(_35, _40);
-    Vec3 _42 = Vec3_init(_17, _29, _41);
-    return _42;
+bool Vector2__Lambda_vapprox_19_env(bool i, bool v) {
+    bool _18;
+    if (i) {
+        bool _14 = v;
+        _18 = _14;
+    } else {
+        bool _17 = false;
+        _18 = _17;
+    }
+    return _18;
 }
 
-Vec3 Vec3_copy(Vec3* pRef) {
-    Vec3 copy = *pRef;
+void Vector2_delete__bool(Vector2__bool p) {
+    /* Ignore non-managed member 'x' : Bool */
+    /* Ignore non-managed member 'y' : Bool */
+}
+
+bool Vector2_vreduce__bool_bool(Lambda f, bool i, Vector2__bool* v) {
+    bool* _12 = Vector2_x__bool(v);
+    bool _13 = Bool_copy(_12);
+    bool _14 = f.env ? ((bool(*)(LambdaEnv, bool, bool))f.callback)(f.env, i, _13) : ((bool(*)(bool, bool))f.callback)(i, _13);
+    bool* _18 = Vector2_y__bool(v);
+    bool _19 = Bool_copy(_18);
+    bool _20 = f.env ? ((bool(*)(LambdaEnv, bool, bool))f.callback)(f.env, _14, _19) : ((bool(*)(bool, bool))f.callback)(_14, _19);
+    Function_delete__bool_bool_bool(f);
+    return _20;
+}
+
+bool* Vector2_x__bool(Vector2__bool* p) { return (&(p->x)); }
+
+bool* Vector2_y__bool(Vector2__bool* p) { return (&(p->y)); }
+
+double Vector3__Lambda_div__double_13_env(Vector3__Lambda_div__double_13_env_ty* _env, double c) {
+    double _12 = Double__DIV_(c, _env->n);
+    return _12;
+}
+
+double Vector3__Lambda_mul__double_13_env(Vector3__Lambda_mul__double_13_env_ty* _env, double c) {
+    double _12 = Double__MUL_(_env->n, c);
+    return _12;
+}
+
+bool Vector3__Lambda_vapprox_19_env(bool i, bool v) {
+    bool _18;
+    if (i) {
+        bool _14 = v;
+        _18 = _14;
+    } else {
+        bool _17 = false;
+        _18 = _17;
+    }
+    return _18;
+}
+
+Vector3__double Vector3_add__double(Vector3__double* a, Vector3__double* b) {
+    Lambda _6 = { .callback = (void*)Double__PLUS_, .env = NULL, .delete = NULL, .copy = NULL }; //Sym Double.+ (LookupGlobal ExternalCode AFunction)
+    Vector3__double _9 = Vector3_zip__double_double_double(_6, a, b);
+    return _9;
+}
+
+Vector3__double Vector3_copy__double(Vector3__double* pRef) {
+    Vector3__double copy = *pRef;
     /* Ignore non-managed member 'x' : Double */
     /* Ignore non-managed member 'y' : Double */
     /* Ignore non-managed member 'z' : Double */
     return copy;
 }
 
-Vec3 Vec3_cross(Vec3* a, Vec3* b) {
-    double* _11 = Vec3_y(a);
+Vector3__double Vector3_cross__double(Vector3__double* a, Vector3__double* b) {
+    double* _11 = Vector3_y__double(a);
     double _12 = Double_copy(_11);
-    double* _16 = Vec3_z(b);
+    double* _16 = Vector3_z__double(b);
     double _17 = Double_copy(_16);
     double _18 = Double__MUL_(_12, _17);
-    double* _23 = Vec3_z(a);
+    double* _23 = Vector3_z__double(a);
     double _24 = Double_copy(_23);
-    double* _28 = Vec3_y(b);
+    double* _28 = Vector3_y__double(b);
     double _29 = Double_copy(_28);
     double _30 = Double__MUL_(_24, _29);
     double _31 = Double__MINUS_(_18, _30);
-    double* _37 = Vec3_z(a);
+    double* _37 = Vector3_z__double(a);
     double _38 = Double_copy(_37);
-    double* _42 = Vec3_x(b);
+    double* _42 = Vector3_x__double(b);
     double _43 = Double_copy(_42);
     double _44 = Double__MUL_(_38, _43);
-    double* _49 = Vec3_x(a);
+    double* _49 = Vector3_x__double(a);
     double _50 = Double_copy(_49);
-    double* _54 = Vec3_z(b);
+    double* _54 = Vector3_z__double(b);
     double _55 = Double_copy(_54);
     double _56 = Double__MUL_(_50, _55);
     double _57 = Double__MINUS_(_44, _56);
-    double* _63 = Vec3_x(a);
+    double* _63 = Vector3_x__double(a);
     double _64 = Double_copy(_63);
-    double* _68 = Vec3_y(b);
+    double* _68 = Vector3_y__double(b);
     double _69 = Double_copy(_68);
     double _70 = Double__MUL_(_64, _69);
-    double* _75 = Vec3_y(a);
+    double* _75 = Vector3_y__double(a);
     double _76 = Double_copy(_75);
-    double* _80 = Vec3_x(b);
+    double* _80 = Vector3_x__double(b);
     double _81 = Double_copy(_80);
     double _82 = Double__MUL_(_76, _81);
     double _83 = Double__MINUS_(_70, _82);
-    Vec3 _84 = Vec3_init(_31, _57, _83);
+    Vector3__double _84 = Vector3_init__double(_31, _57, _83);
     return _84;
 }
 
-void Vec3_delete(Vec3 p) {
+void Vector3_delete__bool(Vector3__bool p) {
+    /* Ignore non-managed member 'x' : Bool */
+    /* Ignore non-managed member 'y' : Bool */
+    /* Ignore non-managed member 'z' : Bool */
+}
+
+void Vector3_delete__double(Vector3__double p) {
     /* Ignore non-managed member 'x' : Double */
     /* Ignore non-managed member 'y' : Double */
     /* Ignore non-managed member 'z' : Double */
 }
 
-double Vec3_dot(Vec3* a, Vec3* b) {
-    double* _11 = Vec3_x(a);
-    double _12 = Double_copy(_11);
-    double* _16 = Vec3_x(b);
-    double _17 = Double_copy(_16);
-    double _18 = Double__MUL_(_12, _17);
-    double* _23 = Vec3_y(a);
-    double _24 = Double_copy(_23);
-    double* _28 = Vec3_y(b);
-    double _29 = Double_copy(_28);
-    double _30 = Double__MUL_(_24, _29);
-    double _31 = Double__PLUS_(_18, _30);
-    double* _36 = Vec3_z(a);
-    double _37 = Double_copy(_36);
-    double* _41 = Vec3_z(b);
-    double _42 = Double_copy(_41);
-    double _43 = Double__MUL_(_37, _42);
-    double _44 = Double__PLUS_(_31, _43);
-    return _44;
+Vector3__double Vector3_div__double(Vector3__double* v, double n) {
+    // This lambda captures 1 variables: n
+    Vector3__Lambda_div__double_13_env_ty *_13_env = CARP_MALLOC(sizeof(Vector3__Lambda_div__double_13_env_ty));
+    _13_env->n = n;
+    Lambda _13 = {
+      .callback = (void*)Vector3__Lambda_div__double_13_env,
+      .env = _13_env,
+      .delete = (void*)Vector3__Lambda_div__double_13_env_ty_delete,
+      .copy = (void*)Vector3__Lambda_div__double_13_env_ty_copy
+    };
+    Vector3__double _15 = Vector3_map__double_double(_13, v);
+    return _15;
 }
 
-Vec3 Vec3_init(double x, double y, double z) {
-    Vec3 instance;
+double Vector3_dot__double(Vector3__double* a, Vector3__double* b) {
+    Lambda _8 = { .callback = (void*)Double__MUL_, .env = NULL, .delete = NULL, .copy = NULL }; //Sym Double.* (LookupGlobal ExternalCode AFunction)
+    Vector3__double _11 = Vector3_zip__double_double_double(_8, a, b);
+    Vector3__double* _12 = &_11; // ref
+    double _13 = Vector3_sum__double(_12);
+    Vector3_delete__double(_11);
+    return _13;
+}
+
+Vector3__double Vector3_init__double(double x, double y, double z) {
+    Vector3__double instance;
     instance.x = x;
     instance.y = y;
     instance.z = z;
     return instance;
 }
 
-double Vec3_mag(Vec3* v) {
-    double _7 = Vec3_mag_MINUS_sq(v);
+double Vector3_mag_MINUS_sq__double(Vector3__double* o) {
+    double _7 = Vector3_dot__double(o, o);
+    return _7;
+}
+
+double Vector3_mag__double(Vector3__double* o) {
+    double _7 = Vector3_mag_MINUS_sq__double(o);
     double _8 = Double_sqrt(_7);
     return _8;
 }
 
-double Vec3_mag_MINUS_sq(Vec3* v) {
-    double _7 = Vec3_dot(v, v);
-    return _7;
-}
-
-Vec3 Vec3_mul(Vec3* v, double s) {
-    double* _10 = Vec3_x(v);
+Vector3__double Vector3_map__double_double(Lambda f, Vector3__double* v) {
+    double* _10 = Vector3_x__double(v);
     double _11 = Double_copy(_10);
-    double _13 = Double__MUL_(_11, s);
-    double* _18 = Vec3_y(v);
-    double _19 = Double_copy(_18);
-    double _21 = Double__MUL_(_19, s);
-    double* _26 = Vec3_z(v);
-    double _27 = Double_copy(_26);
-    double _29 = Double__MUL_(_27, s);
-    Vec3 _30 = Vec3_init(_13, _21, _29);
-    return _30;
+    double _12 = f.env ? ((double(*)(LambdaEnv, double))f.callback)(f.env, _11) : ((double(*)(double))f.callback)(_11);
+    double* _17 = Vector3_y__double(v);
+    double _18 = Double_copy(_17);
+    double _19 = f.env ? ((double(*)(LambdaEnv, double))f.callback)(f.env, _18) : ((double(*)(double))f.callback)(_18);
+    double* _24 = Vector3_z__double(v);
+    double _25 = Double_copy(_24);
+    double _26 = f.env ? ((double(*)(LambdaEnv, double))f.callback)(f.env, _25) : ((double(*)(double))f.callback)(_25);
+    Vector3__double _27 = Vector3_init__double(_12, _19, _26);
+    Function_delete__double_double(f);
+    return _27;
 }
 
-Vec3 Vec3_new(double x, double y, double z) {
-    Vec3 _10 = Vec3_init(x, y, z);
-    return _10;
+Vector3__double Vector3_mul__double(Vector3__double* v, double n) {
+    // This lambda captures 1 variables: n
+    Vector3__Lambda_mul__double_13_env_ty *_13_env = CARP_MALLOC(sizeof(Vector3__Lambda_mul__double_13_env_ty));
+    _13_env->n = n;
+    Lambda _13 = {
+      .callback = (void*)Vector3__Lambda_mul__double_13_env,
+      .env = _13_env,
+      .delete = (void*)Vector3__Lambda_mul__double_13_env_ty_delete,
+      .copy = (void*)Vector3__Lambda_mul__double_13_env_ty_copy
+    };
+    Vector3__double _15 = Vector3_map__double_double(_13, v);
+    return _15;
 }
 
-Vec3 Vec3_normalize(Vec3* v) {
-    Vec3 _30;
+Vector3__double Vector3_normalize__double(Vector3__double* o) {
+    Vector3__double _28;
     /* let */ {
-        double _8 = Vec3_mag(v);
+        double _8 = Vector3_mag__double(o);
         double m = _8;
-        Vec3 _29;
-        bool _14 = Double__GT_(m, 1.0e-6);
-        if (_14) {
-            double _21 = Double__DIV_(1.0, m);
-            Vec3 _22 = Vec3_mul(v, _21);
-            Vec3 _23 = _22;
-            _29 = _23;
+        Vector3__double _27;
+        double _14 = Double_zero();
+        bool _15 = Double__EQ_(m, _14);
+        if (_15) {
+            Vector3__double _19 = Vector3_copy__double(o);
+            Vector3__double _20 = _19;
+            _27 = _20;
         } else {
-            Vec3 _27 = Vec3_copy(v);
-            Vec3 _28 = _27;
-            _29 = _28;
+            Vector3__double _25 = Vector3_div__double(o, m);
+            Vector3__double _26 = _25;
+            _27 = _26;
         }
-        _30 = _29;
+        _28 = _27;
     }
-    return _30;
+    return _28;
 }
 
-String Vec3_prn(Vec3* v) {
-    static String _9 = "(";
-    String *_9_ref = &_9;
-    String _10 = String_str(_9_ref);
-    String* _11 = &_10; // ref
-    double* _20 = Vec3_x(v);
-    double _21 = Double_copy(_20);
-    String _22 = Double_str(_21);
-    String _23 = StringCopy_str(_22);
-    String* _24 = &_23; // ref
-    static String _29 = ", ";
-    String *_29_ref = &_29;
-    String _30 = String_str(_29_ref);
-    String* _31 = &_30; // ref
-    double* _40 = Vec3_y(v);
-    double _41 = Double_copy(_40);
-    String _42 = Double_str(_41);
-    String _43 = StringCopy_str(_42);
-    String* _44 = &_43; // ref
-    static String _49 = ", ";
-    String *_49_ref = &_49;
-    String _50 = String_str(_49_ref);
-    String* _51 = &_50; // ref
-    double* _60 = Vec3_z(v);
-    double _61 = Double_copy(_60);
-    String _62 = Double_str(_61);
-    String _63 = StringCopy_str(_62);
-    String* _64 = &_63; // ref
-    static String _67 = ")";
-    String *_67_ref = &_67;
-    String _68 = String_str(_67_ref);
-    String* _69 = &_68; // ref
-    String _70 = String_append(_64, _69);
-    String* _71 = &_70; // ref
-    String _72 = String_append(_51, _71);
-    String* _73 = &_72; // ref
-    String _74 = String_append(_44, _73);
-    String* _75 = &_74; // ref
-    String _76 = String_append(_31, _75);
-    String* _77 = &_76; // ref
-    String _78 = String_append(_24, _77);
-    String* _79 = &_78; // ref
-    String _80 = String_append(_11, _79);
-    String* _81 = &_80; // ref
-    String _82 = String_copy(_81);
-    String_delete(_10);
-    String_delete(_23);
-    String_delete(_30);
-    String_delete(_43);
-    String_delete(_50);
-    String_delete(_63);
-    String_delete(_68);
-    String_delete(_70);
-    String_delete(_72);
-    String_delete(_74);
-    String_delete(_76);
-    String_delete(_78);
-    String_delete(_80);
-    return _82;
-}
-
-Vec3 Vec3_set_MINUS_x(Vec3 p, double newValue) {
-    /* Ignore non-managed member 'x' : Double */
-    p.x = newValue;
-    return p;
-}
-
-
-void Vec3_set_MINUS_x_BANG_(Vec3* pRef, double newValue) {
-    /* Ignore non-managed member 'x' : Double */
-    pRef->x = newValue;
-}
-
-
-Vec3 Vec3_set_MINUS_y(Vec3 p, double newValue) {
-    /* Ignore non-managed member 'y' : Double */
-    p.y = newValue;
-    return p;
-}
-
-
-void Vec3_set_MINUS_y_BANG_(Vec3* pRef, double newValue) {
-    /* Ignore non-managed member 'y' : Double */
-    pRef->y = newValue;
-}
-
-
-Vec3 Vec3_set_MINUS_z(Vec3 p, double newValue) {
-    /* Ignore non-managed member 'z' : Double */
-    p.z = newValue;
-    return p;
-}
-
-
-void Vec3_set_MINUS_z_BANG_(Vec3* pRef, double newValue) {
-    /* Ignore non-managed member 'z' : Double */
-    pRef->z = newValue;
-}
-
-
-String Vec3_str(Vec3 *p) {
+String Vector3_prn__double(Vector3__double *p) {
   // convert members to String here:
   String temp = NULL;
   int tempsize = 0;
   (void)tempsize; // that way we remove the occasional unused warning 
-  int size = snprintf(NULL, 0, "(%s )", "Vec3");
+  int size = snprintf(NULL, 0, "(%s )", "(Vector3 Double)");
   temp = Double_prn(p->x); 
   size += snprintf(NULL, 0, "%s ", temp);
   if(temp) { CARP_FREE(temp); temp = NULL; }
@@ -16109,8 +15973,8 @@ String Vec3_str(Vec3 *p) {
   String buffer = CARP_MALLOC(size);
   String bufferPtr = buffer;
 
-  sprintf(bufferPtr, "(%s ", "Vec3");
-  bufferPtr += strlen("Vec3") + 2;
+  sprintf(bufferPtr, "(%s ", "Vector3");
+  bufferPtr += strlen("Vector3") + 2;
 
   temp = Double_prn(p->x);
   sprintf(bufferPtr, "%s ", temp);
@@ -16132,53 +15996,100 @@ String Vec3_str(Vec3 *p) {
   return buffer;
 }
 
-Vec3 Vec3_sub(Vec3* a, Vec3* b) {
-    double* _10 = Vec3_x(a);
-    double _11 = Double_copy(_10);
-    double* _15 = Vec3_x(b);
-    double _16 = Double_copy(_15);
-    double _17 = Double__MINUS_(_11, _16);
-    double* _22 = Vec3_y(a);
-    double _23 = Double_copy(_22);
-    double* _27 = Vec3_y(b);
-    double _28 = Double_copy(_27);
-    double _29 = Double__MINUS_(_23, _28);
-    double* _34 = Vec3_z(a);
-    double _35 = Double_copy(_34);
-    double* _39 = Vec3_z(b);
-    double _40 = Double_copy(_39);
-    double _41 = Double__MINUS_(_35, _40);
-    Vec3 _42 = Vec3_init(_17, _29, _41);
-    return _42;
+Vector3__double Vector3_sub__double(Vector3__double* a, Vector3__double* b) {
+    Lambda _6 = { .callback = (void*)Double__MINUS_, .env = NULL, .delete = NULL, .copy = NULL }; //Sym Double.- (LookupGlobal ExternalCode AFunction)
+    Vector3__double _9 = Vector3_zip__double_double_double(_6, a, b);
+    return _9;
 }
 
-Vec3 Vec3_update_MINUS_x(Vec3 p, Lambda *updater) {
-    p.x = (*updater).env ? ((Fn__LambdaEnv_double_double)(*updater).callback)((*updater).env, p.x) : ((Fn__double_double)(*updater).callback)(p.x);
-    return p;
+double Vector3_sum__double(Vector3__double* o) {
+    Lambda _5 = { .callback = (void*)Double__PLUS_, .env = NULL, .delete = NULL, .copy = NULL }; //Sym Double.+ (LookupGlobal ExternalCode AFunction)
+    double _7 = Double_zero();
+    double _9 = Vector3_vreduce__double_double(_5, _7, o);
+    return _9;
 }
 
-
-Vec3 Vec3_update_MINUS_y(Vec3 p, Lambda *updater) {
-    p.y = (*updater).env ? ((Fn__LambdaEnv_double_double)(*updater).callback)((*updater).env, p.y) : ((Fn__double_double)(*updater).callback)(p.y);
-    return p;
+bool Vector3_vreduce__bool_bool(Lambda f, bool i, Vector3__bool* v) {
+    bool* _13 = Vector3_x__bool(v);
+    bool _14 = Bool_copy(_13);
+    bool _15 = f.env ? ((bool(*)(LambdaEnv, bool, bool))f.callback)(f.env, i, _14) : ((bool(*)(bool, bool))f.callback)(i, _14);
+    bool* _19 = Vector3_y__bool(v);
+    bool _20 = Bool_copy(_19);
+    bool _21 = f.env ? ((bool(*)(LambdaEnv, bool, bool))f.callback)(f.env, _15, _20) : ((bool(*)(bool, bool))f.callback)(_15, _20);
+    bool* _25 = Vector3_z__bool(v);
+    bool _26 = Bool_copy(_25);
+    bool _27 = f.env ? ((bool(*)(LambdaEnv, bool, bool))f.callback)(f.env, _21, _26) : ((bool(*)(bool, bool))f.callback)(_21, _26);
+    Function_delete__bool_bool_bool(f);
+    return _27;
 }
 
-
-Vec3 Vec3_update_MINUS_z(Vec3 p, Lambda *updater) {
-    p.z = (*updater).env ? ((Fn__LambdaEnv_double_double)(*updater).callback)((*updater).env, p.z) : ((Fn__double_double)(*updater).callback)(p.z);
-    return p;
+double Vector3_vreduce__double_double(Lambda f, double i, Vector3__double* v) {
+    double* _13 = Vector3_x__double(v);
+    double _14 = Double_copy(_13);
+    double _15 = f.env ? ((double(*)(LambdaEnv, double, double))f.callback)(f.env, i, _14) : ((double(*)(double, double))f.callback)(i, _14);
+    double* _19 = Vector3_y__double(v);
+    double _20 = Double_copy(_19);
+    double _21 = f.env ? ((double(*)(LambdaEnv, double, double))f.callback)(f.env, _15, _20) : ((double(*)(double, double))f.callback)(_15, _20);
+    double* _25 = Vector3_z__double(v);
+    double _26 = Double_copy(_25);
+    double _27 = f.env ? ((double(*)(LambdaEnv, double, double))f.callback)(f.env, _21, _26) : ((double(*)(double, double))f.callback)(_21, _26);
+    Function_delete__double_double_double(f);
+    return _27;
 }
 
+bool* Vector3_x__bool(Vector3__bool* p) { return (&(p->x)); }
 
-double* Vec3_x(Vec3* p) { return (&(p->x)); }
+double* Vector3_x__double(Vector3__double* p) { return (&(p->x)); }
 
-double* Vec3_y(Vec3* p) { return (&(p->y)); }
+bool* Vector3_y__bool(Vector3__bool* p) { return (&(p->y)); }
 
-double* Vec3_z(Vec3* p) { return (&(p->z)); }
+double* Vector3_y__double(Vector3__double* p) { return (&(p->y)); }
 
-Vec3 Vec3_zero() {
-    Vec3 _7 = Vec3_init(0.0, 0.0, 0.0);
-    return _7;
+bool* Vector3_z__bool(Vector3__bool* p) { return (&(p->z)); }
+
+double* Vector3_z__double(Vector3__double* p) { return (&(p->z)); }
+
+Vector3__double Vector3_zip__double_double_double(Lambda f, Vector3__double* a, Vector3__double* b) {
+    double* _11 = Vector3_x__double(a);
+    double _12 = Double_copy(_11);
+    double* _16 = Vector3_x__double(b);
+    double _17 = Double_copy(_16);
+    double _18 = f.env ? ((double(*)(LambdaEnv, double, double))f.callback)(f.env, _12, _17) : ((double(*)(double, double))f.callback)(_12, _17);
+    double* _23 = Vector3_y__double(a);
+    double _24 = Double_copy(_23);
+    double* _28 = Vector3_y__double(b);
+    double _29 = Double_copy(_28);
+    double _30 = f.env ? ((double(*)(LambdaEnv, double, double))f.callback)(f.env, _24, _29) : ((double(*)(double, double))f.callback)(_24, _29);
+    double* _35 = Vector3_z__double(a);
+    double _36 = Double_copy(_35);
+    double* _40 = Vector3_z__double(b);
+    double _41 = Double_copy(_40);
+    double _42 = f.env ? ((double(*)(LambdaEnv, double, double))f.callback)(f.env, _36, _41) : ((double(*)(double, double))f.callback)(_36, _41);
+    Vector3__double _43 = Vector3_init__double(_18, _30, _42);
+    Function_delete__double_double_double(f);
+    return _43;
+}
+
+Vector3__Lambda_div__double_13_env_ty* Vector3__Lambda_div__double_13_env_ty_copy(Vector3__Lambda_div__double_13_env_ty* pRef) {
+    Vector3__Lambda_div__double_13_env_ty* copy = CARP_MALLOC(sizeof(*pRef));
+    *copy = *pRef;
+    /* Ignore non-managed member 'n' : Double */
+    return copy;
+}
+
+void Vector3__Lambda_div__double_13_env_ty_delete(Vector3__Lambda_div__double_13_env_ty* p) {
+    /* Ignore non-managed member 'n' : Double */
+}
+
+Vector3__Lambda_mul__double_13_env_ty* Vector3__Lambda_mul__double_13_env_ty_copy(Vector3__Lambda_mul__double_13_env_ty* pRef) {
+    Vector3__Lambda_mul__double_13_env_ty* copy = CARP_MALLOC(sizeof(*pRef));
+    *copy = *pRef;
+    /* Ignore non-managed member 'n' : Double */
+    return copy;
+}
+
+void Vector3__Lambda_mul__double_13_env_ty_delete(Vector3__Lambda_mul__double_13_env_ty* p) {
+    /* Ignore non-managed member 'n' : Double */
 }
 
 int id__int(int x) {
@@ -16187,124 +16098,102 @@ int id__int(int x) {
 
 int main(int argc, char** argv) {
     carp_init_globals(argc, argv);
-    int _221;
+    int _180;
     /* let */ {
         TestState _9 = Test_State_init(0, 0);
         TestState* _10 = &_9; // ref
         TestState* camera_MINUS_test = _10;
-        TestState _209;
+        TestState _168;
         /* let */ {
             TestState _21 = Test_State_init(0, 0);
             TestState state = _21;
             /* let */ {
-                Vec3 _30 = Vec3_new(1.0, 2.0, 3.0);
-                Vec3 v1 = _30;
-                Vec3 _36 = Vec3_new(4.0, 5.0, 6.0);
-                Vec3 v2 = _36;
-                Vec3* _41 = &v1; // ref
-                Vec3* _44 = &v2; // ref
-                Vec3 _45 = Vec3_add(_41, _44);
-                Vec3 v3 = _45;
-                TestState* _52 = &state; // ref
-                Vec3* _58 = &v3; // ref
-                double* _59 = Vec3_x(_58);
-                double _60 = Double_copy(_59);
-                static String _61 = "Vec3 addition works";
-                String *_61_ref = &_61;
-                TestState _62 = Test_assert_MINUS_equal__double_String(_52, 5.0, _60, _61_ref);
+                Mat4 _27 = Mat4_identity();
+                Mat4 m = _27;
+                Mat4* _32 = &m; // ref
+                Array__float* _33 = Mat4_data(_32);
+                Array__float* data = _33;
+                TestState* _41 = &state; // ref
+                float* _47 = Array_unsafe_MINUS_nth__float(data, 0);
+                float _48 = Float_copy(_47);
+                static String _49 = "Identity [0] is 1";
+                String *_49_ref = &_49;
+                TestState _50 = Test_assert_MINUS_equal__float_String(_41, 1.0f, _48, _49_ref);
                 Test_State_delete(state);
-                state = _62;  // Test.State = Test.State
-                Vec3_delete(v1);
-                Vec3_delete(v2);
-                Vec3_delete(v3);
-            }
-            /* let */ {
-                Mat4 _68 = Mat4_identity();
-                Mat4 m = _68;
-                Mat4* _73 = &m; // ref
-                Array__float* _74 = Mat4_data(_73);
-                Array__float* data = _74;
-                TestState* _82 = &state; // ref
-                float* _88 = Array_unsafe_MINUS_nth__float(data, 0);
-                float _89 = Float_copy(_88);
-                static String _90 = "Identity [0] is 1";
-                String *_90_ref = &_90;
-                TestState _91 = Test_assert_MINUS_equal__float_String(_82, 1.0f, _89, _90_ref);
+                state = _50;  // Test.State = Test.State
+                TestState* _57 = &state; // ref
+                float* _63 = Array_unsafe_MINUS_nth__float(data, 5);
+                float _64 = Float_copy(_63);
+                static String _65 = "Identity [5] is 1";
+                String *_65_ref = &_65;
+                TestState _66 = Test_assert_MINUS_equal__float_String(_57, 1.0f, _64, _65_ref);
                 Test_State_delete(state);
-                state = _91;  // Test.State = Test.State
-                TestState* _98 = &state; // ref
-                float* _104 = Array_unsafe_MINUS_nth__float(data, 5);
-                float _105 = Float_copy(_104);
-                static String _106 = "Identity [5] is 1";
-                String *_106_ref = &_106;
-                TestState _107 = Test_assert_MINUS_equal__float_String(_98, 1.0f, _105, _106_ref);
+                state = _66;  // Test.State = Test.State
+                TestState* _73 = &state; // ref
+                float* _79 = Array_unsafe_MINUS_nth__float(data, 10);
+                float _80 = Float_copy(_79);
+                static String _81 = "Identity [10] is 1";
+                String *_81_ref = &_81;
+                TestState _82 = Test_assert_MINUS_equal__float_String(_73, 1.0f, _80, _81_ref);
                 Test_State_delete(state);
-                state = _107;  // Test.State = Test.State
-                TestState* _114 = &state; // ref
-                float* _120 = Array_unsafe_MINUS_nth__float(data, 10);
-                float _121 = Float_copy(_120);
-                static String _122 = "Identity [10] is 1";
-                String *_122_ref = &_122;
-                TestState _123 = Test_assert_MINUS_equal__float_String(_114, 1.0f, _121, _122_ref);
+                state = _82;  // Test.State = Test.State
+                TestState* _89 = &state; // ref
+                float* _95 = Array_unsafe_MINUS_nth__float(data, 15);
+                float _96 = Float_copy(_95);
+                static String _97 = "Identity [15] is 1";
+                String *_97_ref = &_97;
+                TestState _98 = Test_assert_MINUS_equal__float_String(_89, 1.0f, _96, _97_ref);
                 Test_State_delete(state);
-                state = _123;  // Test.State = Test.State
-                TestState* _130 = &state; // ref
-                float* _136 = Array_unsafe_MINUS_nth__float(data, 15);
-                float _137 = Float_copy(_136);
-                static String _138 = "Identity [15] is 1";
-                String *_138_ref = &_138;
-                TestState _139 = Test_assert_MINUS_equal__float_String(_130, 1.0f, _137, _138_ref);
-                Test_State_delete(state);
-                state = _139;  // Test.State = Test.State
+                state = _98;  // Test.State = Test.State
                 Mat4_delete(m);
             }
             /* let */ {
-                Vec3 _149 = Vec3_new(0.0, 0.0, 10.0);
-                Vec3 pos = _149;
-                Camera _156 = Camera_new(pos, -90.0, 0.0, 1.77);
-                Camera cam = _156;
-                Camera* _161 = &cam; // ref
-                Mat4 _162 = Camera_look_MINUS_at(_161);
-                Mat4 view = _162;
-                Camera* _167 = &cam; // ref
-                Mat4 _168 = Camera_perspective(_167);
-                Mat4 proj = _168;
-                TestState* _176 = &state; // ref
-                Mat4* _182 = &view; // ref
-                Array__float* _183 = Mat4_data(_182);
-                int _184 = Array_length__float(_183);
-                static String _185 = "View matrix has 16 elements";
-                String *_185_ref = &_185;
-                TestState _186 = Test_assert_MINUS_equal__int_String(_176, 16, _184, _185_ref);
+                Vector3__double _108 = Vector3_init__double(0.0, 0.0, 10.0);
+                Vector3__double pos = _108;
+                Camera _115 = Camera_new(pos, -90.0, 0.0, 1.77);
+                Camera cam = _115;
+                Camera* _120 = &cam; // ref
+                Mat4 _121 = Camera_look_MINUS_at(_120);
+                Mat4 view = _121;
+                Camera* _126 = &cam; // ref
+                Mat4 _127 = Camera_perspective(_126);
+                Mat4 proj = _127;
+                TestState* _135 = &state; // ref
+                Mat4* _141 = &view; // ref
+                Array__float* _142 = Mat4_data(_141);
+                int _143 = Array_length__float(_142);
+                static String _144 = "View matrix has 16 elements";
+                String *_144_ref = &_144;
+                TestState _145 = Test_assert_MINUS_equal__int_String(_135, 16, _143, _144_ref);
                 Test_State_delete(state);
-                state = _186;  // Test.State = Test.State
-                TestState* _193 = &state; // ref
-                Mat4* _199 = &proj; // ref
-                Array__float* _200 = Mat4_data(_199);
-                int _201 = Array_length__float(_200);
-                static String _202 = "Proj matrix has 16 elements";
-                String *_202_ref = &_202;
-                TestState _203 = Test_assert_MINUS_equal__int_String(_193, 16, _201, _202_ref);
+                state = _145;  // Test.State = Test.State
+                TestState* _152 = &state; // ref
+                Mat4* _158 = &proj; // ref
+                Array__float* _159 = Mat4_data(_158);
+                int _160 = Array_length__float(_159);
+                static String _161 = "Proj matrix has 16 elements";
+                String *_161_ref = &_161;
+                TestState _162 = Test_assert_MINUS_equal__int_String(_152, 16, _160, _161_ref);
                 Test_State_delete(state);
-                state = _203;  // Test.State = Test.State
+                state = _162;  // Test.State = Test.State
                 Camera_delete(cam);
                 Mat4_delete(proj);
                 Mat4_delete(view);
             }
-            TestState _208 = state;
-            _209 = _208;
+            TestState _167 = state;
+            _168 = _167;
         }
-        TestState* _210 = &_209; // ref
-        camera_MINUS_test = _210;  // (Ref Test.State r152) = (Ref Test.State r152)
+        TestState* _169 = &_168; // ref
+        camera_MINUS_test = _169;  // (Ref Test.State r126) = (Ref Test.State r126)
         Test_print_MINUS_test_MINUS_results(camera_MINUS_test);
-        int* _218 = Test_State_failed(camera_MINUS_test);
-        int _219 = Int_copy(_218);
-        int _220 = _219;
-        _221 = _220;
-        Test_State_delete(_209);
+        int* _177 = Test_State_failed(camera_MINUS_test);
+        int _178 = Int_copy(_177);
+        int _179 = _178;
+        _180 = _179;
+        Test_State_delete(_168);
         Test_State_delete(_9);
     }
-    return _221;
+    return _180;
 }
 
 int max__int(int a, int b) {

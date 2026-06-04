@@ -1,8 +1,8 @@
 # carp-gamecam
-A high-performance, self-contained 3D perspective camera for the Carp programming language.
+A high-performance 3D perspective camera for the Carp programming language.
 
 ## Features
-- **Zero Dependencies**: Includes its own minimal 3D math (Vec3, Mat4) optimized for spatial orchestration.
+- **Standardized**: Uses Carp's internal `Vector3` library for seamless integration with the ecosystem.
 - **WGPU Ready**: Generates 4x4 matrices in column-major order, compatible with modern graphics APIs.
 - **LookAt & Perspective**: Standard functions for generating View and Projection matrices.
 - **FlyCam Support**: Integrated Yaw/Pitch orientation logic for easy 3D navigation.
@@ -15,15 +15,15 @@ A high-performance, self-contained 3D perspective camera for the Carp programmin
 ## Usage
 ```clojure
 (use Camera)
-(use Vec3)
+(use Vector3)
 
 ;; Create a new camera
-(let [cam (Camera.new (Vec3.new 0.0 0.0 10.0) (Vec3.new 0.0 0.0 0.0) 1.77)]
+(let [cam (Camera.new (Vector3.init 0.0 0.0 10.0) -90.0 0.0 1.77)]
   (do
     ;; Generate matrices for the GPU
     (let [view (Camera.look-at &cam)
           proj (Camera.perspective &cam)]
-      (println* "View Matrix: " (str &view)))))
+      (println* "Ready for GPU upload!"))))
 ```
 
 ## License
