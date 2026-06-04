@@ -2,11 +2,11 @@
 (use Double)
 (use Vector3)
 
-(doc Mat4 "is a 4x4 matrix stored in column-major order.")
-(deftype Mat4 [data (Array Float)])
+(doc CameraMat4 "is a 4x4 matrix stored in column-major order.")
+(deftype CameraMat4 [data (Array Float)])
 
-(defmodule Mat4
-  (defn zero [] (Mat4.init (Array.replicate 16 &0.0f)))
+(defmodule CameraMat4
+  (defn zero [] (CameraMat4.init (Array.replicate 16 &0.0f)))
 
   (defn identity []
     (let [m (Array.replicate 16 &0.0f)]
@@ -15,11 +15,11 @@
         (Array.aset! &m 5  1.0f)
         (Array.aset! &m 10 1.0f)
         (Array.aset! &m 15 1.0f)
-        (Mat4.init m))))
+        (CameraMat4.init m))))
 
   (defn mul [a b]
-    (let [m1 (Mat4.data a)
-          m2 (Mat4.data b)
+    (let [m1 (CameraMat4.data a)
+          m2 (CameraMat4.data b)
           res (Array.replicate 16 &0.0f)]
       (do
         (for [col 0 4]
@@ -30,7 +30,7 @@
                   (set! sum (+ sum (* @(Array.unsafe-nth m1 (+ (* k 4) row))
                                       @(Array.unsafe-nth m2 (+ (* col 4) k))))))
                 (Array.aset! &res (+ (* col 4) row) sum)))))
-        (Mat4.init res))))
+        (CameraMat4.init res))))
 )
 
 (doc Camera "represents a 3D perspective camera using the Basis Vector Pattern.")
@@ -132,7 +132,7 @@
         (Array.aset! &m 10 (/ far (- n far)))
         (Array.aset! &m 11 -1.0f)
         (Array.aset! &m 14 (/ (* far n) (- n far)))
-        (Mat4.init m))))
+        (CameraMat4.init m))))
 
   (doc look-at "generates a 4x4 view matrix.")
   (defn look-at [c]
@@ -158,8 +158,8 @@
         (Array.aset! &m 13 (the Float (Double.to-float (- 0.0 (Vector3.dot u p)))))
         (Array.aset! &m 14 (the Float (Double.to-float (Vector3.dot f p))))
         (Array.aset! &m 15 1.0f)
-        (Mat4.init m))))
+        (CameraMat4.init m))))
 
   (defn view-projection [c]
-    (Mat4.mul &(Camera.perspective c) &(Camera.look-at c)))
+    (CameraMat4.mul &(Camera.perspective c) &(Camera.look-at c)))
 )

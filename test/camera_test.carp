@@ -8,8 +8,8 @@
   (let [state (Test.State.init 0 0)]
     (do
       ;; Matrix Identity Test
-      (let [m (Mat4.identity)
-            data (Mat4.data &m)]
+      (let [m (CameraMat4.identity)
+            data (CameraMat4.data &m)]
         (do
           (set! state (Test.assert-equal &state 1.0f @(Array.unsafe-nth data 0)  "Identity [0] is 1"))
           (set! state (Test.assert-equal &state 1.0f @(Array.unsafe-nth data 5)  "Identity [5] is 1"))
@@ -22,7 +22,7 @@
             view (Camera.look-at &cam)
             proj (Camera.perspective &cam)]
         (do
-          (set! state (Test.assert-equal &state 16 (Array.length (Mat4.data &view)) "View matrix has 16 elements"))
-          (set! state (Test.assert-equal &state 16 (Array.length (Mat4.data &proj)) "Proj matrix has 16 elements"))))
+          (set! state (Test.assert-equal &state 16 (Array.length (CameraMat4.data &view)) "View matrix has 16 elements"))
+          (set! state (Test.assert-equal &state 16 (Array.length (CameraMat4.data &proj)) "Proj matrix has 16 elements"))))
       
       state)))

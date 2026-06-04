@@ -550,6 +550,11 @@ typedef int(*Fn__Fn___void_int)(Lambda);
 typedef void(*Fn__int_Fn__int_void_void)(int, Lambda);
 
 // Depth 6
+typedef struct {
+    Array__float data;
+} CameraMat4;
+
+// Depth 6
 typedef Result__Char_String(*Fn__Char_Result__Char_String)(Char);
 
 // Depth 6
@@ -653,11 +658,6 @@ typedef Maybe__int(*Fn__int_Maybe__int)(int);
 
 // Depth 6
 typedef Maybe__uint8_t(*Fn__uint8_t_Maybe__uint8_t)(uint8_t);
-
-// Depth 6
-typedef struct {
-    Array__float data;
-} Mat4;
 
 // Depth 7
 typedef Array__Char(*Fn__Array__Char_Array__Char)(Array__Char);
@@ -828,22 +828,22 @@ typedef Camera(*Fn__Vector3__double_Vector3__double_Vector3__double_Vector3__dou
 typedef Camera(*Fn__Vector3__double_double_double_double_Camera)(Vector3__double, double, double, double);
 
 // Depth 9
-typedef Mat4(*Fn__Array__float_Mat4)(Array__float);
+typedef CameraMat4(*Fn__Array__float_CameraMat4)(Array__float);
 
 // Depth 9
-typedef Mat4(*Fn__Camera_MUL__Mat4)(Camera*);
+typedef Array__float*(*Fn__CameraMat4_MUL__Array__float_MUL_)(CameraMat4*);
 
 // Depth 9
-typedef Array__float*(*Fn__Mat4_MUL__Array__float_MUL_)(Mat4*);
+typedef CameraMat4(*Fn__CameraMat4_MUL__CameraMat4_MUL__CameraMat4)(CameraMat4*, CameraMat4*);
 
 // Depth 9
-typedef Mat4(*Fn__Mat4_MUL__Mat4_MUL__Mat4)(Mat4*, Mat4*);
+typedef String(*Fn__CameraMat4_MUL__String)(CameraMat4*);
 
 // Depth 9
-typedef String(*Fn__Mat4_MUL__String)(Mat4*);
+typedef CameraMat4(*Fn__Camera_MUL__CameraMat4)(Camera*);
 
 // Depth 9
-typedef Mat4(*Fn___Mat4)();
+typedef CameraMat4(*Fn___CameraMat4)();
 
 // Depth 10
 typedef Array__Array__uint8_t(*Fn__Array__Array__uint8_t_Array__uint8_t_Array__Array__uint8_t)(Array__Array__uint8_t, Array__uint8_t);
@@ -2906,7 +2906,7 @@ Vector3__double* Camera_front(Camera* p);
 Camera Camera_init(Vector3__double pos, Vector3__double front, Vector3__double right, Vector3__double up, Vector3__double world_MINUS_up, double yaw, double pitch, double fov, double aspect, double near, double far);
 
 // Depth 500
-Mat4 Camera_look_MINUS_at(Camera* c);
+CameraMat4 Camera_look_MINUS_at(Camera* c);
 
 // Depth 500
 void Camera_look_MINUS_at_MINUS_point_BANG_(Camera* c, Vector3__double* target);
@@ -2927,7 +2927,7 @@ double* Camera_near(Camera* p);
 Camera Camera_new(Vector3__double pos, double yaw, double pitch, double aspect);
 
 // Depth 500
-Mat4 Camera_perspective(Camera* c);
+CameraMat4 Camera_perspective(Camera* c);
 
 // Depth 500
 double* Camera_pitch(Camera* p);
@@ -3062,13 +3062,51 @@ Camera Camera_update_MINUS_yaw(Camera p, Lambda *updater);
 void Camera_update_MINUS_yaw_BANG_(Camera* c, double val);
 
 // Depth 500
-Mat4 Camera_view_MINUS_projection(Camera* c);
+CameraMat4 Camera_view_MINUS_projection(Camera* c);
 
 // Depth 500
 Vector3__double* Camera_world_MINUS_up(Camera* p);
 
 // Depth 500
 double* Camera_yaw(Camera* p);
+
+// Depth 1000
+
+// Depth 500
+CameraMat4 CameraMat4_copy(CameraMat4* pRef);
+
+// Depth 500
+Array__float* CameraMat4_data(CameraMat4* p);
+
+// Depth 500
+void CameraMat4_delete(CameraMat4 p);
+
+// Depth 500
+CameraMat4 CameraMat4_identity();
+
+// Depth 500
+CameraMat4 CameraMat4_init(Array__float data);
+
+// Depth 500
+CameraMat4 CameraMat4_mul(CameraMat4* a, CameraMat4* b);
+
+// Depth 500
+String CameraMat4_prn(CameraMat4 *p);
+
+// Depth 500
+CameraMat4 CameraMat4_set_MINUS_data(CameraMat4 p, Array__float newValue);
+
+// Depth 500
+void CameraMat4_set_MINUS_data_BANG_(CameraMat4* pRef, Array__float newValue);
+
+// Depth 500
+String CameraMat4_str(CameraMat4 *p);
+
+// Depth 500
+CameraMat4 CameraMat4_update_MINUS_data(CameraMat4 p, Lambda *updater);
+
+// Depth 500
+CameraMat4 CameraMat4_zero();
 
 // Depth 1000
 
@@ -3737,44 +3775,6 @@ void Map_put_MINUS__BANG___ColorId_String(Map__ColorId_String* m, ColorId* k, St
 
 // Depth 500
 void Map_set_MINUS_len_BANG___ColorId_String(Map__ColorId_String* pRef, int newValue);
-
-// Depth 1000
-
-// Depth 500
-Mat4 Mat4_copy(Mat4* pRef);
-
-// Depth 500
-Array__float* Mat4_data(Mat4* p);
-
-// Depth 500
-void Mat4_delete(Mat4 p);
-
-// Depth 500
-Mat4 Mat4_identity();
-
-// Depth 500
-Mat4 Mat4_init(Array__float data);
-
-// Depth 500
-Mat4 Mat4_mul(Mat4* a, Mat4* b);
-
-// Depth 500
-String Mat4_prn(Mat4 *p);
-
-// Depth 500
-Mat4 Mat4_set_MINUS_data(Mat4 p, Array__float newValue);
-
-// Depth 500
-void Mat4_set_MINUS_data_BANG_(Mat4* pRef, Array__float newValue);
-
-// Depth 500
-String Mat4_str(Mat4 *p);
-
-// Depth 500
-Mat4 Mat4_update_MINUS_data(Mat4 p, Lambda *updater);
-
-// Depth 500
-Mat4 Mat4_zero();
 
 // Depth 1000
 
@@ -9158,8 +9158,8 @@ Camera Camera_init(Vector3__double pos, Vector3__double front, Vector3__double r
     return instance;
 }
 
-Mat4 Camera_look_MINUS_at(Camera* c) {
-    Mat4 _245;
+CameraMat4 Camera_look_MINUS_at(Camera* c) {
+    CameraMat4 _245;
     /* let */ {
         Vector3__double* _8 = Camera_front(c);
         Vector3__double* f = _8;
@@ -9249,8 +9249,8 @@ Mat4 Camera_look_MINUS_at(Camera* c) {
         Array_aset_BANG___float(_222, 14, _232);
         Array__float* _237 = &m; // ref
         Array_aset_BANG___float(_237, 15, 1.0f);
-        Mat4 _243 = Mat4_init(m);
-        Mat4 _244 = _243;
+        CameraMat4 _243 = CameraMat4_init(m);
+        CameraMat4 _244 = _243;
         _245 = _244;
     }
     return _245;
@@ -9348,8 +9348,8 @@ Camera Camera_new(Vector3__double pos, double yaw, double pitch, double aspect) 
     return _47;
 }
 
-Mat4 Camera_perspective(Camera* c) {
-    Mat4 _123;
+CameraMat4 Camera_perspective(Camera* c) {
+    CameraMat4 _123;
     /* let */ {
         double* _16 = Camera_fov(c);
         double _17 = Double_copy(_16);
@@ -9394,8 +9394,8 @@ Mat4 Camera_perspective(Camera* c) {
         float _116 = Float__MINUS_(n, far);
         float _117 = Float__DIV_(_112, _116);
         Array_aset_BANG___float(_106, 14, _117);
-        Mat4 _121 = Mat4_init(m);
-        Mat4 _122 = _121;
+        CameraMat4 _121 = CameraMat4_init(m);
+        CameraMat4 _122 = _121;
         _123 = _122;
     }
     return _123;
@@ -9923,20 +9923,210 @@ void Camera_update_MINUS_yaw_BANG_(Camera* c, double val) {
     Camera_update_MINUS_basis_BANG_(c);
 }
 
-Mat4 Camera_view_MINUS_projection(Camera* c) {
-    Mat4 _8 = Camera_perspective(c);
-    Mat4* _9 = &_8; // ref
-    Mat4 _13 = Camera_look_MINUS_at(c);
-    Mat4* _14 = &_13; // ref
-    Mat4 _15 = Mat4_mul(_9, _14);
-    Mat4_delete(_13);
-    Mat4_delete(_8);
+CameraMat4 Camera_view_MINUS_projection(Camera* c) {
+    CameraMat4 _8 = Camera_perspective(c);
+    CameraMat4* _9 = &_8; // ref
+    CameraMat4 _13 = Camera_look_MINUS_at(c);
+    CameraMat4* _14 = &_13; // ref
+    CameraMat4 _15 = CameraMat4_mul(_9, _14);
+    CameraMat4_delete(_13);
+    CameraMat4_delete(_8);
     return _15;
 }
 
 Vector3__double* Camera_world_MINUS_up(Camera* p) { return (&(p->world_MINUS_up)); }
 
 double* Camera_yaw(Camera* p) { return (&(p->yaw)); }
+
+CameraMat4 CameraMat4_copy(CameraMat4* pRef) {
+    CameraMat4 copy = *pRef;
+    copy.data = Array_copy__float(&(pRef->data));
+    return copy;
+}
+
+Array__float* CameraMat4_data(CameraMat4* p) { return (&(p->data)); }
+
+void CameraMat4_delete(CameraMat4 p) {
+    Array_delete__float(p.data);
+}
+
+CameraMat4 CameraMat4_identity() {
+    CameraMat4 _45;
+    /* let */ {
+        static float _9_lit = 0.0f;
+        float* _9 = &_9_lit; // ref
+        Array__float _10 = Array_replicate__float(16, _9);
+        Array__float m = _10;
+        Array__float* _16 = &m; // ref
+        Array_aset_BANG___float(_16, 0, 1.0f);
+        Array__float* _23 = &m; // ref
+        Array_aset_BANG___float(_23, 5, 1.0f);
+        Array__float* _30 = &m; // ref
+        Array_aset_BANG___float(_30, 10, 1.0f);
+        Array__float* _37 = &m; // ref
+        Array_aset_BANG___float(_37, 15, 1.0f);
+        CameraMat4 _43 = CameraMat4_init(m);
+        CameraMat4 _44 = _43;
+        _45 = _44;
+    }
+    return _45;
+}
+
+CameraMat4 CameraMat4_init(Array__float data) {
+    CameraMat4 instance;
+    instance.data = data;
+    return instance;
+}
+
+CameraMat4 CameraMat4_mul(CameraMat4* a, CameraMat4* b) {
+    CameraMat4 _139;
+    /* let */ {
+        Array__float* _9 = CameraMat4_data(a);
+        Array__float* m1 = _9;
+        Array__float* _13 = CameraMat4_data(b);
+        Array__float* m2 = _13;
+        static float _19_lit = 0.0f;
+        float* _19 = &_19_lit; // ref
+        Array__float _20 = Array_replicate__float(16, _19);
+        Array__float res = _20;
+        /* let */ {
+            int col = 0;
+            bool _31 = Int__LT_(col, 4);
+            bool _133 = _31;
+            while (_133) {
+                /* let */ {
+                    int row = 0;
+                    bool _41 = Int__LT_(row, 4);
+                    bool _123 = _41;
+                    while (_123) {
+                        /* let */ {
+                            float sum = 0.0f;
+                            /* let */ {
+                                int k = 0;
+                                bool _56 = Int__LT_(k, 4);
+                                bool _98 = _56;
+                                while (_98) {
+                                    int _70 = Int__MUL_(k, 4);
+                                    int _72 = Int__PLUS_(_70, row);
+                                    float* _73 = Array_unsafe_MINUS_nth__float(m1, _72);
+                                    float _74 = Float_copy(_73);
+                                    int _82 = Int__MUL_(col, 4);
+                                    int _84 = Int__PLUS_(_82, k);
+                                    float* _85 = Array_unsafe_MINUS_nth__float(m2, _84);
+                                    float _86 = Float_copy(_85);
+                                    float _87 = Float__MUL_(_74, _86);
+                                    float _88 = Float__PLUS_(sum, _87);
+                                    sum = _88;  // Float = Float
+                                    int _95 = Int__PLUS_(k, 1);
+                                    k = _95;  // Int = Int
+                                    bool _56 = Int__LT_(k, 4);
+                                    _98 = _56;
+                                }
+                            }
+                            Array__float* _103 = &res; // ref
+                            int _108 = Int__MUL_(col, 4);
+                            int _110 = Int__PLUS_(_108, row);
+                            Array_aset_BANG___float(_103, _110, sum);
+                        }
+                        int _120 = Int__PLUS_(row, 1);
+                        row = _120;  // Int = Int
+                        bool _41 = Int__LT_(row, 4);
+                        _123 = _41;
+                    }
+                }
+                int _130 = Int__PLUS_(col, 1);
+                col = _130;  // Int = Int
+                bool _31 = Int__LT_(col, 4);
+                _133 = _31;
+            }
+        }
+        CameraMat4 _137 = CameraMat4_init(res);
+        CameraMat4 _138 = _137;
+        _139 = _138;
+    }
+    return _139;
+}
+
+String CameraMat4_prn(CameraMat4 *p) {
+  // convert members to String here:
+  String temp = NULL;
+  int tempsize = 0;
+  (void)tempsize; // that way we remove the occasional unused warning 
+  int size = snprintf(NULL, 0, "(%s )", "CameraMat4");
+  temp = Array_prn__float(&p->data); 
+  size += snprintf(NULL, 0, "%s ", temp);
+  if(temp) { CARP_FREE(temp); temp = NULL; }
+
+
+  String buffer = CARP_MALLOC(size);
+  String bufferPtr = buffer;
+
+  sprintf(bufferPtr, "(%s ", "CameraMat4");
+  bufferPtr += strlen("CameraMat4") + 2;
+
+  temp = Array_prn__float(&p->data);
+  sprintf(bufferPtr, "%s ", temp);
+  bufferPtr += strlen(temp) + 1;
+  if(temp) { CARP_FREE(temp); temp = NULL; }
+
+  bufferPtr--;
+  sprintf(bufferPtr, ")");
+  return buffer;
+}
+
+CameraMat4 CameraMat4_set_MINUS_data(CameraMat4 p, Array__float newValue) {
+    Array_delete__float(p.data);
+    p.data = newValue;
+    return p;
+}
+
+
+void CameraMat4_set_MINUS_data_BANG_(CameraMat4* pRef, Array__float newValue) {
+    Array_delete__float(pRef->data);
+    pRef->data = newValue;
+}
+
+
+String CameraMat4_str(CameraMat4 *p) {
+  // convert members to String here:
+  String temp = NULL;
+  int tempsize = 0;
+  (void)tempsize; // that way we remove the occasional unused warning 
+  int size = snprintf(NULL, 0, "(%s )", "CameraMat4");
+  temp = Array_prn__float(&p->data); 
+  size += snprintf(NULL, 0, "%s ", temp);
+  if(temp) { CARP_FREE(temp); temp = NULL; }
+
+
+  String buffer = CARP_MALLOC(size);
+  String bufferPtr = buffer;
+
+  sprintf(bufferPtr, "(%s ", "CameraMat4");
+  bufferPtr += strlen("CameraMat4") + 2;
+
+  temp = Array_prn__float(&p->data);
+  sprintf(bufferPtr, "%s ", temp);
+  bufferPtr += strlen(temp) + 1;
+  if(temp) { CARP_FREE(temp); temp = NULL; }
+
+  bufferPtr--;
+  sprintf(bufferPtr, ")");
+  return buffer;
+}
+
+CameraMat4 CameraMat4_update_MINUS_data(CameraMat4 p, Lambda *updater) {
+    p.data = (*updater).env ? ((Fn__LambdaEnv_Array__float_Array__float)(*updater).callback)((*updater).env, p.data) : ((Fn__Array__float_Array__float)(*updater).callback)(p.data);
+    return p;
+}
+
+
+CameraMat4 CameraMat4_zero() {
+    static float _8_lit = 0.0f;
+    float* _8 = &_8_lit; // ref
+    Array__float _9 = Array_replicate__float(16, _8);
+    CameraMat4 _10 = CameraMat4_init(_9);
+    return _10;
+}
 
 bool Char_alpha_QMARK_(Char c) {
     bool _16;
@@ -12644,196 +12834,6 @@ void Map_set_MINUS_len_BANG___ColorId_String(Map__ColorId_String* pRef, int newV
     pRef->len = newValue;
 }
 
-
-Mat4 Mat4_copy(Mat4* pRef) {
-    Mat4 copy = *pRef;
-    copy.data = Array_copy__float(&(pRef->data));
-    return copy;
-}
-
-Array__float* Mat4_data(Mat4* p) { return (&(p->data)); }
-
-void Mat4_delete(Mat4 p) {
-    Array_delete__float(p.data);
-}
-
-Mat4 Mat4_identity() {
-    Mat4 _45;
-    /* let */ {
-        static float _9_lit = 0.0f;
-        float* _9 = &_9_lit; // ref
-        Array__float _10 = Array_replicate__float(16, _9);
-        Array__float m = _10;
-        Array__float* _16 = &m; // ref
-        Array_aset_BANG___float(_16, 0, 1.0f);
-        Array__float* _23 = &m; // ref
-        Array_aset_BANG___float(_23, 5, 1.0f);
-        Array__float* _30 = &m; // ref
-        Array_aset_BANG___float(_30, 10, 1.0f);
-        Array__float* _37 = &m; // ref
-        Array_aset_BANG___float(_37, 15, 1.0f);
-        Mat4 _43 = Mat4_init(m);
-        Mat4 _44 = _43;
-        _45 = _44;
-    }
-    return _45;
-}
-
-Mat4 Mat4_init(Array__float data) {
-    Mat4 instance;
-    instance.data = data;
-    return instance;
-}
-
-Mat4 Mat4_mul(Mat4* a, Mat4* b) {
-    Mat4 _139;
-    /* let */ {
-        Array__float* _9 = Mat4_data(a);
-        Array__float* m1 = _9;
-        Array__float* _13 = Mat4_data(b);
-        Array__float* m2 = _13;
-        static float _19_lit = 0.0f;
-        float* _19 = &_19_lit; // ref
-        Array__float _20 = Array_replicate__float(16, _19);
-        Array__float res = _20;
-        /* let */ {
-            int col = 0;
-            bool _31 = Int__LT_(col, 4);
-            bool _133 = _31;
-            while (_133) {
-                /* let */ {
-                    int row = 0;
-                    bool _41 = Int__LT_(row, 4);
-                    bool _123 = _41;
-                    while (_123) {
-                        /* let */ {
-                            float sum = 0.0f;
-                            /* let */ {
-                                int k = 0;
-                                bool _56 = Int__LT_(k, 4);
-                                bool _98 = _56;
-                                while (_98) {
-                                    int _70 = Int__MUL_(k, 4);
-                                    int _72 = Int__PLUS_(_70, row);
-                                    float* _73 = Array_unsafe_MINUS_nth__float(m1, _72);
-                                    float _74 = Float_copy(_73);
-                                    int _82 = Int__MUL_(col, 4);
-                                    int _84 = Int__PLUS_(_82, k);
-                                    float* _85 = Array_unsafe_MINUS_nth__float(m2, _84);
-                                    float _86 = Float_copy(_85);
-                                    float _87 = Float__MUL_(_74, _86);
-                                    float _88 = Float__PLUS_(sum, _87);
-                                    sum = _88;  // Float = Float
-                                    int _95 = Int__PLUS_(k, 1);
-                                    k = _95;  // Int = Int
-                                    bool _56 = Int__LT_(k, 4);
-                                    _98 = _56;
-                                }
-                            }
-                            Array__float* _103 = &res; // ref
-                            int _108 = Int__MUL_(col, 4);
-                            int _110 = Int__PLUS_(_108, row);
-                            Array_aset_BANG___float(_103, _110, sum);
-                        }
-                        int _120 = Int__PLUS_(row, 1);
-                        row = _120;  // Int = Int
-                        bool _41 = Int__LT_(row, 4);
-                        _123 = _41;
-                    }
-                }
-                int _130 = Int__PLUS_(col, 1);
-                col = _130;  // Int = Int
-                bool _31 = Int__LT_(col, 4);
-                _133 = _31;
-            }
-        }
-        Mat4 _137 = Mat4_init(res);
-        Mat4 _138 = _137;
-        _139 = _138;
-    }
-    return _139;
-}
-
-String Mat4_prn(Mat4 *p) {
-  // convert members to String here:
-  String temp = NULL;
-  int tempsize = 0;
-  (void)tempsize; // that way we remove the occasional unused warning 
-  int size = snprintf(NULL, 0, "(%s )", "Mat4");
-  temp = Array_prn__float(&p->data); 
-  size += snprintf(NULL, 0, "%s ", temp);
-  if(temp) { CARP_FREE(temp); temp = NULL; }
-
-
-  String buffer = CARP_MALLOC(size);
-  String bufferPtr = buffer;
-
-  sprintf(bufferPtr, "(%s ", "Mat4");
-  bufferPtr += strlen("Mat4") + 2;
-
-  temp = Array_prn__float(&p->data);
-  sprintf(bufferPtr, "%s ", temp);
-  bufferPtr += strlen(temp) + 1;
-  if(temp) { CARP_FREE(temp); temp = NULL; }
-
-  bufferPtr--;
-  sprintf(bufferPtr, ")");
-  return buffer;
-}
-
-Mat4 Mat4_set_MINUS_data(Mat4 p, Array__float newValue) {
-    Array_delete__float(p.data);
-    p.data = newValue;
-    return p;
-}
-
-
-void Mat4_set_MINUS_data_BANG_(Mat4* pRef, Array__float newValue) {
-    Array_delete__float(pRef->data);
-    pRef->data = newValue;
-}
-
-
-String Mat4_str(Mat4 *p) {
-  // convert members to String here:
-  String temp = NULL;
-  int tempsize = 0;
-  (void)tempsize; // that way we remove the occasional unused warning 
-  int size = snprintf(NULL, 0, "(%s )", "Mat4");
-  temp = Array_prn__float(&p->data); 
-  size += snprintf(NULL, 0, "%s ", temp);
-  if(temp) { CARP_FREE(temp); temp = NULL; }
-
-
-  String buffer = CARP_MALLOC(size);
-  String bufferPtr = buffer;
-
-  sprintf(bufferPtr, "(%s ", "Mat4");
-  bufferPtr += strlen("Mat4") + 2;
-
-  temp = Array_prn__float(&p->data);
-  sprintf(bufferPtr, "%s ", temp);
-  bufferPtr += strlen(temp) + 1;
-  if(temp) { CARP_FREE(temp); temp = NULL; }
-
-  bufferPtr--;
-  sprintf(bufferPtr, ")");
-  return buffer;
-}
-
-Mat4 Mat4_update_MINUS_data(Mat4 p, Lambda *updater) {
-    p.data = (*updater).env ? ((Fn__LambdaEnv_Array__float_Array__float)(*updater).callback)((*updater).env, p.data) : ((Fn__Array__float_Array__float)(*updater).callback)(p.data);
-    return p;
-}
-
-
-Mat4 Mat4_zero() {
-    static float _8_lit = 0.0f;
-    float* _8 = &_8_lit; // ref
-    Array__float _9 = Array_replicate__float(16, _8);
-    Mat4 _10 = Mat4_init(_9);
-    return _10;
-}
 
 Maybe__Long Maybe_Just__Long(Long member0) {
   Maybe__Long instance;
@@ -16108,10 +16108,10 @@ int main(int argc, char** argv) {
             TestState _21 = Test_State_init(0, 0);
             TestState state = _21;
             /* let */ {
-                Mat4 _27 = Mat4_identity();
-                Mat4 m = _27;
-                Mat4* _32 = &m; // ref
-                Array__float* _33 = Mat4_data(_32);
+                CameraMat4 _27 = CameraMat4_identity();
+                CameraMat4 m = _27;
+                CameraMat4* _32 = &m; // ref
+                Array__float* _33 = CameraMat4_data(_32);
                 Array__float* data = _33;
                 TestState* _41 = &state; // ref
                 float* _47 = Array_unsafe_MINUS_nth__float(data, 0);
@@ -16145,7 +16145,7 @@ int main(int argc, char** argv) {
                 TestState _98 = Test_assert_MINUS_equal__float_String(_89, 1.0f, _96, _97_ref);
                 Test_State_delete(state);
                 state = _98;  // Test.State = Test.State
-                Mat4_delete(m);
+                CameraMat4_delete(m);
             }
             /* let */ {
                 Vector3__double _108 = Vector3_init__double(0.0, 0.0, 10.0);
@@ -16153,14 +16153,14 @@ int main(int argc, char** argv) {
                 Camera _115 = Camera_new(pos, -90.0, 0.0, 1.77);
                 Camera cam = _115;
                 Camera* _120 = &cam; // ref
-                Mat4 _121 = Camera_look_MINUS_at(_120);
-                Mat4 view = _121;
+                CameraMat4 _121 = Camera_look_MINUS_at(_120);
+                CameraMat4 view = _121;
                 Camera* _126 = &cam; // ref
-                Mat4 _127 = Camera_perspective(_126);
-                Mat4 proj = _127;
+                CameraMat4 _127 = Camera_perspective(_126);
+                CameraMat4 proj = _127;
                 TestState* _135 = &state; // ref
-                Mat4* _141 = &view; // ref
-                Array__float* _142 = Mat4_data(_141);
+                CameraMat4* _141 = &view; // ref
+                Array__float* _142 = CameraMat4_data(_141);
                 int _143 = Array_length__float(_142);
                 static String _144 = "View matrix has 16 elements";
                 String *_144_ref = &_144;
@@ -16168,8 +16168,8 @@ int main(int argc, char** argv) {
                 Test_State_delete(state);
                 state = _145;  // Test.State = Test.State
                 TestState* _152 = &state; // ref
-                Mat4* _158 = &proj; // ref
-                Array__float* _159 = Mat4_data(_158);
+                CameraMat4* _158 = &proj; // ref
+                Array__float* _159 = CameraMat4_data(_158);
                 int _160 = Array_length__float(_159);
                 static String _161 = "Proj matrix has 16 elements";
                 String *_161_ref = &_161;
@@ -16177,8 +16177,8 @@ int main(int argc, char** argv) {
                 Test_State_delete(state);
                 state = _162;  // Test.State = Test.State
                 Camera_delete(cam);
-                Mat4_delete(proj);
-                Mat4_delete(view);
+                CameraMat4_delete(proj);
+                CameraMat4_delete(view);
             }
             TestState _167 = state;
             _168 = _167;
